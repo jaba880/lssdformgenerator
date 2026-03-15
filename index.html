@@ -4,126 +4,102 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com">
     <style>
-        body { margin: 0; font-family: 'Arial', sans-serif; background: #0a0c0b; color: #fff; padding-bottom: 50px; }
+        body { margin: 0; font-family: 'Segoe UI', Arial, sans-serif; background: #0a0c0b; }
 
-        /* --- ШАПКА LSSD (без изменений) --- */
-        .top-bar { background-color: #0b0f0d; height: 35px; display: flex; justify-content: space-between; align-items: center; padding: 0 50px; border-bottom: 1px solid #c4a159; color: #fff; font-size: 12px; font-weight: bold; }
+        /* Верхняя панель (Тёмно-зеленый/черный) */
+        .top-bar {
+            background-color: #0b0f0d;
+            height: 35px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 50px;
+            border-bottom: 1px solid #c4a159; /* Золотистая линия */
+            color: #fff;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
         .city-info { display: flex; align-items: center; gap: 8px; text-transform: uppercase; }
-        .emergency-link { background: #000; color: #fff; text-decoration: none; padding: 3px 10px; border-radius: 3px; font-weight: bold; }
-        .main-header { background: linear-gradient(180deg, #121814 0%, #0d110e 100%); height: 100px; display: flex; align-items: center; padding: 0 50px; border-bottom: 3px solid #c4a159; }
+        .city-logo { height: 16px; width: auto; } /* Логотип города */
+
+        .emergency { display: flex; align-items: center; gap: 10px; font-weight: normal; }
+        .emergency-link {
+            background: #000;
+            color: #fff;
+            text-decoration: none;
+            padding: 3px 10px;
+            border-radius: 3px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .emergency-link:hover { color: #c4a159; }
+
+        /* Основной хедер (Тёмно-зелёный градиент как на sd.ls-services.ru) */
+        .main-header {
+            background: linear-gradient(180deg, #121814 0%, #0d110e 100%);
+            height: 100px;
+            display: flex;
+            align-items: center;
+            padding: 0 50px;
+            border-bottom: 3px solid #c4a159;
+        }
+
         .brand-block { display: flex; align-items: center; gap: 20px; }
         .lssd-logo { height: 75px; }
+
         .separator { width: 1px; height: 50px; background: rgba(255,255,255,0.1); }
-        .brand-text h1 { margin: 0; font-size: 22px; }
+
+        .brand-text h1 { color: #fff; margin: 0; font-size: 22px; font-weight: 600; }
         .brand-text p { color: #8a918c; margin: 0; font-size: 13px; font-style: italic; }
-        .nav-item { color: #fff; text-decoration: none; background: #1a231e; padding: 12px 25px; font-size: 14px; display: flex; align-items: center; gap: 8px; border-radius: 4px 4px 0 0; border-bottom: 3px solid #c4a159; margin-left: auto; margin-bottom: -33px; }
 
-        /* --- КОНСТРУКТОР --- */
-        .constructor-container { max-width: 900px; margin: 50px auto; background: #111111; border: 1px solid #333; padding: 25px; box-shadow: 0 0 20px rgba(0,0,0,0.5); }
-        .form-title { text-align: center; text-transform: uppercase; font-size: 18px; margin-bottom: 25px; border-bottom: 1px solid #333; padding-bottom: 10px; color: #c4a159; font-weight: bold; }
-        
-        .section-header { background: #0d1a2b; color: #fff; padding: 8px; font-size: 13px; font-weight: bold; text-transform: uppercase; text-align: center; margin: 25px 0 15px 0; border: 1px solid #1e3a5f; letter-spacing: 1px; }
-
-        .input-group { margin-bottom: 15px; }
-        .input-group label { display: block; font-size: 11px; font-weight: bold; margin-bottom: 6px; color: #aaa; text-transform: uppercase; }
-        
-        input, textarea { width: 100%; background: #1a1a1a; border: 1px solid #333; color: #fff; padding: 12px; box-sizing: border-box; font-size: 13px; outline: none; transition: 0.3s; }
-        input:focus, textarea:focus { border-color: #c4a159; background: #222; }
-
-        .row { display: flex; gap: 20px; }
-        .row .input-group { flex: 1; }
-
-        /* --- ЦЕНТРИРОВАННОЕ СОГЛАШЕНИЕ --- */
-        .agreement-block {
-            background: #0a0a0a;
-            border: 1px solid #222;
-            padding: 25px;
-            margin: 30px auto;
-            max-width: 80%; /* Сузил для лучшего вида */
-            text-align: center; /* Текст по центру */
+        /* Навигация */
+        .nav-menu { margin-left: auto; }
+        .nav-item {
+            color: #fff;
+            text-decoration: none;
+            background: #1a231e; /* Темно-зеленая подложка кнопки */
+            padding: 12px 25px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-radius: 4px 4px 0 0;
+            border-bottom: 3px solid #c4a159;
+            margin-bottom: -33px; /* Прижимаем к золотой линии */
         }
-        .agreement-title { color: #4a90e2; font-weight: bold; font-size: 14px; letter-spacing: 2px; display: block; margin-bottom: 15px; }
-        .agreement-text { font-size: 13px; line-height: 1.6; color: #bbb; margin-bottom: 20px; display: block; }
-        
-        .checkbox-container { display: inline-flex; align-items: center; gap: 12px; font-weight: bold; color: #fff; font-size: 13px; cursor: pointer; }
-        .checkbox-container input { width: 18px; height: 18px; cursor: pointer; accent-color: #c4a159; }
-
-        /* Кнопки */
-        .actions { display: flex; justify-content: center; gap: 15px; margin-top: 30px; }
-        .btn { background: #1a1a1a; border: 1px solid #333; color: #fff; padding: 10px 30px; cursor: pointer; text-transform: uppercase; font-size: 12px; font-weight: bold; transition: 0.3s; }
-        .btn-primary { background: #1a231e; border-color: #2a3d2e; }
-        .btn:hover { border-color: #c4a159; color: #c4a159; box-shadow: 0 0 10px rgba(196, 161, 89, 0.2); }
     </style>
 </head>
 <body>
 
-    <!-- ШАПКА -->
     <div class="top-bar">
-        <div class="city-info"><img src="https://sd.ls-services.ru/images/ranksOCT19/Logos/SIBLogo.png" class="city-logo"> ЛОС-САНТОС</div>
-        <div class="emergency">Для экстренных ситуаций: <a href="#" class="emergency-link">Emergency services</a></div>
+        <div class="city-info">
+            <!-- Заменил иконку на логотип звезды -->
+            <img src="https://i.imgur.com" class="city-logo" alt="">
+            ЛОС-САНТОС
+        </div>
+        <div class="emergency">
+            Для экстренных ситуаций: 
+            <a href="https://ваша-ссылка.ru" class="emergency-link">Emergency services</a>
+        </div>
     </div>
+
     <header class="main-header">
         <div class="brand-block">
-            <img src="https://sd.ls-services.ru/images/ranksOCT19/Logos/LSSDLogo.png" class="lssd-logo">
+            <img src="https://i.imgur.com" class="lssd-logo" alt="LSSD">
             <div class="separator"></div>
             <div class="brand-text">
                 <h1>Департамент Шерифа Лос-Сантоса</h1>
                 <p>To Protect and to Serve</p>
             </div>
         </div>
-        <a href="#" class="nav-item"><i class="fas fa-users"></i> Гражданам</a>
+
+        <nav class="nav-menu">
+            <a href="#" class="nav-item">
+                <i class="fas fa-users"></i> Гражданам
+            </a>
+        </nav>
     </header>
-
-    <!-- КОНСТРУКТОР -->
-    <div class="constructor-container">
-        <div class="form-title">Программа «Возвращение домой»</div>
-
-        <div class="section-header">1. Информация о прошлых местах игры</div>
-        <div class="input-group">
-            <label>1.1. НИК-НЕЙМ ВАШЕГО ДЕЙСТВУЮЩЕГО ПЕРСОНАЖА:</label>
-            <input type="text" placeholder="Заполнить">
-        </div>
-        <div class="input-group">
-            <label>1.2. ПРОЕКТЫ, СООБЩЕСТВА И СЕРВЕРА, ГДЕ ВЫ ИГРАЛИ:</label>
-            <textarea rows="4" placeholder="Развернутый ответ на вопрос"></textarea>
-        </div>
-        <div class="row">
-            <div class="input-group"><label>1.3. ЗВАНИЕ, ДОЛЖНОСТЬ И ОТДЕЛ:</label><input type="text" placeholder="Заполнить"></div>
-            <div class="input-group"><label>1.4. ПРИЧИНА УХОДА:</label><input type="text" placeholder="Заполнить"></div>
-        </div>
-
-        <div class="section-header">2. Информация о подающем заявление</div>
-        <div class="row">
-            <div class="input-group"><label>2.1. ВАШ ВОЗРАСТ:</label><input type="text" placeholder="Заполнить"></div>
-            <div class="input-group"><label>2.2. ССЫЛКА НА ВКОНТАКТЕ:</label><input type="text" placeholder="Заполнить"></div>
-        </div>
-        <div class="input-group">
-            <label>2.3. КВЕНТА ВАШЕГО ПЕРСОНАЖА:</label>
-            <textarea rows="4" placeholder="Развернутый ответ на вопрос"></textarea>
-        </div>
-        <div class="input-group"><label>2.4. ПЛАНЫ НА ПЕРСОНАЖА:</label><input type="text" placeholder="Заполнить"></div>
-        <div class="input-group"><label>2.5. СПИСОК ПОЖЕЛАНИЙ:</label><input type="text" placeholder="Заполнить"></div>
-        <div class="row">
-            <div class="input-group"><label>2.6. ДОКАЗАТЕЛЬСТВА ВАШЕЙ ИГРЫ:</label><input type="text" placeholder="Ссылка на СС-ки, иные подтверждения"></div>
-            <div class="input-group"><label>2.7. СКРИНШОТ ЗАЩИТЫ АККАУНТА:</label><input type="text" placeholder="Заполнить"></div>
-        </div>
-
-        <!-- СОГЛАШЕНИЕ ПО ЦЕНТРУ -->
-        <div class="agreement-block">
-            <span class="agreement-title">СОГЛАШЕНИЕ</span>
-            <span class="agreement-text">
-                Я соглашаюсь со всеми правилами и условиями полицейского департамента. Также уверяю, что все данные мною ответы в этой заявке являются правдивыми, и я не имею конфликтов с полицейским департаментом и не состою в черном списке сообщества. Я согласен быть активным с аккаунта полицейского больше, чем с каких-либо других имеющихся у меня аккаунтов.
-            </span>
-            <label class="checkbox-container">
-                <input type="checkbox"> Я принимаю условия данного заявления
-            </label>
-        </div>
-
-        <div class="actions">
-            <button class="btn btn-primary">Сгенерировать</button>
-            <button class="btn">Назад</button>
-        </div>
-    </div>
 
 </body>
 </html>
