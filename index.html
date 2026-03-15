@@ -1,311 +1,277 @@
-
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <link rel="stylesheet" href="/common/css/style.css">
-    <link rel="stylesheet" href="/common/css/micromodal.css">
-    <script src="/common/js/micromodal.min.js"></script>
-    <script src="/common/js/utils.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LSSD - Backhome Program</title>
+    <style>
+        :root {
+            --lssd-green: #354920;
+            --bg-dark: #121212;
+            --panel-bg: #1a1a1a;
+            --input-bg: #222;
+            --text-gray: #b3b3b3;
+            --border-color: #333;
+        }
 
-    <title>Программа возвращения домой | NYC-PD.RU</title>
-</head>
+        body {
+            background-color: var(--bg-dark);
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            padding: 40px 20px;
+        }
 
-<body>
-<style>
+        .form-container {
+            width: 100%;
+            max-width: 850px;
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
 
-</style>
-    <body>
+        .header-title {
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 25px;
+            border-bottom: 1px solid var(--lssd-green);
+            padding-bottom: 10px;
+            color: #fff;
+        }
+
+        .section-header {
+            background: var(--lssd-green);
+            color: white;
+            text-align: center;
+            font-size: 0.85em;
+            padding: 5px;
+            margin: 20px 0 15px 0;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .grid-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-size: 0.75em;
+            color: var(--text-gray);
+            text-transform: uppercase;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input, textarea {
+            background: var(--input-bg);
+            border: 1px solid #444;
+            color: white;
+            padding: 10px;
+            font-size: 0.9em;
+            outline: none;
+            transition: border 0.3s;
+        }
+
+        input:focus, textarea:focus {
+            border-color: var(--lssd-green);
+        }
+
+        textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .agreement-box {
+            font-size: 0.8em;
+            color: #888;
+            text-align: justify;
+            border: 1px solid #333;
+            padding: 15px;
+            margin: 20px 0;
+            line-height: 1.5;
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 0.8em;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-generate { background: var(--lssd-green); color: white; }
+        .btn-generate:hover { background: #4a662d; }
         
-<header class="sfpd-header">
-    <nav class="topbar d-flex justify-content-between align-items-center px-3 px-md-4">
-        <div class="d-flex align-items-center text-white">
-            <img src="https://www.upload.ee/image/16078694/sfcitylogo2color.png" height="25" width="25" class="mr-2" alt="Герб">
-            <b>САН-ФИЕРРО</b>
-        </div>
-        <div class="d-flex align-items-center text-white" style="font-size: 0.9rem;">
-            <i class="fas fa-phone-alt mr-2"></i>
-            Для экстренных ситуаций: 
-            <span class="emergency__number">911</span>
-        </div>
-        </div>
-    </nav>
+        #result-area {
+            margin-top: 20px;
+            display: none;
+        }
 
-    <nav class="navbar navbar-expand-lg navbar-main shadow-sm">
-        <div class="container position-relative">
-            <!-- Логотип, перекрывающий оба навбара -->
-            <div class="logo-container">
-                <img src="\htmlforms\lspd disabled\sfpd_logo.png" class="sfpd-logo" alt="Логотип SFPD">
-            </div>
-            
-            <a href="/" class="navbar-brand sfpd-brand">
-                <div class="department-name">
-                    Департамент полиции Сан-Фиерро
-                    <span><i>Oro en paz, fierro en guerra</i></span>
-                </div>
-            </a>
-            
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" 
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link sfpd-nav-link" href="/sfpd.html">
-                            <i class="fas fa-shield-alt mr-2"></i>
-                            Офицерам
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link sfpd-nav-link active" href="/sfpd/civil.html">
-                            <i class="fas fa-users mr-2"></i>
-                            Гражданам
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link sfpd-nav-link" href="/IAD_enter.html">
-                            <i class="fas fa-file-invoice"></i>
-                            Инспекторам ОВР
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-</header><br>
-
+        .bbcode-output {
+            background: #000;
+            color: #0f0;
+            padding: 15px;
+            font-family: monospace;
+            font-size: 12px;
+            border: 1px dashed var(--lssd-green);
+            white-space: pre-wrap;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
 <body>
-    <div class="form" style="border: 1px solid #0F283E; padding: 10px; background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);">
-        <table width="100%">
-            <tbody>
-                    <td style="vertical-align: centered_text; width:100%;  color: rgb(0, 0, 0); ">
-                        <div align="center"><span style="font-weight: bold; font-size: 25px;">Программа «Возвращение домой»</span> </span> </div>
-                    </td>
-                    <td style="vertical-align: top; width:26%; padding-left:10px;">
-                        <div align="right"><span style="font-size: 85%; line-height: 116%; color: #0F283E;">
-                            </span></div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <div style="border-bottom: 1px solid #0F283E; padding: 1px;"></div> <br>
-        <div style="padding: 2px; background-color: #0F283E;"><span><span style="color: #FFFFFF">
-                    <div align="center">1. ИНФОРМАЦИЯ О ПРОШЛЫХ МЕСТАХ ИГРЫ</div>
-                </span></span></div>
-        <div style="border: 1px solid #000; padding: 5px; background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);"><span style="color: #000000">
-                <table width="100%">
-                    <tbody>
-                        <tr>
-                            <td style="vertical-align: top; width:33%; padding-right:10px;"><span style="font-weight: bold; font-size: 90%; line-height: 116%;">1.1. НИК-НЕЙМ ВАШЕГО ДЕЙСТВУЮЩЕГО ПЕРСОНАЖА:</span><br>
-                                <div style="background-color:white; color: #555; border:1px solid #ccc; margin-right:10px"><input type="text" name="nickname" placeholder="Заполнить">
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table><br>
-                <table width="100%">
-                    <tbody>
-                        <tr>
-                            <td style="vertical-align: top; width:33%; padding-right:10px;"><span style="font-weight: bold; font-size: 90%; line-height: 116%;">1.2. ПРОЕКТЫ, СООБЩЕСТВА И СЕРВЕРА, ГДЕ ВЫ ИГРАЛИ:</span><br>
-                                <div style="background-color:white; border:1px solid #ccc; color: #555555; padding: 10px"><textarea name="projects" placeholder="Развернутый ответ на вопрос" cols="78"></textarea></div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table><br>
-                <table width="100%">
-                    <tbody>
-                        <tr>
-                            <td style="vertical-align: top; width:33%; padding-right:10px;"><span style="font-weight: bold; font-size: 90%; line-height: 116%;">1.3. ЗВАНИЕ, ДОЛЖНОСТЬ И ОТДЕЛ:</span><br>
-                                <div style="background-color:white; color: #555; border:1px solid #ccc; margin-right:10px"><input type="text" name="history" placeholder="Заполнить">
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table><br>
-                <table width="100%">
-                    <tbody>
-                        <tr>
-                            <td style="vertical-align: top; width:33%; padding-right:10px;"><span style="font-weight: bold; font-size: 90%; line-height: 116%;">1.4. ПРИЧИНА УХОДА:</span><br>
-                                <div style="background-color:white; color: #555; border:1px solid #ccc; margin-right:10px"><input type="text" name="leave_reason" placeholder="Заполнить">
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            
-        </div><br>
-        <div style="padding: 2px; background-color: #0F283E;"><span><span style="color: #FFFFFF">
-            <div align="center">2. ИНФОРМАЦИЯ О ПОДАЮЩЕМ ЗАЯВЛЕНИЕ</div>
-        </span></span></div>
-        <div style="border: 1px solid #000; padding: 5px; background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);"><span style="color: #000000">
-                <table width="100%">
-                    <tbody>
-                        <tr>
-                            <td style="vertical-align: top; width:33%; padding-right:10px;"><span style="font-weight: bold; font-size: 90%; line-height: 116%;">2.1. ВАШ ВОЗРАСТ:</span><br>
-                                <div style="background-color:white; color: #555; border:1px solid #ccc; margin-right:10px"><input type="text" name="age" placeholder="Заполнить">
-                                </div>
-                            </td>
-                            <td style="vertical-align: top; width:33%; padding-right:10px;"><span style="font-weight: bold; font-size: 90%; line-height: 116%;">2.2. ССЫЛКА НА ВКОНТАКТЕ:</span><br>
-                                <div style="background-color:white; color: #555; border:1px solid #ccc; margin-right:10px"><input type="text" name="vk" placeholder="Заполнить">
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table><br>
-                <table width="100%">
-                    <tbody>
-                        <tr>
-                            <td style="vertical-align: top; width:33%; padding-right:10px;"><span style="font-weight: bold; font-size: 90%; line-height: 116%;">2.3. КВЕНТА ВАШЕГО ПЕРСОНАЖА:</span><br>
-                                <div style="background-color:white; border:1px solid #ccc; color: #555555; padding: 10px"><textarea name="qventa" placeholder="Развернутый ответ на вопрос" cols="78"></textarea></div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table><br>
-                <table width="100%">
-                    <tbody>
-                        <tr>
-                            <td style="vertical-align: top; width:33%; padding-right:10px;"><span style="font-weight: bold; font-size: 90%; line-height: 116%;">2.4. ПЛАНЫ НА ПЕРСОНАЖА:</span><br>
-                                <div style="background-color:white; color: #555; border:1px solid #ccc; margin-right:10px"><input type="text" name="plans" placeholder="Заполнить">
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table><br>
-                <table width="100%">
-                    <tbody>
-                        <tr>
-                            <td style="vertical-align: top; width:33%; padding-right:10px;"><span style="font-weight: bold; font-size: 90%; line-height: 116%;">2.5. СПИСОК ПОЖЕЛАНИЙ:</span><br>
-                                <div style="background-color:white; color: #555; border:1px solid #ccc; margin-right:10px"><input type="text" name="zhelania" placeholder="Заполнить">
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table><br>
-                <table width="100%">
-                    <tbody>
-                        <tr>
-                            <td style="vertical-align: top; width:33%; padding-right:10px;"><span style="font-weight: bold; font-size: 90%; line-height: 116%;">2.6. ДОКАЗАТЕЛЬСТВА ВАШЕЙ ИГРЫ:</span><br>
-                                <div style="background-color:white; color: #555; border:1px solid #ccc; margin-right:10px"><input type="text" name="ss" placeholder="Ссылки на СС-ки, иные подтверждения">
-                                </div>
-                            </td>
-                            <td style="vertical-align: top; width:33%; padding-right:10px;"><span style="font-weight: bold; font-size: 90%; line-height: 116%;">2.7. СКРИНШОТ ЗАЩИТЫ НА ИГРОВОМ АККАУНТЕ (GOOGLE АУТЕНТИФИКАТОР, ПОЧТОВЫЙ ЯЩИК):</span><br>
-                                <div style="background-color:white; color: #555; border:1px solid #ccc; margin-right:10px"><input type="text" name="security" placeholder="Заполнить">
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            
-        </div><br>
-    
-        <div style="padding: 2px; background-color: #0F283E;"><span><span style="color: #FFFFFF">
-                <div align="center">СОГЛАШЕНИЕ</div>
-            </span></span></div>
-        </span></span>
-        <span style="font-size: 85%; line-height: 116%;"><span><div style="text-align: justify;">Я соглашаюсь, что если покину сообщество в течение испытательного срока без основательной причины, то буду занесен в черный список (ЧС) сообщества без права выхода. Я понимаю, что не все мои перечисленные пожелания могут быть удовлетворены и всё равно соглашаюсь играть. Я соглашаюсь, что мое заявление может быть отклонено без объяснения причин. Я понимаю, что в случае слива любой информации с форума и бесед, я буду занесен в черный список. Я уверяю, что все данные мною ответы в этой заявке являются правдивыми.</div><span style="font-weight: bold"><input type="checkbox" class="checkbox" name="checkbox" /> Я принимаю условия данного заявления</span>
-        </div>
-       
 
-    <div class="btn-container">
-        <button class="modal__btn modal__btn-primary" onclick="showBB()">Сгенерировать</button>
-        <button class="modal__btn" onclick="window.location.assign('/sfpd/civil.html')">Назад</button>
+<div class="form-container">
+    <div class="header-title">Программа «Возвращение домой» — LSSD</div>
+
+    <!-- РАЗДЕЛ 1 -->
+    <div class="section-header">1. Информация о прошлых местах игры</div>
+    
+    <div class="form-group" style="margin-bottom: 15px;">
+        <label>1.1. Имя Фамилия Вашего персонажа (никнейм):</label>
+        <input type="text" id="nick" placeholder="Заполнить">
     </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="output_modal" tabindex="-1" role="dialog" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">BBCode для копирования</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div class="container-fluid">
-                <div class="row mb-3">
-                    <div class="col-12">
-                        <label for="output__header">Название темы</label>
-                    </div>
-                    <div class="col-9 col-lg-10">
-                        <input type="text" class="form-control" id="output__header">
-                    </div>
-                    <div class="col-3 col-lg-2">
-                        <button class="btn btn-outline-secondary" type="button" data-field="output__header" onclick="copyCode(this)">Copy</button>
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-12">
-                        <label for="output__body">Код</label>
-                    </div>
-                    <div class="col-9 col-lg-10">
-                        <textarea class="form-control" rows="10" id="output__body"></textarea>
-                    </div>
-                    <div class="col-3 col-lg-2 d-flex align-items-center">
-                        <button class="btn btn-outline-secondary" type="button" data-field="output__body" onclick="copyCode(this)">Copy</button>
-                    </div>
-                </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-            <button type="button" class="btn btn-primary" onclick="window.open('https://sfpd.nyc-pd.ru/posting.php?mode=post&f=15','_blank')">На форум</button>
-          </div>
-        </div>
-      </div>
-    
-    <script>
-        function generatePostTitle() {
-            var nickname = document.getElementsByName("nickname")[0].value.toUpperCase();
-            var h_output = "[ВОССТАНОВЛЕНИЕ] " + document.getElementsByName("nickname")[0].innerText;
-            h_output = "[ВОССТАНОВЛЕНИЕ] " + nickname;
-            return h_output;
-        }
-        function form2dict(form) {
-            var values = form.querySelectorAll('[name]');
-            var data = {};
-            for (var i = 0; i < values.length; i++) {
-                if (values[i].classList.contains('datepicker')) {
-                    data[values[i].getAttribute('name')] = values[i].value.toUpperCase() || 'N/A';
-                } else if (values[i].classList.contains('checkbox')) {
-                    var checked = document.getElementsByName("checkbox")[0].checked ? ('X') : ' '
-                    data[values[i].getAttribute('name')] = checked;
-                } else {
-                    data[values[i].getAttribute('name')] = values[i].value || values[i].innerText || 'N/A';
-                }
-            }
-            return data;
-        }
+    <div class="form-group" style="margin-bottom: 15px;">
+        <label>1.2. Фракции, проекты, ранги и даты ухода:</label>
+        <textarea id="factions" placeholder="Пример: LSPD, Gambit RP, Sergeant II, ПСЖ..."></textarea>
+    </div>
 
-        MicroModal.init();
-        window.__bbcodeurl = '/bbforms/lscsd disabled/back_home.txt';
-        document.querySelector('[name="name"]').focus();   
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-      <!-- Yandex.Metrika counter -->
-        <script type="text/javascript" >
-            (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-            m[i].l=1*new Date();
-            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-            (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-        
-            ym(101513650, "init", {
-                clickmap:true,
-                trackLinks:true,
-                accurateTrackBounce:true
-            });
-        </script>
-        <noscript><div><img src="https://mc.yandex.ru/watch/101513650" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-        <!-- /Yandex.Metrika counter -->
+    <div class="grid-row">
+        <div class="form-group">
+            <label>1.3. Звание, должность и отдел:</label>
+            <input type="text" id="rank" placeholder="Заполнить">
+        </div>
+        <div class="form-group">
+            <label>1.4. Причина ухода:</label>
+            <input type="text" id="reason" placeholder="Заполнить">
+        </div>
+    </div>
+
+    <!-- РАЗДЕЛ 2 -->
+    <div class="section-header">2. Информация о подающем заявление</div>
+
+    <div class="grid-row">
+        <div class="form-group">
+            <label>2.1. Ваш возраст:</label>
+            <input type="text" id="age" placeholder="XX лет">
+        </div>
+        <div class="form-group">
+            <label>2.2. Ссылка на ВКонтакте или TG:</label>
+            <input type="text" id="social" placeholder="@nickname">
+        </div>
+    </div>
+
+    <div class="form-group" style="margin-bottom: 15px;">
+        <label>2.3. Квента персонажа / Планы на игру:</label>
+        <textarea id="role" placeholder="Минимум 3-4 предложения..."></textarea>
+    </div>
+
+    <div class="grid-row">
+        <div class="form-group">
+            <label>2.4. Доказательства игры (СС/фрапсы):</label>
+            <input type="text" id="proofs" placeholder="Ссылки">
+        </div>
+        <div class="form-group">
+            <label>2.5. Ссылка на скриншот Google Authenticator:</label>
+            <input type="text" id="ga_link" placeholder="http://...">
+        </div>
+    </div>
+
+    <!-- СОГЛАШЕНИЕ -->
+    <div class="section-header" style="background: transparent; color: var(--lssd-green);">Соглашение</div>
+    <div class="agreement-box">
+        Я соглашаюсь со всеми правилами и условиями полицейского департамента. Также уверяю, что все данные мною ответы в этой заявке являются правдивыми, и я не имею конфликтов с полицейским департаментом и не состою в черном списке сообщества. Я согласен быть активным с аккаунта полицейского больше, чем с каких-либо других имеющихся у меня аккаунтов.
+    </div>
+
+    <div class="checkbox-container">
+        <input type="checkbox" id="agree">
+        <label style="margin:0">Я принимаю условия данного заявления</label>
+    </div>
+
+    <div class="btn-group">
+        <button class="btn-generate" onclick="generateBB()">Сгенерировать код</button>
+    </div>
+
+    <!-- РЕЗУЛЬТАТ -->
+    <div id="result-area">
+        <div class="bbcode-output" id="output"></div>
+        <button class="btn-generate" style="background: #444; margin-top: 10px;" onclick="copyCode()">Копировать в буфер</button>
+    </div>
+</div>
+
+<script>
+function generateBB() {
+    if(!document.getElementById('agree').checked) {
+        alert('Вы должны принять условия соглашения!');
+        return;
+    }
+
+    const val = (id) => document.getElementById(id).value || "Заполнить";
+    const social = document.getElementById('social').value;
+    const tgLink = social.startsWith('@') ? social.substring(1) : social;
+
+    const code = `[box=#354920][img]https://www.upload.ee[/img][color=#FFFFFF]  Департамент шерифа Лос Сантоса > Карьера > Программа «Возвращение домой»[/color][/box]
+[b][size=115][border=#354920]Заявление[/border][/size][/b]
+[list=1][*][b]Фракции в которых состояли ([i]Никнейм, проект, должность, причины и даты ухода[/i]):[/b] ${val('factions')}
+[*][b]Доказательства игры [i](СС, не обязательно за копов)[/i]:[/b] ${val('proofs')}
+[*][b]Планируемая роль во фракции:[/b]
+[spoiler="Роль"]${val('role')}[/spoiler]
+[*][b]Список пожеланий, комментарий:[/b] ${val('rank')} | ${val('reason')}
+
+
+[*][b]Имя:[/b] ${val('nick')}
+[*][b]Возраст:[/b] ${val('age')}
+[*][b]Ссылка на аккаунт в TG:[/b] [url=https://t.me{tgLink}]${social}[/url]
+[*][b]Скриншот включенного Google Authenticator (без каких-либо обработок):[/b] [url=${val('ga_link')}]Ссылка на скриншот[/url][/list]
+
+[hr][/hr]
+[b][size=115][border=#354920]Соглашение[/border][/size][/b]
+[list][b]Отправляя это заявление, вы автоматически соглашаетесь с приведенным ниже соглашением:[/b]
+
+[list][i] [justify]Я соглашаюсь со всеми правилами и условиями полицейского департамента. Также уверяю, что все данные мною ответы в этой заявке являются правдивыми, и я не имею конфликтов с полицейским департаментом и не состою в черном списке сообщества. Я согласен быть активным с аккаунта полицейского больше, чем с каких-либо других имеющихся у меня аккаунтов.[/justify][/i][/list][/list]
+
+[box=#354920][color=#FFFFFF][size=85][center]© 2024. Департамент шерифа округа Лос-Сантос. Все права защищены.[/center][/size][/color][/box]`;
+
+    document.getElementById('output').innerText = code;
+    document.getElementById('result-area').style.display = 'block';
+    window.scrollTo(0, document.body.scrollHeight);
+}
+
+function copyCode() {
+    const text = document.getElementById('output').innerText;
+    navigator.clipboard.writeText(text).then(() => alert('Код успешно скопирован!'));
+}
+</script>
+
 </body>
 </html>
