@@ -2,7 +2,6 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LSSD - Backhome Program</title>
     <style>
         :root {
@@ -17,11 +16,11 @@
         body {
             background-color: var(--bg-dark);
             color: white;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             display: flex;
             justify-content: center;
-            padding: 40px 20px;
+            padding: 20px;
         }
 
         .form-container {
@@ -29,247 +28,198 @@
             max-width: 850px;
             background: var(--panel-bg);
             border: 1px solid var(--border-color);
-            padding: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.7);
         }
 
-        .header-title {
-            text-align: center;
+        /* ШАПКА С ЛОГОТИПОМ */
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--lssd-green);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .logo-side {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-img {
+            width: 70px;
+            height: auto;
+        }
+
+        .logo-text {
             text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 25px;
-            border-bottom: 1px solid var(--lssd-green);
-            padding-bottom: 10px;
-            color: #fff;
+            line-height: 1.2;
         }
 
+        .logo-text .city { font-size: 1.2em; font-weight: bold; letter-spacing: 1px; }
+        .logo-text .dept { font-size: 0.8em; color: var(--lssd-green); font-weight: bold; }
+
+        .emergency-side {
+            text-align: right;
+            line-height: 1.1;
+        }
+
+        .emergency-side .acronym { font-size: 2em; font-weight: 900; letter-spacing: 2px; }
+        .emergency-side .call { font-size: 0.8em; color: #cc0000; font-weight: bold; }
+
+        /* СТИЛИ СЕКЦИЙ (из прошлого шага) */
         .section-header {
             background: var(--lssd-green);
             color: white;
             text-align: center;
             font-size: 0.85em;
-            padding: 5px;
-            margin: 20px 0 15px 0;
+            padding: 6px;
+            margin: 25px 0 15px 0;
             text-transform: uppercase;
             font-weight: bold;
         }
 
-        .grid-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 15px;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-        }
-
-        label {
-            font-size: 0.75em;
-            color: var(--text-gray);
-            text-transform: uppercase;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
+        .grid-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
+        .form-group { display: flex; flex-direction: column; margin-bottom: 15px; }
+        label { font-size: 0.7em; color: var(--text-gray); text-transform: uppercase; margin-bottom: 5px; font-weight: bold; }
+        
         input, textarea {
             background: var(--input-bg);
             border: 1px solid #444;
             color: white;
-            padding: 10px;
+            padding: 12px;
             font-size: 0.9em;
             outline: none;
-            transition: border 0.3s;
         }
-
-        input:focus, textarea:focus {
-            border-color: var(--lssd-green);
-        }
-
-        textarea {
-            min-height: 80px;
-            resize: vertical;
-        }
+        
+        input:focus { border-color: var(--lssd-green); }
 
         .agreement-box {
             font-size: 0.8em;
-            color: #888;
+            color: #777;
             text-align: justify;
-            border: 1px solid #333;
+            border: 1px solid #222;
             padding: 15px;
-            margin: 20px 0;
-            line-height: 1.5;
+            margin-top: 15px;
+            font-style: italic;
         }
 
-        .checkbox-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            font-size: 0.8em;
-        }
-
-        .btn-group {
-            display: flex;
-            gap: 10px;
-            margin-top: 25px;
-        }
-
-        button {
-            flex: 1;
-            padding: 12px;
+        .btn-generate {
+            background: var(--lssd-green);
+            color: white;
             border: none;
+            width: 100%;
+            padding: 15px;
+            margin-top: 20px;
+            font-weight: bold;
             cursor: pointer;
             text-transform: uppercase;
-            font-weight: bold;
-            transition: 0.3s;
         }
 
-        .btn-generate { background: var(--lssd-green); color: white; }
-        .btn-generate:hover { background: #4a662d; }
-        
-        #result-area {
+        #output-box {
             margin-top: 20px;
             display: none;
-        }
-
-        .bbcode-output {
             background: #000;
-            color: #0f0;
             padding: 15px;
+            border: 1px dashed var(--lssd-green);
             font-family: monospace;
             font-size: 12px;
-            border: 1px dashed var(--lssd-green);
+            color: #8fbc8f;
             white-space: pre-wrap;
-            max-height: 300px;
-            overflow-y: auto;
         }
     </style>
 </head>
 <body>
 
 <div class="form-container">
-    <div class="header-title">Программа «Возвращение домой» — LSSD</div>
+    <!-- ВЕРХНЯЯ ПАНЕЛЬ -->
+    <div class="header-top">
+        <div class="logo-side">
+            <img src="https://www.upload.ee" class="logo-img" alt="LSSD">
+            <div class="logo-text">
+                <div class="city">ЛОС-САНТОС</div>
+                <div class="dept">ДЕПАРТАМЕНТ ШЕРИФА</div>
+            </div>
+        </div>
+        <div class="emergency-side">
+            <div class="acronym">LSSD</div>
+            <div class="call">ЭКСТРЕННЫЕ СЛУЖБЫ</div>
+        </div>
+    </div>
 
-    <!-- РАЗДЕЛ 1 -->
-    <div class="section-header">1. Информация о прошлых местах игры</div>
+    <div style="text-align: center; font-size: 0.9em; letter-spacing: 3px; color: var(--text-gray);">
+        ПРОГРАММА «ВОЗВРАЩЕНИЕ ДОМОЙ»
+    </div>
+
+    <!-- ПОЛЯ ВВОДА -->
+    <div class="section-header">1. ИНФОРМАЦИЯ О ПРОШЛЫХ МЕСТАХ ИГРЫ</div>
     
-    <div class="form-group" style="margin-bottom: 15px;">
+    <div class="form-group">
         <label>1.1. Имя Фамилия Вашего персонажа (никнейм):</label>
-        <input type="text" id="nick" placeholder="Заполнить">
+        <input type="text" id="nick" placeholder="Name Surname">
     </div>
 
-    <div class="form-group" style="margin-bottom: 15px;">
+    <div class="form-group">
         <label>1.2. Фракции, проекты, ранги и даты ухода:</label>
-        <textarea id="factions" placeholder="Пример: LSPD, Gambit RP, Sergeant II, ПСЖ..."></textarea>
+        <textarea id="factions" placeholder="LSPD, SAPD..."></textarea>
     </div>
 
     <div class="grid-row">
         <div class="form-group">
-            <label>1.3. Звание, должность и отдел:</label>
-            <input type="text" id="rank" placeholder="Заполнить">
+            <label>1.3. Желаемая роль/отдел:</label>
+            <input type="text" id="rank" placeholder="SEB / OSS / Detective">
         </div>
         <div class="form-group">
-            <label>1.4. Причина ухода:</label>
-            <input type="text" id="reason" placeholder="Заполнить">
+            <label>1.4. Причина ухода с прошлых мест:</label>
+            <input type="text" id="reason" placeholder="ПСЖ / Расформ">
         </div>
     </div>
 
-    <!-- РАЗДЕЛ 2 -->
-    <div class="section-header">2. Информация о подающем заявление</div>
+    <div class="section-header">2. ИНФОРМАЦИЯ О ПОДАЮЩЕМ ЗАЯВЛЕНИЕ</div>
 
     <div class="grid-row">
         <div class="form-group">
-            <label>2.1. Ваш возраст:</label>
-            <input type="text" id="age" placeholder="XX лет">
+            <label>2.1. Ваш возраст (OOC):</label>
+            <input type="text" id="age" placeholder="20 лет">
         </div>
         <div class="form-group">
-            <label>2.2. Ссылка на ВКонтакте или TG:</label>
-            <input type="text" id="social" placeholder="@nickname">
+            <label>2.2. Связь (TG/VK):</label>
+            <input type="text" id="social" placeholder="@username">
         </div>
     </div>
 
-    <div class="form-group" style="margin-bottom: 15px;">
-        <label>2.3. Квента персонажа / Планы на игру:</label>
-        <textarea id="role" placeholder="Минимум 3-4 предложения..."></textarea>
+    <div class="form-group">
+        <label>2.3. Доказательства игры (СС):</label>
+        <input type="text" id="proofs" placeholder="Ссылки на фотохостинги">
     </div>
 
-    <div class="grid-row">
-        <div class="form-group">
-            <label>2.4. Доказательства игры (СС/фрапсы):</label>
-            <input type="text" id="proofs" placeholder="Ссылки">
-        </div>
-        <div class="form-group">
-            <label>2.5. Ссылка на скриншот Google Authenticator:</label>
-            <input type="text" id="ga_link" placeholder="http://...">
-        </div>
-    </div>
-
-    <!-- СОГЛАШЕНИЕ -->
-    <div class="section-header" style="background: transparent; color: var(--lssd-green);">Соглашение</div>
     <div class="agreement-box">
-        Я соглашаюсь со всеми правилами и условиями полицейского департамента. Также уверяю, что все данные мною ответы в этой заявке являются правдивыми, и я не имею конфликтов с полицейским департаментом и не состою в черном списке сообщества. Я согласен быть активным с аккаунта полицейского больше, чем с каких-либо других имеющихся у меня аккаунтов.
+        Я подтверждаю, что все данные верны. Я согласен с правилами сообщества и готов нести ответственность за свою игру.
     </div>
 
-    <div class="checkbox-container">
-        <input type="checkbox" id="agree">
-        <label style="margin:0">Я принимаю условия данного заявления</label>
-    </div>
+    <button class="btn-generate" onclick="generateBB()">Сгенерировать код заявления</button>
 
-    <div class="btn-group">
-        <button class="btn-generate" onclick="generateBB()">Сгенерировать код</button>
-    </div>
-
-    <!-- РЕЗУЛЬТАТ -->
-    <div id="result-area">
-        <div class="bbcode-output" id="output"></div>
-        <button class="btn-generate" style="background: #444; margin-top: 10px;" onclick="copyCode()">Копировать в буфер</button>
-    </div>
+    <div id="output-box"></div>
 </div>
 
 <script>
 function generateBB() {
-    if(!document.getElementById('agree').checked) {
-        alert('Вы должны принять условия соглашения!');
-        return;
-    }
-
-    const val = (id) => document.getElementById(id).value || "Заполнить";
-    const social = document.getElementById('social').value;
-    const tgLink = social.startsWith('@') ? social.substring(1) : social;
-
-    const code = `[box=#354920][img]https://www.upload.ee[/img][color=#FFFFFF]  Департамент шерифа Лос Сантоса > Карьера > Программа «Возвращение домой»[/color][/box]
-[b][size=115][border=#354920]Заявление[/border][/size][/b]
-[list=1][*][b]Фракции в которых состояли ([i]Никнейм, проект, должность, причины и даты ухода[/i]):[/b] ${val('factions')}
-[*][b]Доказательства игры [i](СС, не обязательно за копов)[/i]:[/b] ${val('proofs')}
-[*][b]Планируемая роль во фракции:[/b]
-[spoiler="Роль"]${val('role')}[/spoiler]
-[*][b]Список пожеланий, комментарий:[/b] ${val('rank')} | ${val('reason')}
-
-
-[*][b]Имя:[/b] ${val('nick')}
-[*][b]Возраст:[/b] ${val('age')}
-[*][b]Ссылка на аккаунт в TG:[/b] [url=https://t.me{tgLink}]${social}[/url]
-[*][b]Скриншот включенного Google Authenticator (без каких-либо обработок):[/b] [url=${val('ga_link')}]Ссылка на скриншот[/url][/list]
-
+    const v = (id) => document.getElementById(id).value || "Заполнить";
+    
+    const bb = `[box=#354920][img]https://www.upload.ee[/img][color=#FFFFFF]  LSSD > Программа «Возвращение домой»[/color][/box]
+[b]Никнейм:[/b] ${v('nick')}
+[b]Прошлый опыт:[/b] ${v('factions')}
+[b]Желаемый отдел:[/b] ${v('rank')}
+[b]Связь:[/b] ${v('social')}
+[b]Доказательства:[/b] [url=${v('proofs')}]Клик[/url]
 [hr][/hr]
-[b][size=115][border=#354920]Соглашение[/border][/size][/b]
-[list][b]Отправляя это заявление, вы автоматически соглашаетесь с приведенным ниже соглашением:[/b]
+[center]© 2024 Los Santos Sheriff Department[/center]`;
 
-[list][i] [justify]Я соглашаюсь со всеми правилами и условиями полицейского департамента. Также уверяю, что все данные мною ответы в этой заявке являются правдивыми, и я не имею конфликтов с полицейским департаментом и не состою в черном списке сообщества. Я согласен быть активным с аккаунта полицейского больше, чем с каких-либо других имеющихся у меня аккаунтов.[/justify][/i][/list][/list]
-
-[box=#354920][color=#FFFFFF][size=85][center]© 2024. Департамент шерифа округа Лос-Сантос. Все права защищены.[/center][/size][/color][/box]`;
-
-    document.getElementById('output').innerText = code;
-    document.getElementById('result-area').style.display = 'block';
-    window.scrollTo(0, document.body.scrollHeight);
-}
-
-function copyCode() {
-    const text = document.getElementById('output').innerText;
-    navigator.clipboard.writeText(text).then(() => alert('Код успешно скопирован!'));
+    const out = document.getElementById('output-box');
+    out.innerText = bb;
+    out.style.display = 'block';
 }
 </script>
 
