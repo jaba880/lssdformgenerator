@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,95 +7,90 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com">
     <title>LSSD - Back Home Program</title>
     <style>
-        :root { --lssd-main: #354920; }
-        body { background-color: #f4f4f4; font-family: 'Segoe UI', Tahoma, sans-serif; }
+        :root { --lssd-main: #354920; --dark-ui: #0b0e11; }
+        body { background-color: var(--dark-ui); color: #4dc2bb; font-family: 'Segoe UI', sans-serif; padding-top: 20px; }
         
-        .lssd-top { background: var(--lssd-main); color: white; padding: 6px 0; font-size: 13px; font-weight: bold; text-align: center; }
-        .lssd-header { background: white; border-bottom: 4px solid var(--lssd-main); padding: 15px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        .dept-title { color: var(--lssd-main); font-weight: 800; text-transform: uppercase; line-height: 1.1; }
-        .dept-title span { display: block; font-size: 11px; color: #666; font-style: italic; }
+        /* Шапка LSSD */
+        .header-lssd { background: #000; border-bottom: 2px solid var(--lssd-main); padding: 15px 0; margin-bottom: 30px; }
+        .dept-name { color: var(--lssd-main); font-weight: 800; text-transform: uppercase; line-height: 1.1; margin-left: 15px; }
+        .dept-name span { color: #888; font-size: 11px; display: block; font-style: italic; }
 
-        .form-container { max-width: 850px; margin: 35px auto; background: white; border: 1px solid #ddd; padding: 30px; }
-        .main-title { color: var(--lssd-main); font-size: 26px; font-weight: bold; text-align: center; margin-bottom: 25px; border-bottom: 2px solid var(--lssd-main); padding-bottom: 15px; }
+        .form-card { max-width: 900px; margin: 0 auto; background: #0d1117; border: 1px solid #1c2626; padding: 25px; box-shadow: 0 0 20px rgba(0,0,0,0.5); }
+        .section-header { background: var(--lssd-main); color: white; padding: 8px; text-align: center; font-weight: bold; text-transform: uppercase; font-size: 13px; margin: 25px 0 15px; }
 
-        .section-bar { background: var(--lssd-main); color: white; padding: 8px 15px; font-weight: bold; font-size: 14px; text-transform: uppercase; margin: 25px 0 15px; }
-        
-        label { display: block; font-size: 12px; font-weight: bold; color: #333; text-transform: uppercase; margin-bottom: 5px; }
-        .input-wrap { border: 1px solid #ced4da; padding: 5px; margin-bottom: 20px; transition: 0.3s; }
-        .input-wrap:focus-within { border-color: var(--lssd-main); box-shadow: 0 0 0 0.2rem rgba(53, 73, 32, 0.1); }
-        
-        input, textarea { width: 100%; border: none; padding: 10px; font-size: 14px; outline: none; }
-        
-        .btn-generate { background: var(--lssd-main); color: white; border: none; padding: 16px; width: 100%; font-weight: bold; text-transform: uppercase; cursor: pointer; letter-spacing: 1px; transition: 0.3s; }
-        .btn-generate:hover { background: #2a3a19; }
+        label { display: block; font-size: 12px; font-weight: bold; color: var(--lssd-main); margin-bottom: 5px; text-transform: uppercase; }
+        input, textarea { width: 100%; background: #12181d; border: 1px solid #1b3d3a; color: #4dc2bb; padding: 10px; margin-bottom: 15px; border-radius: 2px; outline: none; font-size: 14px; }
+        input:focus, textarea:focus { border-color: #4dc2bb; background: #161e24; }
 
-        #result-box { display: none; margin-top: 30px; padding: 20px; background: #1a1a1a; border: 2px dashed var(--lssd-main); color: #4af626; font-family: 'Consolas', monospace; font-size: 13px; white-space: pre-wrap; }
+        .btn-lssd { background: var(--lssd-main); color: white; border: none; padding: 15px; width: 100%; font-weight: bold; text-transform: uppercase; cursor: pointer; transition: 0.3s; margin-top: 10px; }
+        .btn-lssd:hover { background: #4a632d; transform: translateY(-2px); }
+
+        #result-container { display: none; margin-top: 30px; padding: 20px; background: #050505; border: 1px dashed var(--lssd-main); color: #00ff00; font-family: 'Consolas', monospace; font-size: 13px; white-space: pre-wrap; }
     </style>
 </head>
-
 <body>
-    <div class="lssd-top">LOS SANTOS COUNTY SHERIFF'S DEPARTMENT — BACK HOME PROGRAM</div>
 
-    <header class="lssd-header">
-        <div class="container d-flex align-items-center">
-            <img src="https://www.upload.ee" height="60" class="mr-4">
-            <div class="dept-title">
-                Департамент шерифа округа Лос-Сантос
-                <span>"A Tradition of Service"</span>
-            </div>
+<header class="header-lssd">
+    <div class="container d-flex align-items-center">
+        <img src="https://www.upload.ee" height="55">
+        <div class="dept-name">
+            Los Santos County Sheriff's Department
+            <span>"A Tradition of Service" | Back Home Program</span>
         </div>
-    </header>
+    </div>
+</header>
 
-    <div class="form-container shadow-sm">
-        <div class="main-title">ГЕНЕРАТОР ЗАЯВЛЕНИЯ</div>
+<div class="container">
+    <div class="form-card">
+        <div align="center"><h3 style="color: var(--lssd-main); font-weight: bold;">ГЕНЕРАТОР ЗАЯВЛЕНИЯ</h3></div>
+        
+        <div class="section-header">1. ИНФОРМАЦИЯ О ПРОШЛОМ ОПЫТЕ</div>
+        <label>1.1. Фракции, ники, ранги, причины и даты ухода:</label>
+        <textarea id="exp" rows="3" placeholder="Nick, Project, Rank, Reason, Date"></textarea>
 
-        <div class="section-bar">I. Информация о прошлом опыте</div>
-        <label>1.1. Фракции, никнеймы, ранги, причины и даты ухода:</label>
-        <div class="input-wrap"><textarea id="exp" rows="3" placeholder="Nick, Project, Rank, Reason, Date"></textarea></div>
+        <label>1.2. Доказательства вашей игры (СС, скриншоты):</label>
+        <input type="text" id="proofs" placeholder="Ссылки на Imgur / Yapix">
 
-        <label>1.2. Доказательства игры (ссылки на СС / скриншоты):</label>
-        <div class="input-wrap"><input type="text" id="proofs" placeholder="https://imgur.com..."></div>
-
-        <label>1.3. Планируемая роль во фракции (квента, 3-4 предложения):</label>
-        <div class="input-wrap"><textarea id="role" rows="4"></textarea></div>
+        <label>1.3. Планируемая роль во фракции (Квента, 3-4 предложения):</label>
+        <textarea id="role" rows="4" placeholder="Опишите характер вашего персонажа..."></textarea>
 
         <label>1.4. Список пожеланий, комментарий:</label>
-        <div class="input-wrap"><input type="text" id="comment"></div>
+        <input type="text" id="comment">
 
-        <div class="section-bar">II. Личные данные (OOC)</div>
+        <div class="section-header">2. ЛИЧНЫЕ ДАННЫЕ (OOC)</div>
         <div class="row">
-            <div class="col-md-8"><label>Ваше Имя:</label><div class="input-wrap"><input type="text" id="name"></div></div>
-            <div class="col-md-4"><label>Возраст:</label><div class="input-wrap"><input type="text" id="age" placeholder="XX"></div></div>
+            <div class="col-md-8"><label>ВАШЕ ИМЯ:</label><input type="text" id="name"></div>
+            <div class="col-md-4"><label>ВОЗРАСТ:</label><input type="text" id="age" placeholder="XX"></div>
         </div>
+        <label>НИК В TG (ДЛЯ ССЫЛКИ):</label>
+        <input type="text" id="tg" placeholder="username">
 
-        <label>Ник в Telegram (для ссылки):</label>
-        <div class="input-wrap"><input type="text" id="tg" placeholder="username"></div>
+        <label>СКРИНШОТ GOOGLE AUTHENTICATOR (ССЫЛКА):</label>
+        <input type="text" id="gauth">
 
-        <label>Скриншот Google Authenticator (ссылка):</label>
-        <div class="input-wrap"><input type="text" id="gauth"></div>
+        <button class="btn-lssd" onclick="generate()">СГЕНЕРИРОВАТЬ КОД ДЛЯ ФОРУМА</button>
 
-        <button class="btn-generate" onclick="generate()">Сгенерировать BB-код</button>
-
-        <div id="result-box" id="bb-output"></div>
+        <div id="result-container"></div>
     </div>
+</div>
 
-    <script>
-        function generate() {
-            const d = {
-                exp: document.getElementById('exp').value || "Заполнить",
-                proofs: document.getElementById('proofs').value || "Заполнить",
-                role: document.getElementById('role').value || "Описание вашего будущего персонажа...",
-                comment: document.getElementById('comment').value || "Заполнить",
-                name: document.getElementById('name').value || "Заполнить",
-                age: document.getElementById('age').value || "XX",
-                tg: document.getElementById('tg').value || "Nickname",
-                gauth: document.getElementById('gauth').value || "Ссылка на скриншот"
-            };
+<script>
+function generate() {
+    const d = {
+        exp: document.getElementById('exp').value || "Заполнить",
+        proofs: document.getElementById('proofs').value || "Заполнить",
+        role: document.getElementById('role').value || "Описание вашей роли...",
+        comment: document.getElementById('comment').value || "Заполнить",
+        name: document.getElementById('name').value || "Заполнить",
+        age: document.getElementById('age').value || "XX",
+        tg: document.getElementById('tg').value || "Nickname",
+        gauth: document.getElementById('gauth').value || "Ссылка на скриншот"
+    };
 
-            const bb = `[box=#354920][img]https://www.upload.ee[/img][color=#FFFFFF]  Департамент шерифа Лос Сантоса > Карьера > Программа «Возвращение домой»[/color][/box]
+    const bbCode = `[box=#354920][img]https://www.upload.ee[/img][color=#FFFFFF]  Департамент шерифа Лос Сантоса > Карьера > Программа «Возвращение домой»[/color][/box]
 [b][size=115][border=#354920]Заявление[/border][/size][/b]
 [list=1][*][b]Фракции в которых состояли ([i]Никнейм, проект, должность, причины и даты ухода[/i]):[/b] ${d.exp}
-[*][b]Доказательства игры [i](СС, не обязательно за копов)[/i]:[/b] ${d.proofs}
+[*][b]Доказательства игры [i](СС, не обязательно за копов[/i]):[/b] ${d.proofs}
 [*][b]Планируемая роль во фракции:[/b]
 [spoiler="Роль"]${d.role}[/spoiler]
 [*][b]Список пожеланий, комментарий:[/b] ${d.comment}
@@ -114,11 +108,11 @@
 
 [box=#354920][color=#FFFFFF][size=85][center]© 2024. Департамент шерифа округа Лос-Сантос. Все права защищены.[/center][/size][/color][/box]`;
 
-            const res = document.getElementById('result-box');
-            res.innerText = bb;
-            res.style.display = 'block';
-            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-        }
-    </script>
+    const out = document.getElementById('result-container');
+    out.innerText = bbCode;
+    out.style.display = 'block';
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+}
+</script>
 </body>
 </html>
