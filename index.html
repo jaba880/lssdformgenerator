@@ -4,102 +4,188 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com">
     <style>
-        body { margin: 0; font-family: 'Segoe UI', Arial, sans-serif; background: #0a0c0b; }
+        body { margin: 0; font-family: 'Arial', sans-serif; background: #0a0c0b; color: #fff; padding-bottom: 50px; }
 
-        /* Верхняя панель (Тёмно-зеленый/черный) */
+        /* --- ШАПКА LSSD --- */
         .top-bar {
-            background-color: #0b0f0d;
-            height: 35px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 50px;
-            border-bottom: 1px solid #c4a159; /* Золотистая линия */
-            color: #fff;
-            font-size: 12px;
-            font-weight: bold;
+            background-color: #0b0f0d; height: 35px; display: flex;
+            justify-content: space-between; align-items: center; padding: 0 50px;
+            border-bottom: 1px solid #c4a159; color: #fff; font-size: 12px; font-weight: bold;
         }
-
         .city-info { display: flex; align-items: center; gap: 8px; text-transform: uppercase; }
-        .city-logo { height: 16px; width: auto; } /* Логотип города */
-
+        .city-logo { height: 16px; }
         .emergency { display: flex; align-items: center; gap: 10px; font-weight: normal; }
         .emergency-link {
-            background: #000;
-            color: #fff;
-            text-decoration: none;
-            padding: 3px 10px;
-            border-radius: 3px;
-            font-weight: bold;
-            transition: 0.3s;
+            background: #000; color: #fff; text-decoration: none; padding: 3px 10px;
+            border-radius: 3px; font-weight: bold; transition: 0.3s;
         }
-        .emergency-link:hover { color: #c4a159; }
-
-        /* Основной хедер (Тёмно-зелёный градиент как на sd.ls-services.ru) */
         .main-header {
             background: linear-gradient(180deg, #121814 0%, #0d110e 100%);
-            height: 100px;
-            display: flex;
-            align-items: center;
-            padding: 0 50px;
+            height: 100px; display: flex; align-items: center; padding: 0 50px;
             border-bottom: 3px solid #c4a159;
         }
-
         .brand-block { display: flex; align-items: center; gap: 20px; }
         .lssd-logo { height: 75px; }
-
         .separator { width: 1px; height: 50px; background: rgba(255,255,255,0.1); }
-
-        .brand-text h1 { color: #fff; margin: 0; font-size: 22px; font-weight: 600; }
+        .brand-text h1 { margin: 0; font-size: 22px; font-weight: 600; }
         .brand-text p { color: #8a918c; margin: 0; font-size: 13px; font-style: italic; }
-
-        /* Навигация */
         .nav-menu { margin-left: auto; }
         .nav-item {
-            color: #fff;
-            text-decoration: none;
-            background: #1a231e; /* Темно-зеленая подложка кнопки */
-            padding: 12px 25px;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            border-radius: 4px 4px 0 0;
-            border-bottom: 3px solid #c4a159;
-            margin-bottom: -33px; /* Прижимаем к золотой линии */
+            color: #fff; text-decoration: none; background: #1a231e;
+            padding: 12px 25px; font-size: 14px; display: flex; align-items: center;
+            gap: 8px; border-radius: 4px 4px 0 0; border-bottom: 3px solid #c4a159; margin-bottom: -33px;
         }
+
+        /* --- КОНСТРУКТОР ФОРМЫ --- */
+        .constructor-container {
+            max-width: 900px; margin: 50px auto; background: #111111;
+            border: 1px solid #333; padding: 20px; box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+        
+        .form-title { text-align: center; text-transform: uppercase; font-size: 18px; margin-bottom: 25px; border-bottom: 1px solid #333; padding-bottom: 10px; }
+        
+        .section-header {
+            background: #0d1a2b; /* Темно-синий фон как на скрине */
+            color: #fff; padding: 8px 15px; font-size: 13px; font-weight: bold;
+            text-transform: uppercase; text-align: center; margin: 20px 0 15px 0;
+            border: 1px solid #1e3a5f;
+        }
+
+        .input-group { margin-bottom: 15px; }
+        .input-group label { display: block; font-size: 11px; font-weight: bold; margin-bottom: 5px; color: #eee; }
+        
+        input, textarea {
+            width: 100%; background: #222; border: 1px solid #3c3c3c;
+            color: #fff; padding: 10px; box-sizing: border-box; font-size: 13px; outline: none;
+        }
+        input:focus, textarea:focus { border-color: #c4a159; }
+
+        .row { display: flex; gap: 20px; }
+        .row .input-group { flex: 1; }
+
+        /* Блок соглашения */
+        .agreement-block {
+            background: #000; border: 1px solid #333; padding: 15px;
+            font-size: 12px; line-height: 1.4; color: #ccc; margin-top: 25px;
+        }
+        .agreement-title { color: #4a90e2; font-weight: bold; text-align: center; display: block; margin-bottom: 10px; }
+        
+        .checkbox-container { display: flex; align-items: center; gap: 10px; margin-top: 10px; font-weight: bold; color: #fff; }
+
+        /* Кнопки */
+        .actions { display: flex; justify-content: center; gap: 10px; margin-top: 30px; }
+        .btn {
+            background: #222; border: 1px solid #444; color: #fff; padding: 8px 20px;
+            cursor: pointer; text-transform: uppercase; font-size: 12px; transition: 0.3s;
+        }
+        .btn:hover { background: #333; border-color: #c4a159; }
     </style>
 </head>
 <body>
 
+    <!-- ШАПКА -->
     <div class="top-bar">
         <div class="city-info">
-            <!-- Заменил иконку на логотип звезды -->
-            <img src="https://sd.ls-services.ru/images/ranksOCT19/Logos/SIBLogo.png" class="city-logo" alt="">
-            ЛОС-САНТОС
+            <img src="https://sd.ls-services.ru/images/ranksOCT19/Logos/SIBLogo.png" class="city-logo" alt=""> ЛОС-САНТОС
         </div>
         <div class="emergency">
-            Для экстренных ситуаций: 
-            <a href="https://sd.ls-services.ru/viewforum.php?f=4" class="emergency-link">Emergency services</a>
+            Для экстренных ситуаций: <a href="#" class="emergency-link">Emergency services</a>
         </div>
     </div>
 
     <header class="main-header">
         <div class="brand-block">
-            <img src="https://sd.ls-services.ru/images/ranksOCT19/Logos/LSSDLogo.png" class="lssd-logo" alt="LSSD">
+            <img src="https://sd.ls-services.ru/images/ranksOCT19/Logos/LSSDLogo.png" class="lssd-logo">
             <div class="separator"></div>
             <div class="brand-text">
                 <h1>Департамент Шерифа Лос-Сантоса</h1>
                 <p>To Protect and to Serve</p>
             </div>
         </div>
-
         <nav class="nav-menu">
-            <a href="#" class="nav-item">
-                <i class="fas fa-users"></i> Гражданам
-            </a>
+            <a href="#" class="nav-item"><i class="fas fa-users"></i> Гражданам</a>
         </nav>
     </header>
+
+    <!-- КОНСТРУКТОР -->
+    <div class="constructor-container">
+        <div class="form-title">Программа «Возвращение домой»</div>
+
+        <div class="section-header">1. Информация о прошлых местах игры</div>
+        
+        <div class="input-group">
+            <label>1.1. НИК-НЕЙМ ВАШЕГО ДЕЙСТВУЮЩЕГО ПЕРСОНАЖА:</label>
+            <input type="text" placeholder="Заполнить">
+        </div>
+
+        <div class="input-group">
+            <label>1.2. ПРОЕКТЫ, СООБЩЕСТВА И СЕРВЕРА, ГДЕ ВЫ ИГРАЛИ:</label>
+            <textarea rows="4" placeholder="Развернутый ответ на вопрос"></textarea>
+        </div>
+
+        <div class="input-group">
+            <label>1.3. ЗВАНИЕ, ДОЛЖНОСТЬ И ОТДЕЛ:</label>
+            <input type="text" placeholder="Заполнить">
+        </div>
+
+        <div class="input-group">
+            <label>1.4. ПРИЧИНА УХОДА:</label>
+            <input type="text" placeholder="Заполнить">
+        </div>
+
+        <div class="section-header">2. Информация о подающем заявление</div>
+
+        <div class="row">
+            <div class="input-group">
+                <label>2.1. ВАШ ВОЗРАСТ:</label>
+                <input type="text" placeholder="Заполнить">
+            </div>
+            <div class="input-group">
+                <label>2.2. ССЫЛКА НА ВКОНТАКТЕ:</label>
+                <input type="text" placeholder="Заполнить">
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label>2.3. КВЕНТА ВАШЕГО ПЕРСОНАЖА:</label>
+            <textarea rows="4" placeholder="Развернутый ответ на вопрос"></textarea>
+        </div>
+
+        <div class="input-group">
+            <label>2.4. ПЛАНЫ НА ПЕРСОНАЖА:</label>
+            <input type="text" placeholder="Заполнить">
+        </div>
+
+        <div class="input-group">
+            <label>2.5. СПИСОК ПОЖЕЛАНИЙ:</label>
+            <input type="text" placeholder="Заполнить">
+        </div>
+
+        <div class="row">
+            <div class="input-group">
+                <label>2.6. ДОКАЗАТЕЛЬСТВА ВАШЕЙ ИГРЫ:</label>
+                <input type="text" placeholder="Ссылка на СС-ки, иные подтверждения">
+            </div>
+            <div class="input-group">
+                <label>2.7. СКРИНШОТ ЗАЩИТЫ АККАУНТА:</label>
+                <input type="text" placeholder="Заполнить">
+            </div>
+        </div>
+
+        <div class="agreement-block">
+            <span class="agreement-title">СОГЛАШЕНИЕ</span>
+            Я соглашаюсь, что если покину сообщество в течение испытательного срока без основательной причины, то буду занесен в черный список (ЧС) сообщества без права выхода. Я понимаю, что не все мои перечисленные пожелания могут быть удовлетворены и всё равно соглашаюсь играть.
+            <div class="checkbox-container">
+                <input type="checkbox" id="agree">
+                <label for="agree">Я принимаю условия данного заявления</label>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button class="btn">Сгенерировать</button>
+            <button class="btn">Назад</button>
+        </div>
+    </div>
 
 </body>
 </html>
