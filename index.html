@@ -293,11 +293,16 @@
 
     // НОВАЯ ФУНКЦИЯ ДЛЯ ПЕРЕНОСА НА ФОРУМ
     function sendToForum() {
-        const text = document.getElementById('bbcodeOutput').value;
-        const encodedText = encodeURIComponent(text);
-        const url = `https://sd.ls-services.ru/posting.php?mode=post&f=13}`;
-        window.open(url, '_blank');
-    }
+    const text = document.getElementById('bbcodeOutput').value;
+    const encodedText = encodeURIComponent(text);
+    
+    // Добавили заголовок (subject), иногда без него поле сообщения игнорируется
+    const subject = encodeURI("Заявление на возвращение домой"); 
+    
+    const url = `https://sd.ls-services.ru/posting.php?mode=post&f=13}{subject}&message=${encodedText}`;
+    
+    window.open(url, '_blank');
+}
 
     function closeModal() { document.getElementById('bbcodeModal').style.display = 'none'; }
     </script>
