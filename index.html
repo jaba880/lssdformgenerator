@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -74,7 +73,7 @@
         .constructor-container {
             max-width: 900px;
             margin: 60px auto;
-            background: #0d110e; /* Тёмно-зелёный фон блока */
+            background: #0d110e; 
             border: 1px solid #808080;
             padding: 30px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.6);
@@ -90,7 +89,7 @@
         }
 
         .section-header {
-            background: #013220; /* Синий заголовок как на скриншоте */
+            background: #013220; 
             color: #fff;
             padding: 8px;
             font-size: 12px;
@@ -132,24 +131,40 @@
             cursor: pointer; text-transform: uppercase; font-size: 11px; font-weight: bold; transition: 0.3s;
         }
         .btn:hover { border-color: #c4a159; color: #c4a159; }
+
+        /* СТИЛИ МОДАЛЬНОГО ОКНА */
+        #bbcodeModal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: rgba(0,0,0,0.85); justify-content: center; align-items: center; z-index: 10000;
+        }
+        .modal-content {
+            background: #1c1c1c; padding: 20px; max-width: 650px; width: 85%; 
+            border-radius: 4px; border: 1px solid #333; color: #fff; box-shadow: 0 0 30px #000;
+        }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 15px; }
+        .modal-header h3 { margin: 0; font-size: 16px; text-transform: uppercase; }
+        .code-area { width: 100%; height: 250px; background: #000; color: #ccc; font-family: monospace; padding: 12px; border: 1px solid #444; resize: none; box-sizing: border-box; font-size: 12px; margin-top: 5px; }
+        .modal-footer { display: flex; justify-content: flex-end; gap: 10px; margin-top: 15px; }
+        .btn-forum { background: #0066cc; color: #fff; padding: 10px 20px; text-decoration: none; font-weight: bold; font-size: 13px; border-radius: 3px; }
+        .btn-close { background: #444; color: #fff; border: none; padding: 10px 20px; cursor: pointer; border-radius: 3px; font-weight: bold; }
     </style>
 </head>
 <body>
 
     <div class="top-bar">
         <div class="city-info">
-            <img src="https://sd.ls-services.ru/images/ranksOCT19/Logos/SIBLogo.png" class="city-logo" alt="">
+            <img src="https://sd.ls-services.ru" class="city-logo" alt="">
             ЛОС-САНТОС
         </div>
         <div class="emergency">
             Для экстренных ситуаций: 
-            <a href="https://sd.ls-services.ru/viewforum.php?f=4" class="emergency-link">Emergency services</a>
+            <a href="https://sd.ls-services.ru" class="emergency-link">Emergency services</a>
         </div>
     </div>
 
     <header class="main-header">
         <div class="brand-block">
-            <img src="https://sd.ls-services.ru/images/ranksOCT19/Logos/LSSDLogo.png" class="lssd-logo" alt="LSSD">
+            <img src="https://sd.ls-services.ru" class="lssd-logo" alt="LSSD">
             <div class="separator"></div>
             <div class="brand-text">
                 <h1>Департамент Шерифа Лос-Сантоса</h1>
@@ -164,76 +179,110 @@
     <div class="constructor-container">
         <div class="form-main-title">Программа «Возвращение домой»</div>
 
-        <!-- СЕКЦИЯ 1 -->
         <div class="section-header">1. ИНФОРМАЦИЯ О ПРОШЛЫХ МЕСТАХ ИГРЫ</div>
         <div class="input-group">
             <label>1.1. НИК-НЕЙМ ВАШЕГО ДЕЙСТВУЮЩЕГО ПЕРСОНАЖА:</label>
-            <input type="text" placeholder="Заполнить">
+            <input type="text" id="f11" placeholder="Заполнить">
         </div>
         <div class="input-group">
             <label>1.2. ПРОЕКТЫ, СООБЩЕСТВА И СЕРВЕРА, ГДЕ ВЫ ИГРАЛИ:</label>
-            <textarea rows="4" placeholder="Развернутый ответ на вопрос"></textarea>
+            <textarea id="f12" rows="4" placeholder="Развернутый ответ на вопрос"></textarea>
         </div>
         <div class="input-group">
             <label>1.3. ЗВАНИЕ, ДОЛЖНОСТЬ И ОТДЕЛ:</label>
-            <input type="text" placeholder="Заполнить">
+            <input type="text" id="f13" placeholder="Заполнить">
         </div>
         <div class="input-group">
             <label>1.4. ПРИЧИНА УХОДА:</label>
-            <input type="text" placeholder="Заполнить">
+            <input type="text" id="f14" placeholder="Заполнить">
         </div>
 
-        <!-- СЕКЦИЯ 2 -->
         <div class="section-header">2. ИНФОРМАЦИЯ О ПОДАЮЩЕМ ЗАЯВЛЕНИЕ</div>
         <div class="row">
             <div class="input-group">
                 <label>2.1. ВАШ ВОЗРАСТ:</label>
-                <input type="text" placeholder="Заполнить">
+                <input type="text" id="f21" placeholder="Заполнить">
             </div>
             <div class="input-group">
                 <label>2.2. ССЫЛКА НА ВКОНТАКТЕ:</label>
-                <input type="text" placeholder="Заполнить">
+                <input type="text" id="f22" placeholder="Заполнить">
             </div>
         </div>
         <div class="input-group">
             <label>2.3. КВЕНТА ВАШЕГО ПЕРСОНАЖА:</label>
-            <textarea rows="4" placeholder="Развернутый ответ на вопрос"></textarea>
+            <textarea id="f23" rows="4" placeholder="Развернутый ответ на вопрос"></textarea>
         </div>
         <div class="input-group">
             <label>2.4. ПЛАНЫ НА ПЕРСОНАЖА:</label>
-            <input type="text" placeholder="Заполнить">
+            <input type="text" id="f24" placeholder="Заполнить">
         </div>
         <div class="input-group">
             <label>2.5. СПИСОК ПОЖЕЛАНИЙ:</label>
-            <input type="text" placeholder="Заполнить">
+            <input type="text" id="f25" placeholder="Заполнить">
         </div>
         <div class="row">
             <div class="input-group">
                 <label>2.6. ДОКАЗАТЕЛЬСТВА ВАШЕЙ ИГРЫ:</label>
-                <input type="text" placeholder="Ссылки на СС-ки, иные подтверждения">
+                <input type="text" id="f26" placeholder="Ссылки на СС-ки, иные подтверждения">
             </div>
             <div class="input-group">
-                <label>2.7. СКРИНШОТ ЗАЩИТЫ НА ИГРОВОМ АККАУНТЕ (GOOGLE АУТЕНТИФИКАТОР, ПОЧТОВЫЙ ЯЩИК):</label>
-                <input type="text" placeholder="Заполнить">
+                <label>2.7. СКРИНШОТ ЗАЩИТЫ НА ИГРОВОМ АККАУНТЕ:</label>
+                <input type="text" id="f27" placeholder="Заполнить">
             </div>
         </div>
 
-        <!-- СОГЛАШЕНИЕ -->
         <div class="agreement-block">
             <span class="agreement-title">СОГЛАШЕНИЕ</span>
             <span class="agreement-text">
-                Я соглашаюсь со всеми правилами и условиями полицейского департамента. Также уверяю, что все данные мною ответы в этой заявке являются правдивыми, и я не имею конфликтов с полицейским департаментом и не состою в черном списке сообщества. Я согласен быть активным с аккаунта полицейского больше, чем с каких-либо других имеющихся у меня аккаунтов.
+                Я соглашаюсь со всеми правилами и условиями полицейского департамента. Также уверяю, что все данные мною ответы в этой заявке являются правдивыми...
             </span>
             <label class="checkbox-container">
-                <input type="checkbox"> Я принимаю условия данного заявления
+                <input type="checkbox" id="agreeCheck"> Я принимаю условия данного заявления
             </label>
         </div>
 
         <div class="actions">
-            <button class="btn">Сгенерировать</button>
-            <button class="btn">Назад</button>
+            <button class="btn" onclick="generateBB()">Сгенерировать</button>
+            <button class="btn" onclick="location.reload()">Назад</button>
         </div>
     </div>
+
+    <!-- МОДАЛЬНОЕ ОКНО -->
+    <div id="bbcodeModal">
+      <div class="modal-content">
+        <div class="modal-header"><h3>BBCode для копирования</h3><span onclick="closeModal()" style="cursor:pointer; font-size:24px;">×</span></div>
+        <div style="font-size:12px; color:#888; margin-bottom:5px;">Report Code</div>
+        <textarea id="bbcodeOutput" class="code-area" readonly></textarea>
+        <div class="modal-footer">
+          <button onclick="closeModal()" class="btn-close">Закрыть</button>
+          <a href="https://sd.ls-services.ru" target="_blank" class="btn-forum">На форум</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- СКРИПТ ЛОГИКИ -->
+    <script>
+        function generateBB() {
+            if(!document.getElementById('agreeCheck').checked) {
+                alert("Сначала примите соглашение!");
+                return;
+            }
+
+            const v = (id) => document.getElementById(id).value || "—";
+            
+            let bb = `[center][b]LSSD BACKHOME PROGRAM APPLICATION[/b][/center]\n\n`;
+            bb += `[b]1.1. Ник:[/b] ${v('f11')}\n[b]1.2. Опыт:[/b] ${v('f12')}\n[b]1.3. Звание/Отдел:[/b] ${v('f13')}\n[b]1.4. Причина:[/b] ${v('f14')}\n\n`;
+            bb += `[b]2.1. Возраст:[/b] ${v('f21')}\n[b]2.2. ВК:[/b] ${v('f22')}\n[b]2.3. Квента:[/b] ${v('f23')}\n[b]2.4. План:[/b] ${v('f24')}\n`;
+            bb += `[b]2.5. Пожелания:[/b] ${v('f25')}\n[b]2.6. Док-ва:[/b] ${v('f26')}\n[b]2.7. Защита:[/b] ${v('f27')}`;
+
+            document.getElementById('bbcodeOutput').value = bb;
+            document.getElementById('bbcodeModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('bbcodeModal').style.display = 'none';
+        }
+    </script>
 
 </body>
 </html>
