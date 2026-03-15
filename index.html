@@ -295,7 +295,7 @@
     function sendToForum() {
         const text = document.getElementById('bbcodeOutput').value;
         const encodedText = encodeURIComponent(text);
-        const url = `https://sd.ls-services.ru{encodedText}`;
+        const url = `https://sd.ls-services.ru/posting.php?mode=post&f=13}`;
         window.open(url, '_blank');
     }
 
