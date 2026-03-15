@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -251,63 +252,45 @@
     </div>
 
     <!-- МОДАЛЬНОЕ ОКНО -->
-<div id="bbcodeModal">
-    <div class="modal-box">
-        <div class="modal-header"><h3>BBCode для копирования</h3><span onclick="closeModal()" style="cursor:pointer; font-size:24px;">×</span></div>
-        <textarea id="bbcodeOutput" class="bb-area" readonly></textarea>
-        <div class="modal-footer">
-            <button class="btn-close" onclick="closeModal()">Закрыть</button>
-            <!-- Заменили ссылку на кнопку с функцией -->
-            <button class="btn-forum" onclick="sendToForum()">На форум</button>
+    <div id="bbcodeModal">
+        <div class="modal-box">
+            <div class="modal-header"><h3>BBCode для копирования</h3><span onclick="closeModal()" style="cursor:pointer; font-size:24px;">×</span></div>
+            <textarea id="bbcodeOutput" class="bb-area" readonly></textarea>
+            <div class="modal-footer">
+                <button class="btn-close" onclick="closeModal()">Закрыть</button>
+                <a href="https://sd.ls-services.ru/posting.php?mode=post&f=13" target="_blank" class="btn-forum">На форум</a>
+            </div>
         </div>
     </div>
-</div>
 
-<script>
-    function generate() {
-        if(!document.getElementById('agreeCheck').checked) {
-            alert("Сначала примите соглашение!");
-            return;
+    <script>
+        function generate() {
+            if(!document.getElementById('agreeCheck').checked) {
+                alert("Сначала примите соглашение!");
+                return;
+            }
+            
+            const v = (id) => document.getElementById(id).value || "Заполнить";
+            
+            let bb = `[box=#354920][img]https://www.upload.ee/image/13625296/16.png[/img][color=#FFFFFF]  Департамент шерифа Лос Сантоса > Карьера > Программа «Возвращение домой»[/color][/box]\n`;
+            bb += `[b][size=115][border=#354920]Заявление[/border][/size][/b]\n`;
+            bb += `[list=1][*][b]Фракции в которых состояли ([i]Никнейм, проект, должность, причины и даты ухода[/i]):[/b] ${v('f12')}\n`;
+            bb += `[*][b]Доказательства игры [i](СС, не обязательно за копов)[/i]:[/b] ${v('f26')}\n`;
+            bb += `[*][b]Планируемая роль во фракции:[/b]\n[spoiler="Роль"]${v('f23')}[/spoiler]\n`;
+            bb += `[*][b]Список пожеланий, комментарий:[/b] ${v('f25')}\n\n\n`;
+            bb += `[*][b]Имя:[/b] ${v('f11')}\n`;
+            bb += `[*][b]Возраст:[/b] ${v('f21')}\n`;
+            bb += `[*][b]Ссылка на аккаунт в TG:[/b] [url=${v('f22')}]${v('f22')}[/url]\n`;
+            bb += `[*][b]Скриншот включенного Google Authenticator (без каких-либо обработок):[/b] [url=${v('f27')}]Ссылка на скриншот[/url][/list]\n\n`;
+            bb += `[hr][/hr]\n[b][size=115][border=#354920]Соглашение[/border][/size][/b]\n`;
+            bb += `[list][b]Отправляя это заявление, вы автоматически соглашаетесь с приведенным ниже соглашением:[/b]\n\n`;
+            bb += `[list][i] [justify]Я соглашаюсь со всеми правилами и условиями полицейского департамента. Также уверяю, что все данные мною ответы в этой заявке являются правдивыми, и я не имею конфликтов с полицейским департаментом и не состою в черном списке сообщества. Я согласен быть активным с аккаунта полицейского больше, чем с каких-либо других имеющихся у меня аккаунтов.[/justify][/i][/list][/list]\n\n`;
+            bb += `[box=#354920][color=#FFFFFF][size=85][center]© 2024. Департамент шерифа округа Лос-Сантос. Все права защищены.[/center][/size][/color][/box]`;
+
+            document.getElementById('bbcodeOutput').value = bb;
+            document.getElementById('bbcodeModal').style.display = 'flex';
         }
-        
-        const v = (id) => document.getElementById(id).value || "Заполнить";
-        
-        let bb = `[box=#354920][img]https://www.upload.ee/image/13625296/16.png[/img][color=#FFFFFF]  Департамент шерифа Лос Сантоса > Карьера > Программа «Возвращение домой»[/color][/box]\n`;
-        bb += `[b][size=115][border=#354920]Заявление[/border][/size][/b]\n`;
-        bb += `[list=1][*][b]Фракции в которых состояли ([i]Никнейм, проект, должность, причины и даты ухода[/i]):[/b] ${v('f12')}\n`;
-        bb += `[*][b]Доказательства игры [i](СС, не обязательно за копов)[/i]:[/b] ${v('f26')}\n`;
-        bb += `[*][b]Планируемая роль во фракции:[/b]\n[spoiler="Роль"]${v('f23')}[/spoiler]\n`;
-        bb += `[*][b]Список пожеланий, комментарий:[/b] ${v('f25')}\n\n\n`;
-        bb += `[*][b]Имя:[/b] ${v('f11')}\n`;
-        bb += `[*][b]Возраст:[/b] ${v('f21')}\n`;
-        bb += `[*][b]Ссылка на аккаунт в TG:[/b] [url=${v('f22')}]${v('f22')}[/url]\n`;
-        bb += `[*][b]Скриншот включенного Google Authenticator (без каких-либо обработок):[/b] [url=${v('f27')}]Ссылка на скриншот[/url][/list]\n\n`;
-        bb += `[hr][/hr]\n[b][size=115][border=#354920]Соглашение[/border][/size][/b]\n`;
-        bb += `[list][b]Отправляя это заявление, вы автоматически соглашаетесь с приведенным ниже соглашением:[/b]\n\n`;
-        bb += `[list][i] [justify]Я соглашаюсь со всеми правилами и условиями полицейского департамента. Также уверяю, что все данные мною ответы в этой заявке являются правдивыми, и я не имею конфликтов с полицейским департаментом и не состою в черном списке сообщества. Я согласен быть активным с аккаунта полицейского больше, чем с каких-либо других имеющихся у меня аккаунтов.[/justify][/i][/list][/list]\n\n`;
-        bb += `[box=#354920][color=#FFFFFF][size=85][center]© 2024. Департамент шерифа округа Лос-Сантос. Все права защищены.[/center][/size][/color][/box]`;
-
-        document.getElementById('bbcodeOutput').value = bb;
-        document.getElementById('bbcodeModal').style.display = 'flex';
-    }
-
-    // НОВАЯ ФУНКЦИЯ ДЛЯ ПЕРЕНОСА НА ФОРУМ
-    function sendToForum() {
-    const textArea = document.getElementById('bbcodeOutput');
-    
-    // 1. Копируем текст в буфер обмена
-    textArea.select();
-    document.execCommand("copy");
-    
-    // 2. Показываем маленькое уведомление (чтобы юзер понял, что копировать не надо)
-    alert("Текст скопирован! Теперь просто вставь его (Ctrl+V) на форуме.");
-
-    // 3. Открываем форум по «чистой» ссылке без лишнего мусора
-    const url = "https://sd.ls-services.ru/posting.php?mode=post&f=13}";
-    window.open(url, '_blank');
-}
-
-    function closeModal() { document.getElementById('bbcodeModal').style.display = 'none'; }
+        function closeModal() { document.getElementById('bbcodeModal').style.display = 'none'; }
     </script>
 </body>
 </html>
