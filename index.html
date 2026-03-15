@@ -6,67 +6,61 @@
     <style>
         :root {
             --lssd-green: #354920;
-            --section-blue: #0d1a2a;
-            --section-text: #4a9eff;
-            --bg-main: #080808;
-            --bg-panel: #111;
-            --input-bg: #0a0a0a;
-            --border: #222;
+            --section-blue: #233142; /* Мягкий синий */
+            --section-text: #6baaff; /* Светло-голубой */
+            --bg-main: #1a1a1a;      /* Фон как на форуме */
+            --bg-panel: #212121;     /* Чуть светлее для блоков */
+            --input-bg: #161616;
+            --border: #333;
         }
 
-        body { margin: 0; background-color: var(--bg-main); color: #fff; font-family: 'Arial', sans-serif; }
+        body { margin: 0; background-color: var(--bg-main); color: #e0e0e0; font-family: 'Arial', sans-serif; }
 
         /* ВЕРХНЯЯ ПАНЕЛЬ */
         .top-bar {
-            background-color: #0a111a;
+            background-color: #121820;
             height: 35px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 0 60px;
-            border-bottom: 1px solid #1a2a3a;
+            border-bottom: 1px solid #2d3b4d;
         }
-        .top-bar-left { display: flex; align-items: center; gap: 10px; color: #fff; font-size: 11px; font-weight: bold; text-transform: uppercase; }
-        .top-bar-left img { width: 16px; height: 16px; }
+        .top-bar-left { display: flex; align-items: center; gap: 10px; color: #ccc; font-size: 11px; font-weight: bold; text-transform: uppercase; }
+        .top-bar-left img { width: 16px; height: 16px; opacity: 0.8; }
         
         .emergency-link { 
-            color: #fff; 
+            color: #aaa; 
             font-size: 11px; 
             text-decoration: underline; 
             font-weight: bold;
             cursor: pointer;
-            transition: 0.2s;
         }
-        .emergency-link:hover { color: #cc0000; }
+        .emergency-link:hover { color: #fff; }
 
         /* ХЕДЕР */
         .main-header {
-            background-color: #0d0d0d;
+            background-color: #1f1f1f;
             height: 100px;
             display: flex;
             align-items: center;
             padding: 0 60px;
-            border-bottom: 1px solid #1a1a1a;
+            border-bottom: 1px solid var(--border);
         }
-        .header-logo { 
-            width: 60px; 
-            height: auto; 
-            margin-right: 25px; 
-            filter: drop-shadow(0 0 5px rgba(53, 73, 32, 0.4));
-        }
-        .header-text { border-left: 2px solid #222; padding-left: 25px; }
-        .header-text h1 { margin: 0; font-size: 22px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 900; }
-        .header-text p { margin: 4px 0 0; color: #666; font-size: 11px; font-style: italic; text-transform: uppercase; }
+        .header-logo { width: 60px; margin-right: 25px; }
+        .header-text { border-left: 2px solid #333; padding-left: 25px; }
+        .header-text h1 { margin: 0; font-size: 22px; text-transform: uppercase; color: #eee; }
+        .header-text p { margin: 4px 0 0; color: #777; font-size: 11px; font-style: italic; }
 
-        /* КОНСТРУКТОР */
+        /* КОНТЕЙНЕР */
         .main-wrapper { 
             width: 900px; 
             margin: 40px auto; 
             background: var(--bg-panel); 
             border: 1px solid var(--border); 
-            box-shadow: 0 25px 60px rgba(0,0,0,0.8);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
-        .main-title { padding: 30px; text-align: center; font-size: 16px; font-weight: bold; text-transform: uppercase; letter-spacing: 4px; }
+        .main-title { padding: 30px; text-align: center; font-size: 16px; font-weight: bold; text-transform: uppercase; color: #fff; }
 
         .section-bar {
             background-color: var(--section-blue);
@@ -76,56 +70,47 @@
             font-size: 11px;
             font-weight: bold;
             text-transform: uppercase;
-            border-top: 1px solid #1a2a3a;
-            border-bottom: 1px solid #1a2a3a;
-            letter-spacing: 1px;
+            border-top: 1px solid #2d3b4d;
+            border-bottom: 1px solid #2d3b4d;
         }
 
         .form-body { padding: 35px; }
-        label { display: block; font-size: 11px; font-weight: bold; color: #777; text-transform: uppercase; margin-bottom: 8px; }
+        label { display: block; font-size: 11px; font-weight: bold; color: #999; text-transform: uppercase; margin-bottom: 8px; }
         
         input, textarea {
             width: 100%;
             background: var(--input-bg);
-            border: 1px solid #333;
-            color: #eee;
+            border: 1px solid #3a3a3a;
+            color: #ddd;
             padding: 14px;
             box-sizing: border-box;
             font-size: 13px;
             outline: none;
             margin-bottom: 20px;
-            transition: border 0.3s;
         }
-        input:focus, textarea:focus { border-color: var(--lssd-green); }
+        input:focus { border-color: var(--lssd-green); background: #1a1a1a; }
         textarea { height: 90px; resize: none; }
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 
-        /* СОГЛАШЕНИЕ */
-        .agreement-area { padding: 0 35px 35px; text-align: center; }
-        .check-group { display: flex; align-items: center; justify-content: center; gap: 15px; font-size: 12px; font-weight: bold; text-transform: uppercase; }
-        .check-group input { width: 22px; height: 22px; cursor: pointer; }
-
         /* КНОПКИ */
         .footer-btns { display: flex; justify-content: center; gap: 15px; padding-bottom: 50px; }
-        .btn { background: #000; border: 1px solid #333; color: #fff; padding: 14px 45px; font-size: 12px; font-weight: bold; text-transform: uppercase; cursor: pointer; border-radius: 4px; transition: 0.3s; }
-        .btn:hover { border-color: var(--lssd-green); background: #0a0a0a; }
+        .btn { background: #2a2a2a; border: 1px solid #444; color: #fff; padding: 14px 45px; font-size: 12px; font-weight: bold; text-transform: uppercase; cursor: pointer; transition: 0.2s; }
+        .btn:hover { background: var(--lssd-green); border-color: var(--lssd-green); }
 
         /* МОДАЛКА */
-        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 1000; align-items: center; justify-content: center; }
-        .modal-card { background: #151515; width: 650px; border: 1px solid #333; padding: 30px; box-shadow: 0 0 50px #000; }
-        .btn-blue { background: #0060df; border: none; padding: 14px 30px; color: #fff; font-weight: bold; cursor: pointer; float: right; margin-top: 20px; border-radius: 4px; }
-        .btn-blue:hover { background: #0050c0; }
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; align-items: center; justify-content: center; }
+        .modal-card { background: #252525; width: 650px; border: 1px solid #444; padding: 30px; }
     </style>
 </head>
 <body>
 
     <div class="top-bar">
         <div class="top-bar-left"><img src="https://www.upload.ee"> ЛОС-САНТОС</div>
-        <a href="https://sd.ls-services.ru/viewforum.php?f=4" target="_blank" class="emergency-link">Для экстренных</a>
+        <a href="https://sd.ls-services.ru" target="_blank" class="emergency-link">Для экстренных</a>
     </div>
 
     <div class="main-header">
-        <img src="https://www.upload.ee" class="header-logo" alt="LSSD">
+        <img src="https://www.upload.ee" class="header-logo">
         <div class="header-text">
             <h1>ДЕПАРТАМЕНТ ШЕРИФА ЛОС-САНТОСА</h1>
             <p>To Serve and Protect</p>
@@ -138,80 +123,46 @@
         <div class="section-bar">1. Информация о персонаже и опыте</div>
         <div class="form-body">
             <label>1.1. Фракции в которых состояли:</label>
-            <textarea id="factions" placeholder="Никнейм, проект, должность, причины и даты ухода"></textarea>
+            <textarea id="factions" placeholder="Никнейм, проект, ранг..."></textarea>
             
             <label>1.2. Доказательства игры (СС):</label>
-            <input type="text" id="proofs" placeholder="Вставьте прямые ссылки">
+            <input type="text" id="proofs" placeholder="Ссылки на скриншоты">
             
-            <label>1.3. Планируемая роль во фракции (3-4 предложения):</label>
-            <textarea id="role" placeholder="Ваш будущий персонаж..."></textarea>
-            
-            <label>1.4. Список пожеланий, комментарий:</label>
-            <input type="text" id="comments">
+            <label>1.3. Планируемая роль (3-4 предложения):</label>
+            <textarea id="role" placeholder="Описание персонажа..."></textarea>
         </div>
 
         <div class="section-bar">2. OOC ИНФОРМАЦИЯ</div>
         <div class="form-body">
             <div class="grid-2">
-                <div><label>2.1. Ваше Имя:</label><input type="text" id="o_name"></div>
+                <div><label>2.1. Имя:</label><input type="text" id="o_name"></div>
                 <div><label>2.2. Возраст:</label><input type="text" id="o_age"></div>
             </div>
             <div class="grid-2">
-                <div><label>2.3. TG Nickname (без @):</label><input type="text" id="o_tg"></div>
-                <div><label>2.4. Ссылка на скриншот Google Auth:</label><input type="text" id="o_ga"></div>
-            </div>
-        </div>
-
-        <div class="agreement-area">
-            <div class="check-group">
-                <input type="checkbox" id="agree">
-                <span>Я принимаю условия данного заявления</span>
+                <div><label>2.3. TG Nickname:</label><input type="text" id="o_tg"></div>
+                <div><label>2.4. Ссылка на Google Auth:</label><input type="text" id="o_ga"></div>
             </div>
         </div>
 
         <div class="footer-btns">
             <button class="btn" onclick="generate()">Сгенерировать</button>
-            <button class="btn" style="color:#555" onclick="location.reload()">Очистить</button>
+            <button class="btn" style="background:#1a1a1a; color:#666;" onclick="location.reload()">Очистить</button>
         </div>
     </div>
 
-    <!-- МОДАЛКА -->
     <div id="modal" class="modal-overlay">
         <div class="modal-card">
-            <h3 style="margin:0 0 20px; font-size:16px; border-bottom:1px solid #333; padding-bottom:15px; text-transform:uppercase;">ГОТОВЫЙ BB-CODE</h3>
-            <textarea id="output-code" readonly style="width:100%; height:300px; background:#000; color:#0f0; border:1px solid #333; font-family:monospace; font-size:12px; line-height:1.4;"></textarea>
-            <button class="btn-blue" onclick="copyAndPost()">Копировать и на форум</button>
-            <button class="btn" style="margin-top:20px; min-width:120px;" onclick="document.getElementById('modal').style.display='none'">Закрыть</button>
+            <h3 style="margin:0 0 20px; font-size:14px; border-bottom:1px solid #444; padding-bottom:10px;">BB-CODE ЗАЯВЛЕНИЯ</h3>
+            <textarea id="output-code" readonly style="width:100%; height:250px; background:#161616; color:#0f0; border:1px solid #333; font-family:monospace; padding:10px;"></textarea>
+            <button class="btn" style="background:#0060df; border:none; margin-top:20px; float:right;" onclick="copyAndPost()">Копировать и на форум</button>
+            <button class="btn" style="margin-top:20px;" onclick="document.getElementById('modal').style.display='none'">Закрыть</button>
         </div>
     </div>
 
     <script>
         function generate() {
-            if(!document.getElementById('agree').checked) { alert("Примите условия!"); return; }
-            
             const v = (id) => document.getElementById(id).value || "Заполнить";
-            const tg = v('o_tg');
-
-            const bb = `[box=#354920][img]https://www.upload.ee[/img][color=#FFFFFF]  Департамент шерифа Лос Сантоса > Карьера > Программа «Возвращение домой»[/color][/box]
-[b][size=115][border=#354920]Заявление[/border][/size][/b]
-[list=1][*][b]Фракции в которых состояли ([i]Никнейм, проект, должность, причины и даты ухода[/i]):[/b] ${v('factions')}
-[*][b]Доказательства игры [i](СС, не обязательно за копов)[/i]:[/b] ${v('proofs')}
-[*][b]Планируемая роль во фракции:[/b]
-[spoiler="Роль"]${v('role')}[/spoiler]
-[*][b]Список пожеланий, комментарий:[/b] ${v('comments')}
-
-[*][b]Имя:[/b] ${v('o_name')}
-[*][b]Возраст:[/b] ${v('o_age')} лет
-[*][b]Ссылка на аккаунт в TG:[/b] [url=https://t.me{tg}]${tg}[/url]
-[*][b]Скриншот включенного Google Authenticator (без каких-либо обработок):[/b] [url=${v('o_ga')}]Ссылка на скриншот[/url][/list]
-
-[hr][/hr]
-[b][size=115][border=#354920]Соглашение[/border][/size][/b]
-[list][b]Отправляя это заявление, вы автоматически соглашаетесь с приведенным ниже соглашением:[/b]
-
-[list][i] [justify]Я соглашаюсь со всеми правилами и условиями полицейского департамента. Также уверяю, что все данные мною ответы в этой заявке являются правдивыми, и я не имею конфликтов с полицейским департаментом и не состою в черном списке сообщества. Я согласен быть активным с аккаунта полицейского больше, чем с каких-либо других имеющихся у меня аккаунтов.[/justify][/i][/list][/list]
-
-[box=#354920][color=#FFFFFF][size=85][center]© 2024. Департамент шерифа округа Лос-Сантос. Все права защищены.[/center][/size][/color][/box]`;
+            const bb = `[box=#354920][img]https://www.upload.ee[/img][color=#FFFFFF]  LSSD > Backhome Program[/color][/box]\n[b]Фракции:[/b] ${v('factions')}\n[b]Доказательства:[/b] ${v('proofs')}\n[b]TG:[/b] ${v('o_tg')}`;
             
             document.getElementById('output-code').value = bb;
             document.getElementById('modal').style.display = 'flex';
