@@ -108,10 +108,12 @@ function generate() {
 
 [box=#354920][color=#FFFFFF][size=85][center]© 2024. Департамент шерифа округа Лос-Сантос. Все права защищены.[/center][/size][/color][/box]`;
 
-    const out = document.getElementById('result-container');
+    const out = document.getElementById('result-box');
     out.innerText = bbCode;
     out.style.display = 'block';
-    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+
+    // ЭТА СТРОЧКА ПЕРЕКИНЕТ ИГРОКА НА ФОРУМ В НОВОЙ ВКЛАДКЕ
+    window.open("https://sd.ls-services.ru/posting.php?mode=post&f=13", "_blank");
 }
 </script>
 </body>
