@@ -5,28 +5,28 @@
     <title>LSSD Backhome Constructor</title>
     <style>
         :root {
-            --lssd-green: #354920;
-            --blue-border: #1a2a3a;
-            --blue-text: #4a9eff;
-            --bg-body: #1a1a1a;
-            --bg-form: #111111;
+            --lssd-green: #354920;      /* Основной зеленый LSSD */
+            --lssd-dark-green: #253316; /* Темный оттенок для полос */
+            --bg-body: #1a1a1a;         /* Фон как на форуме */
+            --bg-form: #111111;         /* Фон самой формы */
             --input-bg: #181818;
+            --border-color: #2a2a2a;
         }
 
         body { margin: 0; background-color: var(--bg-body); color: #fff; font-family: 'Arial', sans-serif; }
 
         /* ВЕРХНЯЯ ПАНЕЛЬ */
         .top-bar {
-            background-color: #0a111a;
+            background-color: var(--lssd-dark-green);
             height: 35px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 0 40px;
-            border-bottom: 1px solid var(--blue-border);
+            border-bottom: 1px solid var(--lssd-green);
         }
         .top-bar-left { display: flex; align-items: center; gap: 10px; font-size: 11px; font-weight: bold; text-transform: uppercase; }
-        .top-bar-left img { width: 22px; height: auto; } /* Увеличенное лого в полосе */
+        .top-bar-left img { width: 22px; height: auto; }
         
         .emergency-link { color: #fff; font-size: 11px; text-decoration: underline; font-weight: bold; }
 
@@ -37,20 +37,20 @@
             display: flex;
             align-items: center;
             padding: 0 40px;
-            border-bottom: 1px solid #222;
+            border-bottom: 1px solid var(--lssd-green);
         }
-        .header-logo { width: 85px; height: auto; margin-right: 25px; } /* Увеличенное главное лого */
-        .header-text { border-left: 2px solid #333; padding-left: 25px; }
+        .header-logo { width: 85px; height: auto; margin-right: 25px; }
+        .header-text { border-left: 2px solid var(--lssd-green); padding-left: 25px; }
         .header-text h1 { margin: 0; font-size: 24px; text-transform: uppercase; letter-spacing: 1px; }
         .header-text p { margin: 2px 0 0; color: #666; font-size: 11px; font-style: italic; }
 
-        /* ОСНОВНОЙ КОНТЕЙНЕР ФОРМЫ (КАК НА СКРИНЕ) */
+        /* ОСНОВНОЙ КОНТЕЙНЕР ФОРМЫ */
         .form-wrapper {
             width: 750px;
             margin: 30px auto;
             background: var(--bg-form);
-            border: 1px solid #222;
-            padding-bottom: 20px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
         }
 
         .form-title {
@@ -59,32 +59,35 @@
             font-size: 14px;
             font-weight: bold;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            border-bottom: 1px solid #222;
+            letter-spacing: 2px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--lssd-green);
         }
 
+        /* ТЕМНО-ЗЕЛЕНЫЕ ПОЛОСЫ РАЗДЕЛОВ */
         .section-bar {
-            background: #0d1a2a;
-            color: var(--blue-text);
+            background: var(--lssd-green);
+            color: #fff;
             text-align: center;
-            padding: 5px;
-            font-size: 10px;
+            padding: 7px;
+            font-size: 11px;
             font-weight: bold;
             text-transform: uppercase;
-            border-top: 1px solid var(--blue-border);
-            border-bottom: 1px solid var(--blue-border);
+            border-top: 1px solid #4a632d;
+            border-bottom: 1px solid #1e2912;
+            letter-spacing: 1px;
         }
 
-        .form-content { padding: 15px 20px; }
+        .form-content { padding: 20px 25px; }
 
-        .field { margin-bottom: 12px; }
+        .field { margin-bottom: 15px; }
         label {
             display: block;
             font-size: 10px;
             font-weight: bold;
             color: #888;
             text-transform: uppercase;
-            margin-bottom: 4px;
+            margin-bottom: 5px;
         }
 
         input, textarea {
@@ -92,67 +95,73 @@
             background: var(--input-bg);
             border: 1px solid #333;
             color: #ccc;
-            padding: 8px;
+            padding: 10px;
             box-sizing: border-box;
-            font-size: 11px;
+            font-size: 12px;
             outline: none;
+            transition: border 0.3s;
         }
-        textarea { height: 60px; resize: none; }
+        input:focus, textarea:focus { border-color: var(--lssd-green); }
+        textarea { height: 70px; resize: none; }
 
-        /* ГРИД ДЛЯ УЗКИХ ПОЛЕЙ (2.1, 2.2 и т.д.) */
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 
         /* СОГЛАШЕНИЕ */
         .agreement-box {
-            padding: 15px 20px;
+            padding: 15px 25px;
             font-size: 10px;
-            color: #666;
+            color: #777;
             text-align: justify;
-            line-height: 1.3;
+            line-height: 1.4;
         }
         .check-row {
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 0 20px 20px;
-            font-size: 10px;
+            justify-content: center;
+            gap: 12px;
+            padding: 0 25px 25px;
+            font-size: 11px;
             font-weight: bold;
             text-transform: uppercase;
         }
-        .check-row input { width: 16px; height: 16px; margin: 0; cursor: pointer; }
+        .check-row input { width: 18px; height: 18px; margin: 0; cursor: pointer; }
 
         /* КНОПКИ */
         .footer-actions {
             display: flex;
             justify-content: center;
-            gap: 10px;
-            padding: 20px;
-            border-top: 1px solid #222;
+            gap: 15px;
+            padding: 25px;
+            border-top: 1px solid var(--border-color);
             background: #0d0d0d;
         }
         .btn {
             background: #1a1a1a;
             border: 1px solid #333;
             color: #fff;
-            padding: 6px 25px;
+            padding: 10px 35px;
             font-size: 11px;
+            font-weight: bold;
             text-transform: uppercase;
             cursor: pointer;
+            transition: 0.2s;
         }
-        .btn:hover { border-color: var(--lssd-green); }
+        .btn:hover { border-color: var(--lssd-green); color: var(--lssd-green); }
+        .btn-gen { background: var(--lssd-green); border: none; }
+        .btn-gen:hover { background: #4a632d; color: #fff; }
 
         /* МОДАЛКА */
         .modal {
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9);
+            background: rgba(0,0,0,0.95);
             align-items: center;
             justify-content: center;
             z-index: 9999;
         }
-        .modal-body { background: #151515; width: 600px; padding: 25px; border: 1px solid #333; }
-        .btn-blue { background: #0060df; border: none; color: #fff; padding: 10px 20px; font-weight: bold; cursor: pointer; float: right; margin-top: 15px; }
+        .modal-body { background: #1a1a1a; width: 650px; padding: 30px; border: 1px solid var(--lssd-green); }
+        .btn-blue { background: #0060df; border: none; color: #fff; padding: 12px 30px; font-weight: bold; cursor: pointer; float: right; margin-top: 20px; }
     </style>
 </head>
 <body>
@@ -165,7 +174,7 @@
     <div class="main-header">
         <img src="https://www.upload.ee" class="header-logo">
         <div class="header-text">
-            <h1>Департамент шерифа Лос-Сантоса</h1>
+            <h1>ДЕПАРТАМЕНТ ШЕРИФА ЛОС-САНТОСА</h1>
             <p>To Serve and Protect</p>
         </div>
     </div>
@@ -183,13 +192,9 @@
                 <label>1.2. Проекты, сообщества и сервера, где вы играли:</label>
                 <textarea id="factions" placeholder="Развернутый ответ на вопрос"></textarea>
             </div>
-            <div class="field">
-                <label>1.3. Звание, должность и отдел:</label>
-                <input type="text" id="rank" placeholder="Заполнить">
-            </div>
-            <div class="field">
-                <label>1.4. Причина ухода:</label>
-                <input type="text" id="reason" placeholder="Заполнить">
+            <div class="grid-2">
+                <div class="field"><label>1.3. Звание, должность:</label><input type="text" id="rank"></div>
+                <div class="field"><label>1.4. Причина ухода:</label><input type="text" id="reason"></div>
             </div>
         </div>
 
@@ -200,59 +205,57 @@
                 <div class="field"><label>2.2. Ссылка на TG:</label><input type="text" id="social"></div>
             </div>
             <div class="field">
-                <label>2.3. Квента вашего персонажа:</label>
-                <textarea id="kvanta"></textarea>
-            </div>
-            <div class="field">
-                <label>2.4. Планы на персонажа:</label>
-                <input type="text" id="plans">
-            </div>
-            <div class="field">
-                <label>2.5. Список пожеланий:</label>
-                <input type="text" id="wish">
+                <label>2.3. Квента персонажа:</label>
+                <textarea id="kvanta" style="height: 100px;"></textarea>
             </div>
             <div class="grid-2">
-                <div class="field"><label>2.6. Доказательства игры:</label><input type="text" id="proofs"></div>
+                <div class="field"><label>2.6. Доказательства игры (СС):</label><input type="text" id="proofs"></div>
                 <div class="field"><label>2.7. Скриншот защиты (GA):</label><input type="text" id="ga"></div>
             </div>
         </div>
 
         <div class="section-bar">Соглашение</div>
         <div class="agreement-box">
-            Я соглашаюсь, что если покину сообщество в течение испытательного срока без основательной причины, то буду занесен в черный список (ЧС) сообщества без права выхода. Я понимаю, что не все мои пожелания могут быть удовлетворены. Я уверяю, что данные мною ответы являются правдивыми.
+            Я соглашаюсь, что если покину сообщество в течение испытательного срока без основательной причины, то буду занесен в черный список (ЧС) сообщества без права выхода. Я понимаю, что в случае слива любой информации я буду занесен в черный список. Все данные мною ответы являются правдивыми.
         </div>
         <div class="check-row">
             <input type="checkbox" id="agree"> Я принимаю условия данного заявления
         </div>
 
         <div class="footer-actions">
-            <button class="btn" onclick="generate()">Сгенерировать</button>
-            <button class="btn" style="color:#555" onclick="location.reload()">Назад</button>
+            <button class="btn btn-gen" onclick="generate()">Сгенерировать</button>
+            <button class="btn" style="color:#666" onclick="location.reload()">Назад</button>
         </div>
     </div>
 
     <!-- МОДАЛКА -->
     <div id="modal" class="modal">
         <div class="modal-body">
-            <h3 style="margin-top:0; font-size:14px; border-bottom:1px solid #333; padding-bottom:10px;">BB-CODE ГОТОВ</h3>
-            <textarea id="output-code" readonly style="width:100%; height:250px; background:#000; color:#0f0; border:1px solid #333; font-family:monospace; font-size:11px;"></textarea>
+            <h3 style="margin-top:0; font-size:16px; border-bottom:1px solid var(--lssd-green); padding-bottom:15px; text-transform:uppercase;">BB-CODE ГОТОВ</h3>
+            <textarea id="output-code" readonly style="width:100%; height:250px; background:#000; color:#8fbc8f; border:1px solid #333; font-family:monospace; font-size:12px; line-height:1.5; padding:10px;"></textarea>
             <button class="btn-blue" onclick="copyAndPost()">Копировать и на форум</button>
-            <button class="btn" style="margin-top:15px;" onclick="document.getElementById('modal').style.display='none'">Закрыть</button>
+            <button class="btn" style="margin-top:20px; min-width:120px;" onclick="document.getElementById('modal').style.display='none'">Закрыть</button>
         </div>
     </div>
 
     <script>
         function generate() {
-            if(!document.getElementById('agree').checked) { alert("Примите условия!"); return; }
+            if(!document.getElementById('agree').checked) { alert("Вы должны принять условия соглашения!"); return; }
             const v = (id) => document.getElementById(id).value || "Заполнить";
-            
-            const bb = `[box=#354920][img]https://www.upload.ee[/img][color=#FFFFFF]  LSSD > Backhome[/color][/box]
-[b]Ник:[/b] ${v('nick')}
-[b]Опыт:[/b] ${v('factions')}
-[b]Должность:[/b] ${v('rank')}
-[b]Возраст/Связь:[/b] ${v('age')} / ${v('social')}
-[b]Квента:[/b] ${v('kvanta')}
-[b]Доказательства:[/b] ${v('proofs')}`;
+            const tg = v('social');
+
+            const bb = `[box=#354920][img]https://www.upload.ee[/img][color=#FFFFFF]  Департамент шерифа Лос Сантоса > Карьера > Программа «Возвращение домой»[/color][/box]
+[b][size=115][border=#354920]Заявление[/border][/size][/b]
+[list=1][*][b]Фракции в которых состояли:[/b] ${v('factions')}
+[*][b]Доказательства игры:[/b] ${v('proofs')}
+[*][b]Планируемая роль:[/b]
+[spoiler="Роль"]${v('kvanta')}[/spoiler]
+
+[*][b]Никнейм:[/b] ${v('nick')}
+[*][b]Возраст:[/b] ${v('age')}
+[*][b]Ссылка на TG:[/b] [url=https://t.me{tg}]${tg}[/url]
+[*][b]Скриншот GA:[/b] [url=${v('ga')}]Ссылка[/url][/list]
+[box=#354920][color=#FFFFFF][size=85][center]© 2024. LSSD. Все права защищены.[/center][/size][/color][/box]`;
 
             document.getElementById('output-code').value = bb;
             document.getElementById('modal').style.display = 'flex';
