@@ -132,30 +132,39 @@
         }
         .btn:hover { border-color: #c4a159; color: #c4a159; }
 
-        /* Модальное окно */
-        #bbcodeModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); justify-content: center; align-items: center; z-index: 10000; }
-        .modal-content { background: #1c1c1c; padding: 20px; max-width: 700px; width: 90%; border: 1px solid #333; border-radius: 4px; box-shadow: 0 0 30px #000; }
-        .bb-area { width: 100%; height: 300px; background: #000; color: #ccc; border: 1px solid #444; padding: 10px; font-family: monospace; resize: none; font-size: 11px; box-sizing: border-box; }
-        .modal-footer { margin-top: 15px; display: flex; justify-content: flex-end; gap: 10px; }
-        .btn-forum { background: #0066cc; color: #fff; padding: 8px 20px; text-decoration: none; font-weight: bold; font-size: 13px; border-radius: 3px; }
+        /* СТИЛИ МОДАЛЬНОГО ОКНА */
+        #bbcodeModal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: rgba(0,0,0,0.85); justify-content: center; align-items: center; z-index: 10000;
+        }
+        .modal-box {
+            background: #1c1c1c; padding: 20px; max-width: 700px; width: 90%; 
+            border: 1px solid #333; border-radius: 4px; box-shadow: 0 0 20px #000;
+        }
+        .modal-header { display: flex; justify-content: space-between; border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 15px; }
+        .modal-header h3 { margin: 0; font-size: 16px; color: #eee; }
+        .bb-area { width: 100%; height: 250px; background: #000; color: #ccc; border: 1px solid #444; padding: 10px; font-family: monospace; resize: none; box-sizing: border-box; font-size: 12px; }
+        .modal-footer { display: flex; justify-content: flex-end; gap: 10px; margin-top: 15px; }
+        .btn-forum { background: #0066cc; color: #fff; padding: 10px 20px; text-decoration: none; font-weight: bold; font-size: 13px; border-radius: 3px; }
+        .btn-close { background: #444; color: #fff; border: none; padding: 10px 20px; cursor: pointer; border-radius: 3px; }
     </style>
 </head>
 <body>
 
     <div class="top-bar">
         <div class="city-info">
-            <img src="https://sd.ls-services.ru" class="city-logo" alt="">
+            <img src="https://sd.ls-services.ru/images/ranksOCT19/Logos/SIBLogo.png" class="city-logo" alt="">
             ЛОС-САНТОС
         </div>
         <div class="emergency">
             Для экстренных ситуаций: 
-            <a href="https://sd.ls-services.ru" class="emergency-link">Emergency services</a>
+            <a href="https://sd.ls-services.ru/viewforum.php?f=4" class="emergency-link">Emergency services</a>
         </div>
     </div>
 
     <header class="main-header">
         <div class="brand-block">
-            <img src="https://sd.ls-services.ru" class="lssd-logo" alt="LSSD">
+            <img src="https://sd.ls-services.ru/images/ranksOCT19/Logos/LSSDLogo.png" class="lssd-logo" alt="LSSD">
             <div class="separator"></div>
             <div class="brand-text">
                 <h1>Департамент Шерифа Лос-Сантоса</h1>
@@ -197,7 +206,7 @@
                 <input type="text" id="f21" placeholder="Заполнить">
             </div>
             <div class="input-group">
-                <label>2.2. ССЫЛКА НА ВКОНТАКТЕ:</label>
+                <label>2.2. ССЫЛКА НА ВКОНТАКТЕ (TG/VK):</label>
                 <input type="text" id="f22" placeholder="Заполнить">
             </div>
         </div>
@@ -216,10 +225,10 @@
         <div class="row">
             <div class="input-group">
                 <label>2.6. ДОКАЗАТЕЛЬСТВА ВАШЕЙ ИГРЫ:</label>
-                <input type="text" id="f26" placeholder="Ссылки на СС-ки, иные подтверждения">
+                <input type="text" id="f26" placeholder="Ссылки на подтверждения">
             </div>
             <div class="input-group">
-                <label>2.7. СКРИНШОТ ЗАЩИТЫ НА ИГРОВОМ АККАУНТЕ (GOOGLE АУТЕНТИФИКАТОР, ПОЧТОВЫЙ ЯЩИК):</label>
+                <label>2.7. СКРИНШОТ ЗАЩИТЫ НА ИГРОВОМ АККАУНТЕ:</label>
                 <input type="text" id="f27" placeholder="Заполнить">
             </div>
         </div>
@@ -236,29 +245,29 @@
         </div>
 
         <div class="actions">
-            <button class="btn" onclick="gen()">Сгенерировать</button>
+            <button class="btn" onclick="generate()">Сгенерировать</button>
             <button class="btn" onclick="location.reload()">Назад</button>
         </div>
     </div>
 
-    <!-- Модальное окно -->
+    <!-- МОДАЛЬНОЕ ОКНО -->
     <div id="bbcodeModal">
-      <div class="modal-content">
-        <div style="display:flex; justify-content:space-between; border-bottom:1px solid #333; padding-bottom:10px; margin-bottom:15px;">
-            <h3 style="margin:0; font-size:14px;">BBCode для копирования</h3>
-            <span onclick="closeM()" style="cursor:pointer; font-size:20px;">×</span>
+        <div class="modal-box">
+            <div class="modal-header"><h3>BBCode для копирования</h3><span onclick="closeModal()" style="cursor:pointer; font-size:24px;">×</span></div>
+            <textarea id="bbcodeOutput" class="bb-area" readonly></textarea>
+            <div class="modal-footer">
+                <button class="btn-close" onclick="closeModal()">Закрыть</button>
+                <a href="https://sd.ls-services.ru/posting.php?mode=post&f=13" target="_blank" class="btn-forum">На форум</a>
+            </div>
         </div>
-        <textarea id="bbcodeOutput" class="bb-area" readonly></textarea>
-        <div class="modal-footer">
-          <button onclick="closeM()" class="btn">Закрыть</button>
-          <a href="https://sd.ls-services.ru" target="_blank" class="btn-forum">На форум</a>
-        </div>
-      </div>
     </div>
 
     <script>
-        function gen() {
-            if(!document.getElementById('agreeCheck').checked) return alert("Сначала примите соглашение!");
+        function generate() {
+            if(!document.getElementById('agreeCheck').checked) {
+                alert("Сначала примите соглашение!");
+                return;
+            }
             
             const v = (id) => document.getElementById(id).value || "Заполнить";
             
@@ -268,9 +277,9 @@
             bb += `[*][b]Доказательства игры [i](СС, не обязательно за копов)[/i]:[/b] ${v('f26')}\n`;
             bb += `[*][b]Планируемая роль во фракции:[/b]\n[spoiler="Роль"]${v('f23')}[/spoiler]\n`;
             bb += `[*][b]Список пожеланий, комментарий:[/b] ${v('f25')}\n\n\n`;
-            bb += `[*][b]Имя:[/b] ${v('f21')}\n`;
-            bb += `[*][b]Возраст:[/b] ${v('f22')} лет\n`;
-            bb += `[*][b]Ссылка на аккаунт в TG:[/b] [url=https://t.me{v('f22')}]${v('f22')}[/url]\n`;
+            bb += `[*][b]Имя:[/b] ${v('f11')}\n`;
+            bb += `[*][b]Возраст:[/b] ${v('f21')} лет\n`;
+            bb += `[*][b]Ссылка на аккаунт в TG:[/b] [url=${v('f22')}]${v('f22')}[/url]\n`;
             bb += `[*][b]Скриншот включенного Google Authenticator (без каких-либо обработок):[/b] [url=${v('f27')}]Ссылка на скриншот[/url][/list]\n\n`;
             bb += `[hr][/hr]\n[b][size=115][border=#354920]Соглашение[/border][/size][/b]\n`;
             bb += `[list][b]Отправляя это заявление, вы автоматически соглашаетесь с приведенным ниже соглашением:[/b]\n\n`;
@@ -280,8 +289,7 @@
             document.getElementById('bbcodeOutput').value = bb;
             document.getElementById('bbcodeModal').style.display = 'flex';
         }
-        function closeM() { document.getElementById('bbcodeModal').style.display = 'none'; }
+        function closeModal() { document.getElementById('bbcodeModal').style.display = 'none'; }
     </script>
-
 </body>
 </html>
