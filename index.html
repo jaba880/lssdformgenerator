@@ -234,36 +234,6 @@
             <button class="btn">Назад</button>
         </div>
     </div>
-    
-  <!-- МОДАЛЬНОЕ ОКНО -->
-    <div id="bbcodeModal">
-        <div class="modal-content">
-            <div class="modal-header"><h2>BBCode для копирования</h2><span onclick="closeM()" style="cursor:pointer; font-size:20px;">×</span></div>
-            <textarea id="bbOutput" class="bb-area" readonly></textarea>
-            <div class="modal-footer">
-                <button class="btn-close" onclick="closeM()">Закрыть</button>
-                <a href="https://sd.ls-services.ru" target="_blank" class="btn-forum">На форум</a>
-            </div>
-        </div>
-    </div>
 
-    <script>
-        function gen() {
-            if(!document.getElementById('agreeCheck').checked) return alert("Сначала примите соглашение!");
-            
-            const v = (id) => document.getElementById(id).value || "Не заполнено";
-            
-            let bb = `[background=#112f25][center][size=150][b]LOS SANTOS SHERIFF DEPARTMENT[/b][/size]\n`;
-            bb += `[size=130]BACKHOME PROGRAM APPLICATION[/size][/center]\n\n`;
-            bb += `[b]1.1. Ник:[/b] ${v('f11')}\n[b]1.2. Опыт:[/b] ${v('f12')}\n[b]1.3. Звание/Отдел:[/b] ${v('f13')}\n[b]1.4. Причина:[/b] ${v('f14')}\n\n`;
-            bb += `[b]2.1. Возраст:[/b] ${v('f21')}\n[b]2.2. ВК:[/b] ${v('f22')}\n[b]2.3. Квента:[/b] ${v('f23')}\n`;
-            bb += `[b]2.4. Планы:[/b] ${v('f24')}\n[b]2.5. Пожелания:[/b] ${v('f25')}\n[b]2.6. Док-ва:[/b] ${v('f26')}\n[b]2.7. Защита:[/b] ${v('f27')}\n\n`;
-            bb += `[center][i]Соглашение принято автором.[/i][/center][/background]`;
-
-            document.getElementById('bbOutput').value = bb;
-            document.getElementById('bbcodeModal').style.display = 'flex';
-        }
-        function closeM() { document.getElementById('bbcodeModal').style.display = 'none'; }
-    </script>
 </body>
 </html>
