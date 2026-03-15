@@ -2,138 +2,175 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>LSSD - Backhome Constructor</title>
+    <title>LSSD - Backhome Program Constructor</title>
     <style>
-        body {
-            background-color: #0b0b0b;
-            color: #d1d1d1;
-            font-family: Arial, sans-serif;
-            margin: 0;
+        body { margin: 0; background-color: #0d0d0d; font-family: 'Arial', sans-serif; color: #fff; }
+
+        /* 1. ВЕРХНИЙ СИНЕ-ЧЕРНЫЙ БАР */
+        .top-bar {
+            background-color: #0a111a;
+            height: 28px;
             display: flex;
-            justify-content: center;
-            padding: 20px 0;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 40px;
+            border-bottom: 1px solid #1a2a3a;
         }
+        .city-info { display: flex; align-items: center; gap: 8px; color: #fff; font-size: 10px; font-weight: bold; text-transform: uppercase; }
+        .city-info img { width: 14px; height: 14px; }
+        .emergency-info { color: #ccc; font-size: 10px; }
+        .emergency-info b { color: #fff; font-size: 11px; }
 
-        /* ОСНОВНОЙ КОНТЕЙНЕР (УЗКИЙ КАК НА СКРИНЕ) */
-        .wrapper {
-            width: 650px;
-            background: #111111;
+        /* 2. ОСНОВНОЙ ХЕДЕР С ЛОГОТИПОМ */
+        .main-header {
+            background-color: #111;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            padding: 0 40px;
+            border-bottom: 1px solid #222;
+        }
+        .dept-brand { display: flex; align-items: center; gap: 15px; flex-grow: 1; }
+        .dept-logo { width: 45px; height: auto; }
+        .brand-text { border-left: 1px solid #333; padding-left: 15px; }
+        .brand-text h1 { margin: 0; color: #fff; font-size: 16px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .brand-text p { margin: 0; color: #666; font-size: 10px; font-style: italic; }
+
+        /* 3. КОНТЕЙНЕР КОНСТРУКТОРА */
+        .constructor-wrapper {
+            width: 780px;
+            margin: 30px auto;
+            background: #111;
             border: 1px solid #222;
-            padding: 0;
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            padding-bottom: 0;
         }
 
-        /* ШАПКА ФОРМЫ */
-        .form-header {
+        .main-title-bar {
+            background: #151515;
             padding: 15px;
             text-align: center;
+            font-size: 14px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             border-bottom: 1px solid #222;
         }
 
-        .title {
-            text-transform: uppercase;
-            font-weight: bold;
-            font-size: 14px;
-            letter-spacing: 2px;
-            color: #fff;
-        }
-
-        /* СИНИЙ РАЗДЕЛИТЕЛЬ */
-        .section-title {
-            background: #1a2635; /* Тот самый темно-синий */
-            border-top: 1px solid #2b3a4a;
-            border-bottom: 1px solid #2b3a4a;
-            color: #fff;
+        /* ТЕМНО-СИНИЕ РАЗДЕЛИТЕЛИ */
+        .section-bar {
+            background: #0d1a2a;
+            color: #4a9eff;
             text-align: center;
+            padding: 6px;
             font-size: 10px;
             font-weight: bold;
-            padding: 4px;
             text-transform: uppercase;
+            border-top: 1px solid #1a2a3a;
+            border-bottom: 1px solid #1a2a3a;
         }
 
-        /* ПОЛЯ ВВОДА */
-        .content { padding: 15px; }
-
-        .field { margin-bottom: 12px; }
-
+        .form-content { padding: 20px; }
+        .field-group { margin-bottom: 15px; }
+        
         label {
             display: block;
             font-size: 10px;
             font-weight: bold;
             color: #888;
             text-transform: uppercase;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
         }
 
         input, textarea {
             width: 100%;
             background: #0a0a0a;
-            border: 1px solid #333;
+            border: 1px solid #2a2a2a;
             color: #ccc;
-            padding: 8px;
+            padding: 10px;
             box-sizing: border-box;
             font-size: 11px;
             outline: none;
         }
 
         input:focus, textarea:focus { border-color: #354920; }
-        textarea { height: 50px; resize: none; }
+        textarea { height: 60px; resize: none; }
 
-        /* СЕТКА 50/50 */
-        .row-grid {
+        .grid-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 10px;
+            gap: 15px;
+            margin-bottom: 15px;
         }
 
-        /* ТЕКСТ СОГЛАШЕНИЯ */
+        /* 4. БЛОК СОГЛАШЕНИЯ ИЗ СКРИНШОТА */
+        .agreement-box {
+            background: #111;
+            padding: 0 20px 20px 20px;
+        }
+
         .agreement-text {
-            font-size: 9px;
-            color: #666;
+            font-size: 10px;
+            color: #777;
             text-align: justify;
-            padding: 10px 15px;
-            line-height: 1.3;
+            line-height: 1.5;
+            margin-bottom: 15px;
+            padding: 0 10px;
         }
 
-        .check-row {
-            padding: 0 15px 15px;
-            font-size: 10px;
-            color: #888;
+        .checkbox-row {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+            font-size: 11px;
+            font-weight: bold;
+            color: #fff;
+            padding-left: 10px;
         }
 
-        /* КНОПКИ */
+        .checkbox-row input {
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+
+        /* 5. КНОПКИ ГЕНЕРАЦИИ */
         .footer-btns {
-            background: #0a0a0a;
-            padding: 15px;
+            background: #0d0d0d;
+            padding: 20px;
             display: flex;
             justify-content: center;
             gap: 10px;
             border-top: 1px solid #222;
         }
 
-        .btn {
-            background: #1a1a1a;
+        .btn-gen {
+            background: #000;
             border: 1px solid #333;
             color: #fff;
-            padding: 6px 20px;
-            font-size: 10px;
-            text-transform: uppercase;
+            padding: 10px 30px;
+            font-size: 11px;
             cursor: pointer;
-            min-width: 100px;
+            transition: 0.2s;
         }
 
-        .btn:hover { background: #222; border-color: #444; }
+        .btn-back {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            color: #888;
+            padding: 10px 30px;
+            font-size: 11px;
+            cursor: pointer;
+        }
 
-        /* РЕЗУЛЬТАТ */
-        #output {
+        .btn-gen:hover { background: #111; border-color: #444; }
+
+        /* ОКНО С ГОТОВЫМ КОДОМ */
+        #result-area {
             display: none;
-            padding: 15px;
-            background: #000;
+            padding: 20px;
+            background: #050505;
             border: 1px dashed #354920;
-            margin: 15px;
+            margin: 20px;
             color: #8fbc8f;
             font-family: monospace;
             font-size: 11px;
@@ -143,97 +180,115 @@
 </head>
 <body>
 
-<div class="wrapper">
-    <div class="form-header">
-        <div class="title">Программа «Возвращение домой» — LSSD</div>
-    </div>
-
-    <div class="section-title">1. Информация о прошлых местах игры</div>
-    <div class="content">
-        <div class="field">
-            <label>1.1. Никнейм Вашего персонажа:</label>
-            <input type="text" id="nick">
+    <!-- ВЕРХНИЙ БАР -->
+    <div class="top-bar">
+        <div class="city-info">
+            <img src="https://www.upload.ee" alt="logo">
+            ЛОС-САНТОС
         </div>
-        <div class="field">
-            <label>1.2. Проекты, сообщества и сервера, где Вы играли:</label>
-            <textarea id="factions"></textarea>
-        </div>
-        <div class="field">
-            <label>1.3. Звание, должность и отдел:</label>
-            <input type="text" id="rank">
-        </div>
-        <div class="field">
-            <label>1.4. Причина ухода:</label>
-            <input type="text" id="reason">
+        <div class="emergency-info">
+            📞 Для экстренных ситуаций: <b>Emergency Services</b>
         </div>
     </div>
 
-    <div class="section-title">2. Информация о подающем заявление</div>
-    <div class="content">
-        <div class="row-grid">
-            <div class="field">
-                <label>2.1. Ваш возраст:</label>
-                <input type="text" id="age">
-            </div>
-            <div class="field">
-                <label>2.2. Ссылка на TG/VK:</label>
-                <input type="text" id="social">
+    <!-- ХЕДЕР -->
+    <div class="main-header">
+        <div class="dept-brand">
+            <img src="https://www.upload.ee" class="dept-logo" alt="LSSD">
+            <div class="brand-text">
+                <h1>Департамент шерифа Лос-Сантоса</h1>
+                <p>To Serve and Protect</p>
             </div>
         </div>
-        <div class="field">
-            <label>2.3. Квента / Планы на персонажа:</label>
-            <textarea id="plans" style="height: 80px;"></textarea>
+    </div>
+
+    <!-- ФОРМА -->
+    <div class="constructor-wrapper">
+        <div class="main-title-bar">Программа «Возвращение домой»</div>
+
+        <div class="section-bar">1. Информация о прошлых местах игры</div>
+        <div class="form-content">
+            <div class="field-group">
+                <label>1.1. Ник-нейм вашего действующего персонажа:</label>
+                <input type="text" id="nick">
+            </div>
+            <div class="field-group">
+                <label>1.2. Проекты, сообщества и сервера, где вы играли:</label>
+                <textarea id="factions"></textarea>
+            </div>
+            <div class="grid-row">
+                <div class="field-group">
+                    <label>1.3. Звание, должность и отдел:</label>
+                    <input type="text" id="rank">
+                </div>
+                <div class="field-group">
+                    <label>1.4. Причина ухода:</label>
+                    <input type="text" id="reason">
+                </div>
+            </div>
         </div>
-        <div class="field">
-            <label>2.4. Доказательства игры (СС/фрапсы):</label>
-            <input type="text" id="proofs">
+
+        <div class="section-bar">2. Информация о подающем заявление</div>
+        <div class="form-content" style="padding-bottom: 0;">
+            <div class="grid-row">
+                <div class="field-group">
+                    <label>2.1. Ваш возраст:</label>
+                    <input type="text" id="age">
+                </div>
+                <div class="field-group">
+                    <label>2.2. Ссылка на ВКонтакте:</label>
+                    <input type="text" id="social">
+                </div>
+            </div>
+            <div class="field-group">
+                <label>2.3. Доказательства вашей игры (СС-ки):</label>
+                <input type="text" id="proofs">
+            </div>
         </div>
-        <div class="field">
-            <label>2.5. Скриншот защиты (Google Auth):</label>
-            <input type="text" id="ga">
+
+        <!-- БЛОК СОГЛАШЕНИЯ -->
+        <div class="section-bar">СОГЛАШЕНИЕ</div>
+        <div class="agreement-box">
+            <div class="agreement-text">
+                Я соглашаюсь, что если покину сообщество в течение испытательного срока без основательной причины, то буду занесен в черный список (ЧС) сообщества без права выхода. Я понимаю, что не все мои перечисленные пожелания могут быть удовлетворены и всё равно соглашаюсь играть. Я соглашаюсь, что мое заявление может быть отклонено без объяснения причин. Я уверяю, что все данные мною ответы являются правдивыми.
+            </div>
+            <div class="checkbox-row">
+                <input type="checkbox" id="agree"> Я принимаю условия данного заявления
+            </div>
+        </div>
+
+        <div id="result-area"></div>
+
+        <!-- КНОПКИ -->
+        <div class="footer-btns">
+            <button class="btn-gen" onclick="generate()">Сгенерировать</button>
+            <button class="btn-back" onclick="location.reload()">Назад</button>
         </div>
     </div>
 
-    <div class="section-title">Соглашение</div>
-    <div class="agreement-text">
-        Я подтверждаю, что ознакомлен со всеми правилами департамента. В случае обмана или нарушения условий, я согласен на занесение в черный список сообщества. Я осознаю, что мое заявление может быть отклонено без объяснения причин.
-    </div>
-    <div class="check-row">
-        <input type="checkbox" id="agree"> Я принимаю условия данного заявления
-    </div>
+    <script>
+        function generate() {
+            if(!document.getElementById('agree').checked) {
+                alert("Подтвердите согласие с условиями!");
+                return;
+            }
+            const v = (id) => document.getElementById(id).value || "ЗАПОЛНИТЬ";
+            
+            const bb = `[box=#354920][img]https://www.upload.ee[/img][color=#FFFFFF]  LSSD > Backhome Program[/color][/box]
+[b]Никнейм:[/b] ${v('nick')}
+[b]Опыт:[/b] ${v('factions')}
+[b]Звание/Отдел:[/b] ${v('rank')}
+[b]Причина ухода:[/b] ${v('reason')}
+[b]Возраст/Связь:[/b] ${v('age')} / ${v('social')}
+[b]Доказательства:[/b] [url=${v('proofs')}]ССЫЛКА[/url]
+[hr][/hr]
+[center]© 2024 Los Santos Sheriff Department[/center]`;
 
-    <div id="output"></div>
-
-    <div class="footer-btns">
-        <button class="btn" onclick="generate()">Сгенерировать</button>
-        <button class="btn" onclick="location.reload()">Назад</button>
-    </div>
-</div>
-
-<script>
-    function generate() {
-        if(!document.getElementById('agree').checked) {
-            alert("Вы должны принять условия соглашения.");
-            return;
+            const area = document.getElementById('result-area');
+            area.innerText = bb;
+            area.style.display = 'block';
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
         }
-
-        const get = (id) => document.getElementById(id).value || "ЗАПОЛНИТЬ";
-
-        const bb = `[box=#354920][img]https://www.upload.ee[/img][color=#FFFFFF]  LSSD > Backhome Program[/color][/box]
-[b]Никнейм:[/b] ${get('nick')}
-[b]Опыт:[/b] ${get('factions')}
-[b]Должность:[/b] ${get('rank')}
-[b]Возраст/Связь:[/b] ${get('age')} / ${get('social')}
-[b]Доказательства:[/b] [url=${get('proofs')}]КЛИК[/url]
-[b]Google Auth:[/b] [url=${get('ga')}]ССЫЛКА[/url]
-[spoiler="Квента"]${get('plans')}[/spoiler]`;
-
-        const out = document.getElementById('output');
-        out.innerText = bb;
-        out.style.display = 'block';
-        window.scrollTo(0, document.body.scrollHeight);
-    }
-</script>
-
+    </script>
 </body>
 </html>
