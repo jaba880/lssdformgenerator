@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com">
     <style>
-        body { margin: 0; font-family: 'Segoe UI', Arial, sans-serif; background: #0a0c0b; }
+        body { margin: 0; font-family: 'Segoe UI', Arial, sans-serif; background: #0a0c0b; color: #fff; padding-bottom: 50px; }
 
-        /* Верхняя панель (Тёмно-зеленый/черный) */
+        /* Верхняя панель */
         .top-bar {
             background-color: #0b0f0d;
             height: 35px;
@@ -14,14 +14,14 @@
             justify-content: space-between;
             align-items: center;
             padding: 0 50px;
-            border-bottom: 1px solid #c4a159; /* Золотистая линия */
+            border-bottom: 1px solid #c4a159;
             color: #fff;
             font-size: 12px;
             font-weight: bold;
         }
 
         .city-info { display: flex; align-items: center; gap: 8px; text-transform: uppercase; }
-        .city-logo { height: 16px; width: auto; } /* Логотип города */
+        .city-logo { height: 14px; width: auto; } 
 
         .emergency { display: flex; align-items: center; gap: 10px; font-weight: normal; }
         .emergency-link {
@@ -35,7 +35,7 @@
         }
         .emergency-link:hover { color: #c4a159; }
 
-        /* Основной хедер (Тёмно-зелёный градиент как на sd.ls-services.ru) */
+        /* Основной хедер */
         .main-header {
             background: linear-gradient(180deg, #121814 0%, #0d110e 100%);
             height: 100px;
@@ -58,7 +58,7 @@
         .nav-item {
             color: #fff;
             text-decoration: none;
-            background: #1a231e; /* Темно-зеленая подложка кнопки */
+            background: #1a231e; 
             padding: 12px 25px;
             font-size: 14px;
             display: flex;
@@ -66,40 +66,173 @@
             gap: 8px;
             border-radius: 4px 4px 0 0;
             border-bottom: 3px solid #c4a159;
-            margin-bottom: -33px; /* Прижимаем к золотой линии */
+            margin-bottom: -33px;
         }
+
+        /* КОНСТРУКТОР */
+        .constructor-container {
+            max-width: 900px;
+            margin: 60px auto;
+            background: #0d110e; /* Тёмно-зелёный фон блока */
+            border: 1px solid #1a231e;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+        }
+
+        .form-main-title {
+            text-align: center;
+            text-transform: uppercase;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+        }
+
+        .section-header {
+            background: #0d1a2b; /* Синий заголовок как на скриншоте */
+            color: #fff;
+            padding: 8px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-align: center;
+            margin: 25px 0 15px 0;
+            border: 1px solid #1e3a5f;
+        }
+
+        .input-group { margin-bottom: 15px; }
+        .input-group label { display: block; font-size: 11px; font-weight: bold; margin-bottom: 6px; color: #fff; text-transform: uppercase; }
+
+        input, textarea {
+            width: 100%; background: #1a1e1b; border: 1px solid #2a332d;
+            color: #ccc; padding: 10px; box-sizing: border-box; font-size: 12px; outline: none;
+        }
+        input:focus, textarea:focus { border-color: #c4a159; background: #1f2621; }
+
+        .row { display: flex; gap: 20px; }
+        .row .input-group { flex: 1; }
+
+        /* СОГЛАШЕНИЕ ПО ЦЕНТРУ */
+        .agreement-block {
+            padding: 25px;
+            margin-top: 30px;
+            text-align: center;
+            border-top: 1px solid #1a231e;
+        }
+        .agreement-title { color: #4a90e2; font-weight: bold; font-size: 14px; display: block; margin-bottom: 15px; text-transform: uppercase; }
+        .agreement-text { font-size: 12px; line-height: 1.6; color: #ccc; margin-bottom: 20px; display: block; }
+        
+        .checkbox-container { display: inline-flex; align-items: center; gap: 10px; font-weight: bold; font-size: 12px; cursor: pointer; }
+        .checkbox-container input { width: 18px; height: 18px; accent-color: #c4a159; }
+
+        .actions { display: flex; justify-content: center; gap: 15px; margin-top: 20px; }
+        .btn {
+            background: #121212; border: 1px solid #333; color: #fff; padding: 8px 30px;
+            cursor: pointer; text-transform: uppercase; font-size: 11px; font-weight: bold; transition: 0.3s;
+        }
+        .btn:hover { border-color: #c4a159; color: #c4a159; }
     </style>
 </head>
 <body>
 
     <div class="top-bar">
         <div class="city-info">
-            <!-- Заменил иконку на логотип звезды -->
-            <img src="https://sd.ls-services.ru/images/ranksOCT19/Logos/SIBLogo.png" class="city-logo" alt="">
+            <img src="https://sd.ls-services.ru" class="city-logo" alt="">
             ЛОС-САНТОС
         </div>
         <div class="emergency">
             Для экстренных ситуаций: 
-            <a href="https://sd.ls-services.ru/viewforum.php?f=4" class="emergency-link">Emergency services</a>
+            <a href="https://sd.ls-services.ru" class="emergency-link">Emergency services</a>
         </div>
     </div>
 
     <header class="main-header">
         <div class="brand-block">
-            <img src="https://sd.ls-services.ru/images/ranksOCT19/Logos/LSSDLogo.png" class="lssd-logo" alt="LSSD">
+            <img src="https://sd.ls-services.ru" class="lssd-logo" alt="LSSD">
             <div class="separator"></div>
             <div class="brand-text">
                 <h1>Департамент Шерифа Лос-Сантоса</h1>
                 <p>To Protect and to Serve</p>
             </div>
         </div>
-
         <nav class="nav-menu">
-            <a href="#" class="nav-item">
-                <i class="fas fa-users"></i> Гражданам
-            </a>
+            <a href="#" class="nav-item"><i class="fas fa-users"></i> Гражданам</a>
         </nav>
     </header>
+
+    <div class="constructor-container">
+        <div class="form-main-title">Программа «Возвращение домой»</div>
+
+        <!-- СЕКЦИЯ 1 -->
+        <div class="section-header">1. ИНФОРМАЦИЯ О ПРОШЛЫХ МЕСТАХ ИГРЫ</div>
+        <div class="input-group">
+            <label>1.1. НИК-НЕЙМ ВАШЕГО ДЕЙСТВУЮЩЕГО ПЕРСОНАЖА:</label>
+            <input type="text" placeholder="Заполнить">
+        </div>
+        <div class="input-group">
+            <label>1.2. ПРОЕКТЫ, СООБЩЕСТВА И СЕРВЕРА, ГДЕ ВЫ ИГРАЛИ:</label>
+            <textarea rows="4" placeholder="Развернутый ответ на вопрос"></textarea>
+        </div>
+        <div class="input-group">
+            <label>1.3. ЗВАНИЕ, ДОЛЖНОСТЬ И ОТДЕЛ:</label>
+            <input type="text" placeholder="Заполнить">
+        </div>
+        <div class="input-group">
+            <label>1.4. ПРИЧИНА УХОДА:</label>
+            <input type="text" placeholder="Заполнить">
+        </div>
+
+        <!-- СЕКЦИЯ 2 -->
+        <div class="section-header">2. ИНФОРМАЦИЯ О ПОДАЮЩЕМ ЗАЯВЛЕНИЕ</div>
+        <div class="row">
+            <div class="input-group">
+                <label>2.1. ВАШ ВОЗРАСТ:</label>
+                <input type="text" placeholder="Заполнить">
+            </div>
+            <div class="input-group">
+                <label>2.2. ССЫЛКА НА ВКОНТАКТЕ:</label>
+                <input type="text" placeholder="Заполнить">
+            </div>
+        </div>
+        <div class="input-group">
+            <label>2.3. КВЕНТА ВАШЕГО ПЕРСОНАЖА:</label>
+            <textarea rows="4" placeholder="Развернутый ответ на вопрос"></textarea>
+        </div>
+        <div class="input-group">
+            <label>2.4. ПЛАНЫ НА ПЕРСОНАЖА:</label>
+            <input type="text" placeholder="Заполнить">
+        </div>
+        <div class="input-group">
+            <label>2.5. СПИСОК ПОЖЕЛАНИЙ:</label>
+            <input type="text" placeholder="Заполнить">
+        </div>
+        <div class="row">
+            <div class="input-group">
+                <label>2.6. ДОКАЗАТЕЛЬСТВА ВАШЕЙ ИГРЫ:</label>
+                <input type="text" placeholder="Ссылки на СС-ки, иные подтверждения">
+            </div>
+            <div class="input-group">
+                <label>2.7. СКРИНШОТ ЗАЩИТЫ НА ИГРОВОМ АККАУНТЕ (GOOGLE АУТЕНТИФИКАТОР, ПОЧТОВЫЙ ЯЩИК):</label>
+                <input type="text" placeholder="Заполнить">
+            </div>
+        </div>
+
+        <!-- СОГЛАШЕНИЕ -->
+        <div class="agreement-block">
+            <span class="agreement-title">СОГЛАШЕНИЕ</span>
+            <span class="agreement-text">
+                Я соглашаюсь со всеми правилами и условиями полицейского департамента. Также уверяю, что все данные мною ответы в этой заявке являются правдивыми, и я не имею конфликтов с полицейским департаментом и не состою в черном списке сообщества. Я согласен быть активным с аккаунта полицейского больше, чем с каких-либо других имеющихся у меня аккаунтов.
+            </span>
+            <label class="checkbox-container">
+                <input type="checkbox"> Я принимаю условия данного заявления
+            </label>
+        </div>
+
+        <div class="actions">
+            <button class="btn">Сгенерировать</button>
+            <button class="btn">Назад</button>
+        </div>
+    </div>
 
 </body>
 </html>
