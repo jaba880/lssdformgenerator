@@ -2,257 +2,188 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LSSD - Backhome Program</title>
+    <title>LSSD - Backhome Constructor</title>
     <style>
         :root {
             --lssd-green: #354920;
-            --bg-dark: #121212;
-            --panel-bg: #1a1a1a;
-            --input-bg: #222;
-            --text-gray: #b3b3b3;
-            --border-color: #333;
+            --lssd-dark: #1a2412;
+            --bg-main: #1a1a1a;
+            --bg-panel: #212121;
+            --input-bg: #141414;
+            --border: #333;
         }
 
-        body {
-            background-color: var(--bg-dark);
-            color: white;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
+        body { margin: 0; background-color: var(--bg-main); color: #ccc; font-family: 'Arial', sans-serif; }
+
+        /* ВЕРХНЯЯ ПАНЕЛЬ */
+        .top-bar {
+            background-color: #0d1218;
+            height: 35px;
             display: flex;
-            justify-content: center;
-            padding: 40px 20px;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 60px;
+            border-bottom: 1px solid #1a242f;
         }
-
-        .form-container {
-            width: 100%;
-            max-width: 850px;
-            background: var(--panel-bg);
-            border: 1px solid var(--border-color);
-            padding: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        .top-bar-left { display: flex; align-items: center; gap: 10px; color: #fff; font-size: 11px; font-weight: bold; text-transform: uppercase; }
+        .top-bar-left img { width: 18px; height: 18px; }
+        
+        /* ССЫЛКА ДЛЯ ЭКСТРЕННЫХ */
+        .emergency-link { 
+            color: #fff; 
+            font-size: 11px; 
+            text-decoration: underline; 
+            font-weight: bold; 
+            cursor: pointer;
+            transition: 0.2s;
         }
+        .emergency-link:hover { color: #cc0000; }
 
-        .header-title {
-            text-align: center;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 25px;
-            border-bottom: 1px solid var(--lssd-green);
-            padding-bottom: 10px;
-            color: #fff;
-        }
-
-        .section-header {
-            background: var(--lssd-green);
-            color: white;
-            text-align: center;
-            font-size: 0.85em;
-            padding: 5px;
-            margin: 20px 0 15px 0;
-            text-transform: uppercase;
-            font-weight: bold;
-        }
-
-        .grid-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 15px;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-        }
-
-        label {
-            font-size: 0.75em;
-            color: var(--text-gray);
-            text-transform: uppercase;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        input, textarea {
-            background: var(--input-bg);
-            border: 1px solid #444;
-            color: white;
-            padding: 10px;
-            font-size: 0.9em;
-            outline: none;
-            transition: border 0.3s;
-        }
-
-        input:focus, textarea:focus {
-            border-color: var(--lssd-green);
-        }
-
-        textarea {
-            min-height: 80px;
-            resize: vertical;
-        }
-
-        .agreement-box {
-            font-size: 0.8em;
-            color: #888;
-            text-align: justify;
-            border: 1px solid #333;
-            padding: 15px;
-            margin: 20px 0;
-            line-height: 1.5;
-        }
-
-        .checkbox-container {
+        /* ХЕДЕР С УВЕЛИЧЕННЫМ ЛОГО */
+        .main-header {
+            background-color: #1f1f1f;
+            height: 110px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 10px;
-            font-size: 0.8em;
+            padding: 0 60px;
+            border-bottom: 1px solid var(--lssd-green);
         }
+        .header-logo { width: 80px; height: auto; margin-right: 30px; }
+        .header-text { border-left: 2px solid var(--lssd-green); padding-left: 30px; }
+        .header-text h1 { margin: 0; font-size: 22px; text-transform: uppercase; color: #fff; letter-spacing: 1px; }
+        .header-text p { margin: 4px 0 0; color: #666; font-size: 11px; font-style: italic; text-transform: uppercase; }
 
-        .btn-group {
-            display: flex;
-            gap: 10px;
-            margin-top: 25px;
+        /* ОСНОВНОЙ БЛОК */
+        .main-wrapper { 
+            width: 850px; 
+            margin: 40px auto; 
+            background: var(--bg-panel); 
+            border: 1px solid var(--border); 
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
         }
+        .main-title { padding: 25px; text-align: center; font-size: 15px; font-weight: bold; text-transform: uppercase; color: #fff; letter-spacing: 2px; }
 
-        button {
-            flex: 1;
-            padding: 12px;
-            border: none;
-            cursor: pointer;
-            text-transform: uppercase;
+        .section-bar {
+            background-color: var(--lssd-green);
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            font-size: 11px;
             font-weight: bold;
-            transition: 0.3s;
+            text-transform: uppercase;
+            border-top: 1px solid #4a632d;
+            border-bottom: 1px solid #1e2912;
         }
 
-        .btn-generate { background: var(--lssd-green); color: white; }
-        .btn-generate:hover { background: #4a662d; }
+        .form-body { padding: 35px; }
+        label { display: block; font-size: 11px; font-weight: bold; color: #888; text-transform: uppercase; margin-bottom: 8px; }
         
-        #result-area {
-            margin-top: 20px;
-            display: none;
+        input, textarea {
+            width: 100%;
+            background: var(--input-bg);
+            border: 1px solid #3a3a3a;
+            color: #eee;
+            padding: 12px;
+            box-sizing: border-box;
+            font-size: 13px;
+            outline: none;
+            margin-bottom: 20px;
         }
+        input:focus { border-color: var(--lssd-green); }
+        textarea { height: 100px; resize: none; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 
-        .bbcode-output {
-            background: #000;
-            color: #0f0;
-            padding: 15px;
-            font-family: monospace;
-            font-size: 12px;
-            border: 1px dashed var(--lssd-green);
-            white-space: pre-wrap;
-            max-height: 300px;
-            overflow-y: auto;
-        }
+        /* КНОПКИ */
+        .footer-btns { display: flex; justify-content: center; gap: 15px; padding-bottom: 40px; }
+        .btn { background: #111; border: 1px solid #444; color: #fff; padding: 12px 40px; font-size: 12px; font-weight: bold; text-transform: uppercase; cursor: pointer; transition: 0.3s; }
+        .btn-gen { background: var(--lssd-green); border-color: var(--lssd-green); }
+
+        /* МОДАЛКА */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 1000; align-items: center; justify-content: center; }
+        .modal-card { background: #252525; width: 650px; border: 1px solid var(--lssd-green); padding: 30px; }
+        .btn-blue { background: #0060df; border: none; padding: 12px 30px; color: #fff; font-weight: bold; cursor: pointer; float: right; margin-top: 20px; }
     </style>
 </head>
 <body>
 
-<div class="form-container">
-    <div class="header-title">Программа «Возвращение домой» — LSSD</div>
-
-    <!-- РАЗДЕЛ 1 -->
-    <div class="section-header">1. Информация о прошлых местах игры</div>
-    
-    <div class="form-group" style="margin-bottom: 15px;">
-        <label>1.1. Имя Фамилия Вашего персонажа (никнейм):</label>
-        <input type="text" id="nick" placeholder="Заполнить">
+    <div class="top-bar">
+        <div class="top-bar-left"><img src="https://www.upload.ee"> ЛОС-САНТОС</div>
+        <!-- ПЕРЕХОД ДЛЯ ЭКСТРЕННЫХ -->
+        <a href="https://sd.ls-services.ru" target="_blank" class="emergency-link">Для экстренных</a>
     </div>
 
-    <div class="form-group" style="margin-bottom: 15px;">
-        <label>1.2. Фракции, проекты, ранги и даты ухода:</label>
-        <textarea id="factions" placeholder="Пример: LSPD, Gambit RP, Sergeant II, ПСЖ..."></textarea>
-    </div>
-
-    <div class="grid-row">
-        <div class="form-group">
-            <label>1.3. Звание, должность и отдел:</label>
-            <input type="text" id="rank" placeholder="Заполнить">
-        </div>
-        <div class="form-group">
-            <label>1.4. Причина ухода:</label>
-            <input type="text" id="reason" placeholder="Заполнить">
+    <div class="main-header">
+        <img src="https://www.upload.ee" class="header-logo">
+        <div class="header-text">
+            <h1>ДЕПАРТАМЕНТ ШЕРИФА ЛОС-САНТОСА</h1>
+            <p>To Serve and Protect</p>
         </div>
     </div>
 
-    <!-- РАЗДЕЛ 2 -->
-    <div class="section-header">2. Информация о подающем заявление</div>
+    <div class="main-wrapper">
+        <div class="main-title">ПРОГРАММА «ВОЗВРАЩЕНИЕ ДОМОЙ»</div>
 
-    <div class="grid-row">
-        <div class="form-group">
-            <label>2.1. Ваш возраст:</label>
-            <input type="text" id="age" placeholder="XX лет">
+        <div class="section-bar">1. Информация о персонаже и опыте</div>
+        <div class="form-body">
+            <label>1.1. Фракции в которых состояли:</label>
+            <textarea id="factions" placeholder="Никнейм, проект, должность, причины и даты ухода"></textarea>
+            
+            <label>1.2. Доказательства игры (СС):</label>
+            <input type="text" id="proofs" placeholder="Ссылки на скриншоты">
+            
+            <label>1.3. Планируемая роль во фракции (3-4 предложения):</label>
+            <textarea id="role" placeholder="Описание вашего будущего персонажа"></textarea>
+
+            <label>1.4. Список пожеланий, комментарий:</label>
+            <input type="text" id="wish">
         </div>
-        <div class="form-group">
-            <label>2.2. Ссылка на ВКонтакте или TG:</label>
-            <input type="text" id="social" placeholder="@nickname">
+
+        <div class="section-bar">2. Информация о подающем заявление</div>
+        <div class="form-body">
+            <div class="grid-2">
+                <div><label>Имя (OOC):</label><input type="text" id="o_name"></div>
+                <div><label>Возраст:</label><input type="text" id="o_age"></div>
+            </div>
+            <div class="grid-2">
+                <div><label>Telegram (без @):</label><input type="text" id="o_tg"></div>
+                <div><label>Ссылка на скриншот GA:</label><input type="text" id="o_ga"></div>
+            </div>
+        </div>
+
+        <div class="footer-btns">
+            <button class="btn btn-gen" onclick="generate()">Сгенерировать</button>
+            <button class="btn" style="color:#666" onclick="location.reload()">Назад</button>
         </div>
     </div>
 
-    <div class="form-group" style="margin-bottom: 15px;">
-        <label>2.3. Квента персонажа / Планы на игру:</label>
-        <textarea id="role" placeholder="Минимум 3-4 предложения..."></textarea>
-    </div>
-
-    <div class="grid-row">
-        <div class="form-group">
-            <label>2.4. Доказательства игры (СС/фрапсы):</label>
-            <input type="text" id="proofs" placeholder="Ссылки">
-        </div>
-        <div class="form-group">
-            <label>2.5. Ссылка на скриншот Google Authenticator:</label>
-            <input type="text" id="ga_link" placeholder="http://...">
+    <!-- МОДАЛКА -->
+    <div id="modal" class="modal-overlay">
+        <div class="modal-card">
+            <h3 style="margin:0 0 20px; font-size:14px; border-bottom:1px solid #444; padding-bottom:10px; text-transform:uppercase;">ГОТОВЫЙ BB-CODE</h3>
+            <textarea id="output-code" readonly style="width:100%; height:300px; background:#111; color:#8fbc8f; border:1px solid #333; font-family:monospace; padding:10px; font-size:11px; line-height:1.5;"></textarea>
+            <button class="btn-blue" onclick="copyAndPost()">Копировать и на форум</button>
+            <button class="btn" style="margin-top:20px;" onclick="document.getElementById('modal').style.display='none'">Закрыть</button>
         </div>
     </div>
 
-    <!-- СОГЛАШЕНИЕ -->
-    <div class="section-header" style="background: transparent; color: var(--lssd-green);">Соглашение</div>
-    <div class="agreement-box">
-        Я соглашаюсь со всеми правилами и условиями полицейского департамента. Также уверяю, что все данные мною ответы в этой заявке являются правдивыми, и я не имею конфликтов с полицейским департаментом и не состою в черном списке сообщества. Я согласен быть активным с аккаунта полицейского больше, чем с каких-либо других имеющихся у меня аккаунтов.
-    </div>
+    <script>
+        function generate() {
+            const v = (id) => document.getElementById(id).value || "Заполнить";
+            const tg = v('o_tg');
 
-    <div class="checkbox-container">
-        <input type="checkbox" id="agree">
-        <label style="margin:0">Я принимаю условия данного заявления</label>
-    </div>
-
-    <div class="btn-group">
-        <button class="btn-generate" onclick="generateBB()">Сгенерировать код</button>
-    </div>
-
-    <!-- РЕЗУЛЬТАТ -->
-    <div id="result-area">
-        <div class="bbcode-output" id="output"></div>
-        <button class="btn-generate" style="background: #444; margin-top: 10px;" onclick="copyCode()">Копировать в буфер</button>
-    </div>
-</div>
-
-<script>
-function generateBB() {
-    if(!document.getElementById('agree').checked) {
-        alert('Вы должны принять условия соглашения!');
-        return;
-    }
-
-    const val = (id) => document.getElementById(id).value || "Заполнить";
-    const social = document.getElementById('social').value;
-    const tgLink = social.startsWith('@') ? social.substring(1) : social;
-
-    const code = `[box=#354920][img]https://www.upload.ee[/img][color=#FFFFFF]  Департамент шерифа Лос Сантоса > Карьера > Программа «Возвращение домой»[/color][/box]
+            // ТВОЙ ИДЕАЛЬНЫЙ ШАБЛОН BB-КОДА
+            const bb = `[box=#354920][img]https://www.upload.ee[/img][color=#FFFFFF]  Департамент шерифа Лос Сантоса > Карьера > Программа «Возвращение домой»[/color][/box]
 [b][size=115][border=#354920]Заявление[/border][/size][/b]
-[list=1][*][b]Фракции в которых состояли ([i]Никнейм, проект, должность, причины и даты ухода[/i]):[/b] ${val('factions')}
-[*][b]Доказательства игры [i](СС, не обязательно за копов)[/i]:[/b] ${val('proofs')}
+[list=1][*][b]Фракции в которых состояли ([i]Никнейм, проект, должность, причины и даты ухода[/i]):[/b] ${v('factions')}
+[*][b]Доказательства игры [i](СС, не обязательно за копов)[/i]:[/b] ${v('proofs')}
 [*][b]Планируемая роль во фракции:[/b]
-[spoiler="Роль"]${val('role')}[/spoiler]
-[*][b]Список пожеланий, комментарий:[/b] ${val('rank')} | ${val('reason')}
+[spoiler="Роль"]${v('role')}[/spoiler]
+[*][b]Список пожеланий, комментарий:[/b] ${v('wish')}
 
-
-[*][b]Имя:[/b] ${val('nick')}
-[*][b]Возраст:[/b] ${val('age')}
-[*][b]Ссылка на аккаунт в TG:[/b] [url=https://t.me{tgLink}]${social}[/url]
-[*][b]Скриншот включенного Google Authenticator (без каких-либо обработок):[/b] [url=${val('ga_link')}]Ссылка на скриншот[/url][/list]
+[*][b]Имя:[/b] ${v('o_name')}
+[*][b]Возраст:[/b] ${v('o_age')}
+[*][b]Ссылка на аккаунт в TG:[/b] [url=https://t.me{tg}]${tg}[/url]
+[*][b]Скриншот включенного Google Authenticator (без каких-либо обработок):[/b] [url=${v('o_ga')}]Ссылка на скриншот[/url][/list]
 
 [hr][/hr]
 [b][size=115][border=#354920]Соглашение[/border][/size][/b]
@@ -261,17 +192,18 @@ function generateBB() {
 [list][i] [justify]Я соглашаюсь со всеми правилами и условиями полицейского департамента. Также уверяю, что все данные мною ответы в этой заявке являются правдивыми, и я не имею конфликтов с полицейским департаментом и не состою в черном списке сообщества. Я согласен быть активным с аккаунта полицейского больше, чем с каких-либо других имеющихся у меня аккаунтов.[/justify][/i][/list][/list]
 
 [box=#354920][color=#FFFFFF][size=85][center]© 2024. Департамент шерифа округа Лос-Сантос. Все права защищены.[/center][/size][/color][/box]`;
+            
+            document.getElementById('output-code').value = bb;
+            document.getElementById('modal').style.display = 'flex';
+        }
 
-    document.getElementById('output').innerText = code;
-    document.getElementById('result-area').style.display = 'block';
-    window.scrollTo(0, document.body.scrollHeight);
-}
-
-function copyCode() {
-    const text = document.getElementById('output').innerText;
-    navigator.clipboard.writeText(text).then(() => alert('Код успешно скопирован!'));
-}
-</script>
-
+        function copyAndPost() {
+            const code = document.getElementById('output-code');
+            code.select();
+            document.execCommand('copy');
+            // ПЕРЕХОД В РАЗДЕЛ СОЗДАНИЯ ТЕМЫ
+            window.location.href = 'https://sd.ls-services.ru';
+        }
+    </script>
 </body>
 </html>
