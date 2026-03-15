@@ -293,14 +293,17 @@
 
     // НОВАЯ ФУНКЦИЯ ДЛЯ ПЕРЕНОСА НА ФОРУМ
     function sendToForum() {
-    const text = document.getElementById('bbcodeOutput').value;
-    const encodedText = encodeURIComponent(text);
+    const textArea = document.getElementById('bbcodeOutput');
     
-    // Добавили заголовок (subject), иногда без него поле сообщения игнорируется
-    const subject = encodeURI("Заявление на возвращение домой"); 
+    // 1. Копируем текст в буфер обмена
+    textArea.select();
+    document.execCommand("copy");
     
-    const url = `https://sd.ls-services.ru/posting.php?mode=post&f=13}{subject}&message=${encodedText}`;
-    
+    // 2. Показываем маленькое уведомление (чтобы юзер понял, что копировать не надо)
+    alert("Текст скопирован! Теперь просто вставь его (Ctrl+V) на форуме.");
+
+    // 3. Открываем форум по «чистой» ссылке без лишнего мусора
+    const url = "https://sd.ls-services.ru/posting.php?mode=post&f=13}";
     window.open(url, '_blank');
 }
 
