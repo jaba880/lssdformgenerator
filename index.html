@@ -73,7 +73,7 @@
         .constructor-container {
             max-width: 900px;
             margin: 60px auto;
-            background: #0d110e; 
+            background: #0d110e; /* Тёмно-зелёный фон блока */
             border: 1px solid #808080;
             padding: 30px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.6);
@@ -89,7 +89,7 @@
         }
 
         .section-header {
-            background: #013220; 
+            background: #013220; /* Синий заголовок как на скриншоте */
             color: #fff;
             padding: 8px;
             font-size: 12px;
@@ -132,21 +132,12 @@
         }
         .btn:hover { border-color: #c4a159; color: #c4a159; }
 
-        /* СТИЛИ МОДАЛЬНОГО ОКНА */
-        #bbcodeModal {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: rgba(0,0,0,0.85); justify-content: center; align-items: center; z-index: 10000;
-        }
-        .modal-content {
-            background: #1c1c1c; padding: 20px; max-width: 650px; width: 85%; 
-            border-radius: 4px; border: 1px solid #333; color: #fff; box-shadow: 0 0 30px #000;
-        }
-        .modal-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 15px; }
-        .modal-header h3 { margin: 0; font-size: 16px; text-transform: uppercase; }
-        .code-area { width: 100%; height: 250px; background: #000; color: #ccc; font-family: monospace; padding: 12px; border: 1px solid #444; resize: none; box-sizing: border-box; font-size: 12px; margin-top: 5px; }
-        .modal-footer { display: flex; justify-content: flex-end; gap: 10px; margin-top: 15px; }
-        .btn-forum { background: #0066cc; color: #fff; padding: 10px 20px; text-decoration: none; font-weight: bold; font-size: 13px; border-radius: 3px; }
-        .btn-close { background: #444; color: #fff; border: none; padding: 10px 20px; cursor: pointer; border-radius: 3px; font-weight: bold; }
+        /* Модальное окно */
+        #bbcodeModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); justify-content: center; align-items: center; z-index: 10000; }
+        .modal-content { background: #1c1c1c; padding: 20px; max-width: 700px; width: 90%; border: 1px solid #333; border-radius: 4px; box-shadow: 0 0 30px #000; }
+        .bb-area { width: 100%; height: 300px; background: #000; color: #ccc; border: 1px solid #444; padding: 10px; font-family: monospace; resize: none; font-size: 11px; box-sizing: border-box; }
+        .modal-footer { margin-top: 15px; display: flex; justify-content: flex-end; gap: 10px; }
+        .btn-forum { background: #0066cc; color: #fff; padding: 8px 20px; text-decoration: none; font-weight: bold; font-size: 13px; border-radius: 3px; }
     </style>
 </head>
 <body>
@@ -179,6 +170,7 @@
     <div class="constructor-container">
         <div class="form-main-title">Программа «Возвращение домой»</div>
 
+        <!-- СЕКЦИЯ 1 -->
         <div class="section-header">1. ИНФОРМАЦИЯ О ПРОШЛЫХ МЕСТАХ ИГРЫ</div>
         <div class="input-group">
             <label>1.1. НИК-НЕЙМ ВАШЕГО ДЕЙСТВУЮЩЕГО ПЕРСОНАЖА:</label>
@@ -197,6 +189,7 @@
             <input type="text" id="f14" placeholder="Заполнить">
         </div>
 
+        <!-- СЕКЦИЯ 2 -->
         <div class="section-header">2. ИНФОРМАЦИЯ О ПОДАЮЩЕМ ЗАЯВЛЕНИЕ</div>
         <div class="row">
             <div class="input-group">
@@ -226,15 +219,16 @@
                 <input type="text" id="f26" placeholder="Ссылки на СС-ки, иные подтверждения">
             </div>
             <div class="input-group">
-                <label>2.7. СКРИНШОТ ЗАЩИТЫ НА ИГРОВОМ АККАУНТЕ:</label>
+                <label>2.7. СКРИНШОТ ЗАЩИТЫ НА ИГРОВОМ АККАУНТЕ (GOOGLE АУТЕНТИФИКАТОР, ПОЧТОВЫЙ ЯЩИК):</label>
                 <input type="text" id="f27" placeholder="Заполнить">
             </div>
         </div>
 
+        <!-- СОГЛАШЕНИЕ -->
         <div class="agreement-block">
             <span class="agreement-title">СОГЛАШЕНИЕ</span>
             <span class="agreement-text">
-                Я соглашаюсь со всеми правилами и условиями полицейского департамента. Также уверяю, что все данные мною ответы в этой заявке являются правдивыми...
+                Я соглашаюсь со всеми правилами и условиями полицейского департамента. Также уверяю, что все данные мною ответы в этой заявке являются правдивыми, и я не имею конфликтов с полицейским департаментом и не состою в черном списке сообщества. Я согласен быть активным с аккаунта полицейского больше, чем с каких-либо других имеющихся у меня аккаунтов.
             </span>
             <label class="checkbox-container">
                 <input type="checkbox" id="agreeCheck"> Я принимаю условия данного заявления
@@ -242,46 +236,51 @@
         </div>
 
         <div class="actions">
-            <button class="btn" onclick="generateBB()">Сгенерировать</button>
+            <button class="btn" onclick="gen()">Сгенерировать</button>
             <button class="btn" onclick="location.reload()">Назад</button>
         </div>
     </div>
 
-    <!-- МОДАЛЬНОЕ ОКНО -->
+    <!-- Модальное окно -->
     <div id="bbcodeModal">
       <div class="modal-content">
-        <div class="modal-header"><h3>BBCode для копирования</h3><span onclick="closeModal()" style="cursor:pointer; font-size:24px;">×</span></div>
-        <div style="font-size:12px; color:#888; margin-bottom:5px;">Report Code</div>
-        <textarea id="bbcodeOutput" class="code-area" readonly></textarea>
+        <div style="display:flex; justify-content:space-between; border-bottom:1px solid #333; padding-bottom:10px; margin-bottom:15px;">
+            <h3 style="margin:0; font-size:14px;">BBCode для копирования</h3>
+            <span onclick="closeM()" style="cursor:pointer; font-size:20px;">×</span>
+        </div>
+        <textarea id="bbcodeOutput" class="bb-area" readonly></textarea>
         <div class="modal-footer">
-          <button onclick="closeModal()" class="btn-close">Закрыть</button>
+          <button onclick="closeM()" class="btn">Закрыть</button>
           <a href="https://sd.ls-services.ru" target="_blank" class="btn-forum">На форум</a>
         </div>
       </div>
     </div>
 
-    <!-- СКРИПТ ЛОГИКИ -->
     <script>
-        function generateBB() {
-            if(!document.getElementById('agreeCheck').checked) {
-                alert("Сначала примите соглашение!");
-                return;
-            }
-
-            const v = (id) => document.getElementById(id).value || "—";
+        function gen() {
+            if(!document.getElementById('agreeCheck').checked) return alert("Сначала примите соглашение!");
             
-            let bb = `[center][b]LSSD BACKHOME PROGRAM APPLICATION[/b][/center]\n\n`;
-            bb += `[b]1.1. Ник:[/b] ${v('f11')}\n[b]1.2. Опыт:[/b] ${v('f12')}\n[b]1.3. Звание/Отдел:[/b] ${v('f13')}\n[b]1.4. Причина:[/b] ${v('f14')}\n\n`;
-            bb += `[b]2.1. Возраст:[/b] ${v('f21')}\n[b]2.2. ВК:[/b] ${v('f22')}\n[b]2.3. Квента:[/b] ${v('f23')}\n[b]2.4. План:[/b] ${v('f24')}\n`;
-            bb += `[b]2.5. Пожелания:[/b] ${v('f25')}\n[b]2.6. Док-ва:[/b] ${v('f26')}\n[b]2.7. Защита:[/b] ${v('f27')}`;
+            const v = (id) => document.getElementById(id).value || "Заполнить";
+            
+            let bb = `[box=#354920][img]https://www.upload.ee[/img][color=#FFFFFF]  Департамент шерифа Лос Сантоса > Карьера > Программа «Возвращение домой»[/color][/box]\n`;
+            bb += `[b][size=115][border=#354920]Заявление[/border][/size][/b]\n`;
+            bb += `[list=1][*][b]Фракции в которых состояли ([i]Никнейм, проект, должность, причины и даты ухода[/i]):[/b] ${v('f12')}\n`;
+            bb += `[*][b]Доказательства игры [i](СС, не обязательно за копов)[/i]:[/b] ${v('f26')}\n`;
+            bb += `[*][b]Планируемая роль во фракции:[/b]\n[spoiler="Роль"]${v('f23')}[/spoiler]\n`;
+            bb += `[*][b]Список пожеланий, комментарий:[/b] ${v('f25')}\n\n\n`;
+            bb += `[*][b]Имя:[/b] ${v('f21')}\n`;
+            bb += `[*][b]Возраст:[/b] ${v('f22')} лет\n`;
+            bb += `[*][b]Ссылка на аккаунт в TG:[/b] [url=https://t.me{v('f22')}]${v('f22')}[/url]\n`;
+            bb += `[*][b]Скриншот включенного Google Authenticator (без каких-либо обработок):[/b] [url=${v('f27')}]Ссылка на скриншот[/url][/list]\n\n`;
+            bb += `[hr][/hr]\n[b][size=115][border=#354920]Соглашение[/border][/size][/b]\n`;
+            bb += `[list][b]Отправляя это заявление, вы автоматически соглашаетесь с приведенным ниже соглашением:[/b]\n\n`;
+            bb += `[list][i] [justify]Я соглашаюсь со всеми правилами и условиями полицейского департамента. Также уверяю, что все данные мною ответы в этой заявке являются правдивыми, и я не имею конфликтов с полицейским департаментом и не состою в черном списке сообщества. Я согласен быть активным с аккаунта полицейского больше, чем с каких-либо других имеющихся у меня аккаунтов.[/justify][/i][/list][/list]\n\n`;
+            bb += `[box=#354920][color=#FFFFFF][size=85][center]© 2026. Департамент шерифа округа Лос-Сантос. Все права защищены.[/center][/size][/color][/box]`;
 
             document.getElementById('bbcodeOutput').value = bb;
             document.getElementById('bbcodeModal').style.display = 'flex';
         }
-
-        function closeModal() {
-            document.getElementById('bbcodeModal').style.display = 'none';
-        }
+        function closeM() { document.getElementById('bbcodeModal').style.display = 'none'; }
     </script>
 
 </body>
