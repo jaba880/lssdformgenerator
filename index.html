@@ -2,120 +2,163 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LSSD - BackHome Generator</title>
+    <title>BackHome Construction</title>
     <style>
-        /* Стили для новой шапки в стиле скриншота */
-        .top-bar {
-            background-color: #001a33;
-            color: white;
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 5px 20px;
-            font-size: 12px;
-            font-weight: bold;
-            text-transform: uppercase;
-            border-bottom: 1px solid #002b55;
-        }
-        .main-header {
-            background-color: #111;
-            color: white;
-            display: flex;
-            align-items: center;
-            padding: 15px 40px;
-            border-bottom: 2px solid #b8860b;
-        }
-        .header-logo-section {
-            display: flex;
-            align-items: center;
-            border-right: 1px solid #333;
-            padding-right: 20px;
-            margin-right: 20px;
-        }
-        .header-logo-section img {
-            width: 50px;
-            margin-right: 15px;
-        }
-        .header-title h2 {
-            margin: 0;
-            font-size: 18px;
-            letter-spacing: 1px;
-        }
-        .header-title span {
-            font-size: 10px;
-            color: #888;
-            font-style: italic;
-        }
-        .emergency-link-top {
-            color: white;
-            text-decoration: none;
-        }
-        .emergency-link-top span {
-            background: #b8860b;
-            padding: 2px 6px;
-            border-radius: 3px;
-            margin-left: 5px;
+            justify-content: center;
+            padding: 20px;
         }
 
-        /* Твои оригинальные стили ниже (без изменений) */
-        body { font-family: sans-serif; background-color: #f4f4f4; margin: 0; }
-        .container { max-width: 900px; margin: 20px auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-        .form-group { margin-bottom: 15px; }
-        label { display: block; font-weight: bold; margin-bottom: 5px; }
-        input, textarea, select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
-        .btn { background-color: #004a99; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; }
-        .btn:hover { background-color: #003366; }
-        #output { margin-top: 20px; white-space: pre-wrap; background: #f9f9f9; padding: 15px; border: 1px solid #ddd; position: relative; }
+        .container {
+            width: 100%;
+            max-width: 800px;
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            padding: 30px;
+            border-radius: 4px;
+        }
+
+        h2 {
+            text-align: center;
+            text-transform: uppercase;
+            font-size: 1.2em;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            background-color: #252525;
+            padding: 5px 10px;
+            font-size: 0.9em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            border-left: 3px solid #4a90e2;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-size: 0.85em;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #bbb;
+        }
+
+        input, textarea {
+            width: 100%;
+            background-color: #2a2a2a;
+            border: 1px solid #444;
+            color: white;
+            padding: 8px;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 60px;
+        }
+
+        input:focus, textarea:focus {
+            border-color: #4a90e2;
+        }
+
+        .row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .row .form-group {
+            flex: 1;
+        }
+
+        .agreement {
+            font-size: 0.8em;
+            background-color: #222;
+            padding: 15px;
+            border: 1px solid #333;
+            margin-top: 20px;
+            line-height: 1.4;
+        }
+
+        .checkbox-group {
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            font-size: 0.85em;
+        }
+
+        .submit-btn {
+            display: block;
+            width: 200px;
+            margin: 20px auto 0;
+            padding: 10px;
+            background-color: #4a4a4a;
+            border: none;
+            color: white;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .submit-btn:hover {
+            background-color: #5a5a5a;
+        }
     </style>
 </head>
 <body>
 
-<!-- НОВЫЙ БЛОК ШАПКИ -->
-<div class="top-bar">
-    <div>
-        <img src="https://upload.wikimedia.org" style="vertical-align: middle; margin-right: 5px;">
-        ЛОС-САНТОС
-    </div>
-    <span class="emergency-link-top">Для экстренных ситуаций: <span>911</span></span>
-</div>
-
-<div class="main-header">
-    <div class="header-logo-section">
-        <img src="https://upload.wikimedia.org" alt="Logo">
-        <div class="header-title">
-            <h2>Департамент Шерифа Лос-Сантос</h2>
-            <span>Oro en paz, fierro en guerra</span>
-        </div>
-    </div>
-    <div style="font-size: 13px; color: #ccc; display: flex; gap: 20px;">
-        <span>Офицерам</span>
-        <span style="border-bottom: 2px solid #b8860b; color: white;">Гражданам</span>
-        <span>Инспекторам ОВР</span>
-    </div>
-</div>
-
-<!-- ТВОЙ КОНТЕЙНЕР И ФОРМА -->
 <div class="container">
-    <h2 style="text-align: center;">Конструктор BackHome</h2>
-    <form id="bh-form">
-        <!-- Твои поля формы (я сократил для примера, вставь сюда свои из index.html) -->
-        <div class="form-group">
-            <label>Игровой никнейм:</label>
-            <input type="text" id="nickname" placeholder="Nick_Name">
-        </div>
-        <button type="button" class="btn" onclick="generate()">Сгенерировать</button>
-    </form>
-    
-    <div id="output">Результат появится здесь...</div>
-</div>
+    <h2>Программа «Возвращение домой»</h2>
 
-<script>
-    // Твоя функция генерации остается без изменений
-    function generate() {
-        // Твой JS код из репозитория
-    }
-</script>
+    <div class="section-title">1. ИНФОРМАЦИЯ О ПРОШЛЫХ МЕСТАХ ИГРЫ</div>
+    
+    <div class="form-group">
+        <label>1.1. НИК-НЕЙМ ВАШЕГО ПРОШЛОГО ПЕРСОНАЖА:</label>
+        <input type="text" placeholder="Введите ник...">
+    </div>
+
+    <div class="form-group">
+        <label>1.2. ПРОЕКТЫ, СООБЩЕСТВА И ФРАКЦИИ, ГДЕ ВЫ ИГРАЛИ:</label>
+        <textarea placeholder="Опишите ваш опыт..."></textarea>
+    </div>
+
+    <div class="section-title">2. ИНФОРМАЦИЯ О ПОДАЮЩЕМ ЗАЯВЛЕНИЕ</div>
+
+    <div class="row">
+        <div class="form-group">
+            <label>2.1. ВАШ ВОЗРАСТ:</label>
+            <input type="text" placeholder="Лет">
+        </div>
+        <div class="form-group">
+            <label>2.2. ССЫЛКА НА ВК/ТГ:</label>
+            <input type="text" placeholder="https://vk.com...">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>2.3. КВЕНТА ВАШЕГО ПЕРСОНАЖА:</label>
+        <textarea></textarea>
+    </div>
+
+    <div class="agreement">
+        Я соглашаюсь, что если покину сообщество в течение испытательного срока без уважительной причины, то буду занесен в черный список... (текст из твоего скрина)
+        <div class="checkbox-group">
+            <input type="checkbox" id="agree">
+            <label for="agree" style="display:inline; margin-left: 10px;">Я принимаю данные условия</label>
+        </div>
+    </div>
+
+    <button class="submit-btn">Отправить заявку</button>
+</div>
 
 </body>
 </html>
