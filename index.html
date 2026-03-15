@@ -2,225 +2,297 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>LSSD - Backhome Program</title>
+    <title>LSSD - Backhome Constructor</title>
     <style>
         :root {
             --lssd-green: #354920;
-            --bg-dark: #121212;
-            --panel-bg: #1a1a1a;
-            --input-bg: #222;
-            --text-gray: #b3b3b3;
-            --border-color: #333;
+            --lssd-light: #5c7247;
+            --bg: #0d0d0d;
+            --panel: #141414;
+            --input-bg: #0a0a0a;
+            --border: #222;
         }
 
         body {
-            background-color: var(--bg-dark);
-            color: white;
+            background-color: var(--bg);
+            color: #ccc;
             font-family: 'Arial', sans-serif;
-            margin: 0;
             display: flex;
             justify-content: center;
-            padding: 20px;
+            padding: 40px 10px;
+            margin: 0;
         }
 
-        .form-container {
+        .constructor-card {
             width: 100%;
-            max-width: 850px;
-            background: var(--panel-bg);
-            border: 1px solid var(--border-color);
-            padding: 30px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.7);
+            max-width: 900px;
+            background-color: var(--panel);
+            padding: 45px;
+            border: 1px solid var(--border);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
         }
 
-        /* ШАПКА С ЛОГОТИПОМ */
+        /* HEADER */
         .header-top {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid var(--lssd-green);
-            padding-bottom: 15px;
-            margin-bottom: 20px;
+            align-items: flex-start;
+            margin-bottom: 40px;
+            border-bottom: 1px solid #1f1f1f;
+            padding-bottom: 20px;
         }
 
-        .logo-side {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
+        .logo-block { display: flex; align-items: center; gap: 15px; }
+        .logo-block img { width: 55px; height: auto; filter: drop-shadow(0 0 5px rgba(53, 73, 32, 0.5)); }
+        .logo-title { text-transform: uppercase; line-height: 1.1; }
+        .logo-title .city { font-size: 1.6em; font-weight: bold; color: #fff; letter-spacing: 1px; }
+        .logo-title .dept { font-size: 0.8em; color: var(--lssd-light); font-weight: bold; }
 
-        .logo-img {
-            width: 70px;
-            height: auto;
-        }
+        .emergency-block { text-align: right; text-transform: uppercase; line-height: 1.1; }
+        .emergency-block .lssd { font-size: 2.5em; font-weight: 900; color: #fff; letter-spacing: 2px; }
+        .emergency-block .call { font-size: 0.8em; color: #a31d1d; font-weight: bold; }
 
-        .logo-text {
-            text-transform: uppercase;
-            line-height: 1.2;
-        }
-
-        .logo-text .city { font-size: 1.2em; font-weight: bold; letter-spacing: 1px; }
-        .logo-text .dept { font-size: 0.8em; color: var(--lssd-green); font-weight: bold; }
-
-        .emergency-side {
-            text-align: right;
-            line-height: 1.1;
-        }
-
-        .emergency-side .acronym { font-size: 2em; font-weight: 900; letter-spacing: 2px; }
-        .emergency-side .call { font-size: 0.8em; color: #cc0000; font-weight: bold; }
-
-        /* СТИЛИ СЕКЦИЙ (из прошлого шага) */
-        .section-header {
-            background: var(--lssd-green);
-            color: white;
+        .main-subtitle {
             text-align: center;
-            font-size: 0.85em;
-            padding: 6px;
-            margin: 25px 0 15px 0;
+            font-size: 14px;
+            letter-spacing: 5px;
+            color: #fff;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            opacity: 0.8;
+        }
+
+        /* SECTIONS */
+        .section-bar {
+            background-color: var(--lssd-green);
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin: 30px 0 20px 0;
+            letter-spacing: 1px;
+        }
+
+        /* INPUTS */
+        .form-row { margin-bottom: 20px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+
+        label {
+            display: block;
+            font-size: 10px;
+            color: #777;
             text-transform: uppercase;
             font-weight: bold;
+            margin-bottom: 8px;
         }
 
-        .grid-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
-        .form-group { display: flex; flex-direction: column; margin-bottom: 15px; }
-        label { font-size: 0.7em; color: var(--text-gray); text-transform: uppercase; margin-bottom: 5px; font-weight: bold; }
-        
         input, textarea {
-            background: var(--input-bg);
-            border: 1px solid #444;
-            color: white;
-            padding: 12px;
-            font-size: 0.9em;
-            outline: none;
-        }
-        
-        input:focus { border-color: var(--lssd-green); }
-
-        .agreement-box {
-            font-size: 0.8em;
-            color: #777;
-            text-align: justify;
-            border: 1px solid #222;
-            padding: 15px;
-            margin-top: 15px;
-            font-style: italic;
-        }
-
-        .btn-generate {
-            background: var(--lssd-green);
-            color: white;
-            border: none;
             width: 100%;
-            padding: 15px;
-            margin-top: 20px;
+            background-color: var(--input-bg);
+            border: 1px solid #282828;
+            color: #eee;
+            padding: 14px;
+            box-sizing: border-box;
+            font-size: 13px;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        input:focus, textarea:focus { border-color: var(--lssd-green); background-color: #0f0f0f; }
+        textarea { height: 90px; resize: none; }
+
+        /* FOOTER */
+        .agreement {
+            text-align: center;
+            font-size: 11px;
+            font-style: italic;
+            color: #555;
+            margin: 40px 0 20px 0;
+            line-height: 1.5;
+        }
+
+        .btn-group { display: flex; gap: 10px; }
+
+        .btn-gen {
+            background-color: var(--lssd-green);
+            color: #fff;
+            border: none;
+            flex: 2;
+            padding: 18px;
+            font-size: 13px;
             font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            letter-spacing: 1px;
+            transition: background 0.3s;
+        }
+
+        .btn-gen:hover { background-color: #435c29; }
+        
+        .btn-reset {
+            background-color: #222;
+            color: #888;
+            border: none;
+            flex: 1;
             cursor: pointer;
             text-transform: uppercase;
+            font-size: 11px;
         }
 
-        #output-box {
-            margin-top: 20px;
+        /* OUTPUT BOX */
+        #output-container {
             display: none;
-            background: #000;
-            padding: 15px;
+            margin-top: 35px;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        #result {
+            background: #050505;
+            padding: 20px;
             border: 1px dashed var(--lssd-green);
-            font-family: monospace;
-            font-size: 12px;
             color: #8fbc8f;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
             white-space: pre-wrap;
+            margin-bottom: 15px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .copy-info {
+            text-align: center;
+            font-size: 11px;
+            color: var(--lssd-light);
+            text-transform: uppercase;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
 
-<div class="form-container">
-    <!-- ВЕРХНЯЯ ПАНЕЛЬ -->
+<div class="constructor-card">
     <div class="header-top">
-        <div class="logo-side">
-            <img src="https://www.upload.ee" class="logo-img" alt="LSSD">
-            <div class="logo-text">
+        <div class="logo-block">
+            <img src="https://www.upload.ee" alt="LSSD Logo">
+            <div class="logo-title">
                 <div class="city">ЛОС-САНТОС</div>
                 <div class="dept">ДЕПАРТАМЕНТ ШЕРИФА</div>
             </div>
         </div>
-        <div class="emergency-side">
-            <div class="acronym">LSSD</div>
+        <div class="emergency-block">
+            <div class="lssd">LSSD</div>
             <div class="call">ЭКСТРЕННЫЕ СЛУЖБЫ</div>
         </div>
     </div>
 
-    <div style="text-align: center; font-size: 0.9em; letter-spacing: 3px; color: var(--text-gray);">
-        ПРОГРАММА «ВОЗВРАЩЕНИЕ ДОМОЙ»
-    </div>
+    <div class="main-subtitle">ПРОГРАММА «ВОЗВРАЩЕНИЕ ДОМОЙ»</div>
 
-    <!-- ПОЛЯ ВВОДА -->
-    <div class="section-header">1. ИНФОРМАЦИЯ О ПРОШЛЫХ МЕСТАХ ИГРЫ</div>
+    <div class="section-bar">1. ИНФОРМАЦИЯ О ПРОШЛЫХ МЕСТАХ ИГРЫ</div>
     
-    <div class="form-group">
+    <div class="form-row">
         <label>1.1. Имя Фамилия Вашего персонажа (никнейм):</label>
-        <input type="text" id="nick" placeholder="Name Surname">
+        <input type="text" id="nick" placeholder="Напр: John_Doe">
     </div>
 
-    <div class="form-group">
+    <div class="form-row">
         <label>1.2. Фракции, проекты, ранги и даты ухода:</label>
-        <textarea id="factions" placeholder="LSPD, SAPD..."></textarea>
+        <textarea id="factions" placeholder="Напр: LSPD (Gambit), PO III, ПСЖ, 15.01.2024"></textarea>
     </div>
 
-    <div class="grid-row">
-        <div class="form-group">
+    <div class="grid-2">
+        <div class="group">
             <label>1.3. Желаемая роль/отдел:</label>
-            <input type="text" id="rank" placeholder="SEB / OSS / Detective">
+            <input type="text" id="rank" placeholder="Напр: SEB / Detective / Patrol">
         </div>
-        <div class="form-group">
+        <div class="group">
             <label>1.4. Причина ухода с прошлых мест:</label>
-            <input type="text" id="reason" placeholder="ПСЖ / Расформ">
+            <input type="text" id="reason" placeholder="Напр: Собственное желание">
         </div>
     </div>
 
-    <div class="section-header">2. ИНФОРМАЦИЯ О ПОДАЮЩЕМ ЗАЯВЛЕНИЕ</div>
+    <div class="section-bar">2. ИНФОРМАЦИЯ О ПОДАЮЩЕМ ЗАЯВЛЕНИЕ</div>
 
-    <div class="grid-row">
-        <div class="form-group">
+    <div class="grid-2">
+        <div class="group">
             <label>2.1. Ваш возраст (OOC):</label>
-            <input type="text" id="age" placeholder="20 лет">
+            <input type="text" id="age" placeholder="Напр: 22 года">
         </div>
-        <div class="form-group">
+        <div class="group">
             <label>2.2. Связь (TG/VK):</label>
-            <input type="text" id="social" placeholder="@username">
+            <input type="text" id="social" placeholder="Напр: @nick_name">
         </div>
     </div>
 
-    <div class="form-group">
-        <label>2.3. Доказательства игры (СС):</label>
-        <input type="text" id="proofs" placeholder="Ссылки на фотохостинги">
+    <div class="form-row">
+        <label>2.3. Доказательства игры (СС/Видео):</label>
+        <input type="text" id="proofs" placeholder="Вставьте ссылки через запятую">
     </div>
 
-    <div class="agreement-box">
-        Я подтверждаю, что все данные верны. Я согласен с правилами сообщества и готов нести ответственность за свою игру.
+    <div class="form-row">
+        <label>2.4. Ссылка на Google Authenticator (скриншот):</label>
+        <input type="text" id="ga" placeholder="http://imgur.com...">
     </div>
 
-    <button class="btn-generate" onclick="generateBB()">Сгенерировать код заявления</button>
+    <div class="agreement">
+        Я подтверждаю, что все данные верны. Я согласен с правилами сообщества LSSD и готов нести ответственность за свою игру и поведение.
+    </div>
 
-    <div id="output-box"></div>
+    <div class="btn-group">
+        <button class="btn-gen" onclick="generate()">Сгенерировать код заявления</button>
+        <button class="btn-reset" onclick="location.reload()">Сброс</button>
+    </div>
+
+    <div id="output-container">
+        <div class="copy-info">Код готов! Нажмите на него, чтобы скопировать:</div>
+        <div id="result" onclick="copyCode()"></div>
+    </div>
 </div>
 
 <script>
-function generateBB() {
-    const v = (id) => document.getElementById(id).value || "Заполнить";
-    
-    const bb = `[box=#354920][img]https://www.upload.ee[/img][color=#FFFFFF]  LSSD > Программа «Возвращение домой»[/color][/box]
-[b]Никнейм:[/b] ${v('nick')}
-[b]Прошлый опыт:[/b] ${v('factions')}
-[b]Желаемый отдел:[/b] ${v('rank')}
-[b]Связь:[/b] ${v('social')}
-[b]Доказательства:[/b] [url=${v('proofs')}]Клик[/url]
-[hr][/hr]
-[center]© 2024 Los Santos Sheriff Department[/center]`;
+    function generate() {
+        const val = (id) => document.getElementById(id).value.trim() || "ЗАПОЛНИТЬ";
+        
+        // Обработка соцсетей
+        let soc = val('social');
+        let tgUrl = soc.startsWith('@') ? `https://t.me{soc.substring(1)}` : soc;
 
-    const out = document.getElementById('output-box');
-    out.innerText = bb;
-    out.style.display = 'block';
-}
+        const bb = `[box=#354920][img]https://www.upload.ee[/img][color=#FFFFFF]  Департамент шерифа Лос Сантоса > Карьера > Программа «Возвращение домой»[/color][/box]
+[b][size=115][border=#354920]Заявление[/border][/size][/b]
+[list=1][*][b]Фракции в которых состояли:[/b] ${val('factions')}
+[*][b]Доказательства игры:[/b] [url=${val('proofs')}]Клик[/url]
+[*][b]Планируемая роль:[/b]
+[spoiler="Открыть"]Желаемый отдел: ${val('rank')}.[/spoiler]
+[*][b]Причина ухода:[/b] ${val('reason')}
+
+[*][b]Имя:[/b] ${val('nick')}
+[*][b]Возраст:[/b] ${val('age')}
+[*][b]Связь:[/b] [url=${tgUrl}]${soc}[/url]
+[*][b]Google Auth:[/b] [url=${val('ga')}]Скриншот защиты[/url][/list]
+
+[hr][/hr]
+[b][size=115][border=#354920]Соглашение[/border][/size][/b]
+[list][i]Я соглашаюсь со всеми правилами и условиями полицейского департамента. Также уверяю, что все данные мною ответы являются правдивыми.[/i][/list]
+
+[box=#354920][color=#FFFFFF][size=85][center]© 2024. LSSD. Все права защищены.[/center][/size][/color][/box]`;
+
+        const outContainer = document.getElementById('output-container');
+        const resDiv = document.getElementById('result');
+        
+        resDiv.innerText = bb;
+        outContainer.style.display = 'block';
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
+
+    function copyCode() {
+        const text = document.getElementById('result').innerText;
+        navigator.clipboard.writeText(text).then(() => {
+            alert("Код скопирован в буфер обмена!");
+        });
+    }
 </script>
 
 </body>
