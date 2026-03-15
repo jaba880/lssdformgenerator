@@ -4,9 +4,19 @@
     <meta charset="UTF-8">
     <title>LSSD - Backhome Constructor</title>
     <style>
-        body { margin: 0; background-color: #080808; font-family: 'Arial', sans-serif; color: #fff; }
+        /* --- НАСТРОЙКА ЦВЕТОВ ТУТ --- */
+        :root {
+            --accent-color: #354920;      /* Цвет полос и акцентов (сейчас темно-зеленый LSSD) */
+            --border-color: #222;         /* Цвет рамок */
+            --bg-dark: #0d0d0d;           /* Фон панелей */
+            --input-bg: #0a0a0a;          /* Фон полей ввода */
+            --blue-text: #4a9eff;         /* Цвет текста в синих разделителях */
+            --main-font: 'Arial', sans-serif;
+        }
 
-        /* 1. ВЕРХНЯЯ ПОЛОСА (TOP BAR) */
+        body { margin: 0; background-color: #080808; font-family: var(--main-font); color: #fff; }
+
+        /* ВЕРХНИЙ БАР */
         .top-bar {
             background-color: #0a111a;
             height: 30px;
@@ -16,48 +26,40 @@
             padding: 0 50px;
             border-bottom: 1px solid #1a2a3a;
         }
-        .city-tag { display: flex; align-items: center; gap: 8px; color: #fff; font-size: 10px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+        .city-tag { display: flex; align-items: center; gap: 8px; font-size: 10px; font-weight: bold; text-transform: uppercase; }
         .city-tag img { width: 14px; height: 14px; }
-        .emergency-tag { color: #888; font-size: 10px; }
-        .emergency-tag b { color: #cc0000; }
-        .emergency-tag span { color: #fff; font-weight: bold; margin-left: 5px; }
-
-        /* 2. ШАПКА ДЕПАРТАМЕНТА */
+        
+        /* ШАПКА */
         .main-header {
-            background-color: #0d0d0d;
+            background-color: var(--bg-dark);
             height: 90px;
             display: flex;
             align-items: center;
             padding: 0 50px;
-            border-bottom: 1px solid #1a1a1a;
+            border-bottom: 1px solid var(--border-color);
         }
         .logo-area { display: flex; align-items: center; gap: 20px; }
-        .logo-area img { width: 50px; height: auto; }
+        
+        /* --- НАСТРОЙКА РАЗМЕРА ЛОГОТИПА --- */
+        .logo-area img { width: 50px; height: auto; } 
+
         .logo-text { border-left: 1px solid #222; padding-left: 20px; }
-        .logo-text h1 { margin: 0; font-size: 18px; text-transform: uppercase; letter-spacing: 1px; font-weight: bold; }
-        .logo-text p { margin: 2px 0 0; color: #555; font-size: 10px; font-style: italic; }
+        .logo-text h1 { margin: 0; font-size: 18px; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* 3. ОСНОВНАЯ ФОРМА */
+        /* КОНСТРУКТОР */
         .wrapper {
-            width: 800px;
+            width: 780px;
             margin: 40px auto;
-            background: #111;
-            border: 1px solid #222;
+            background: var(--bg-dark);
+            border: 1px solid var(--border-color);
         }
 
-        .title-block {
-            padding: 20px;
-            text-align: center;
-            font-size: 14px;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: #fff;
-        }
+        .title-block { padding: 20px; text-align: center; font-size: 14px; font-weight: bold; text-transform: uppercase; }
 
+        /* ЦВЕТНЫЕ ПОЛОСЫ РАЗДЕЛОВ */
         .section-header {
-            background: #0d1a2a;
-            color: #4a9eff;
+            background: #0d1a2a; /* Можно заменить на var(--accent-color), если хочешь зеленые */
+            color: var(--blue-text);
             text-align: center;
             padding: 7px;
             font-size: 10px;
@@ -80,8 +82,8 @@
 
         input, textarea {
             width: 100%;
-            background: #0a0a0a;
-            border: 1px solid #222;
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
             color: #ccc;
             padding: 12px;
             box-sizing: border-box;
@@ -90,27 +92,11 @@
             margin-bottom: 20px;
         }
 
-        input:focus, textarea:focus { border-color: #354920; }
-        textarea { height: 70px; resize: none; }
+        input:focus { border-color: var(--accent-color); }
 
-        /* СЕТКА 1.3 и 1.4 */
-        .grid-half {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
+        .grid-half { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 
-        /* 4. БЛОК СОГЛАШЕНИЯ */
-        .agreement-area {
-            text-align: center;
-            padding: 0 40px 30px;
-        }
-        .agreement-text {
-            font-size: 10px;
-            color: #555;
-            line-height: 1.5;
-            margin-bottom: 20px;
-        }
+        /* СОГЛАШЕНИЕ */
         .check-container {
             display: flex;
             align-items: center;
@@ -118,23 +104,12 @@
             gap: 15px;
             font-size: 11px;
             font-weight: bold;
-            color: #fff;
-            text-transform: uppercase;
+            padding: 20px;
         }
-        .check-container input {
-            width: 18px;
-            height: 18px;
-            margin: 0;
-            cursor: pointer;
-        }
+        .check-container input { width: 18px; height: 18px; cursor: pointer; }
 
-        /* 5. КНОПКИ */
-        .btn-row {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            padding-bottom: 40px;
-        }
+        /* КНОПКИ */
+        .btn-row { display: flex; justify-content: center; gap: 10px; padding-bottom: 40px; }
         .btn {
             background: #0d0d0d;
             border: 1px solid #333;
@@ -145,33 +120,32 @@
             text-transform: uppercase;
             cursor: pointer;
             min-width: 150px;
-            transition: 0.2s;
         }
-        .btn:hover { border-color: #fff; }
-        .btn-gray { color: #555; }
+        .btn:hover { border-color: var(--accent-color); }
 
         /* МОДАЛКА */
         .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 1000; align-items: center; justify-content: center; }
         .modal { background: #151515; width: 500px; border: 1px solid #333; padding: 20px; }
-        .modal-h { font-size: 13px; font-weight: bold; margin-bottom: 15px; border-bottom: 1px solid #222; padding-bottom: 10px; }
-        .btn-blue { background: #0060df; border: none; padding: 8px 20px; color: #fff; font-weight: bold; cursor: pointer; float: right; margin-top: 10px; }
     </style>
 </head>
 <body>
 
     <div class="top-bar">
         <div class="city-tag">
-            <img src="https://www.upload.ee">
+            <!-- ЛОГОТИП В ВЕРХНЕЙ ПОЛОСЕ -->
+            <img src="https://www.upload.ee"> 
             Лос-Сантос
         </div>
-        <div class="emergency-tag">
-            <b>📞</b> Для экстренных ситуаций: <span>Emergency Services</span>
+        <div class="emergency-info" style="font-size: 10px; color: #888;">
+            📞 Для экстренных ситуаций: <b style="color:#fff">Emergency Services</b>
         </div>
     </div>
 
     <div class="main-header">
         <div class="logo-area">
-            <img src="https://www.upload.ee">
+            <!-- ОСНОВНОЙ ЛОГОТИП ЛССД (ЗАМЕНИ ССЫЛКУ НИЖЕ) -->
+            <img src="https://www.upload.ee" alt="LSSD LOGO">
+            
             <div class="logo-text">
                 <h1>Департамент шерифа Лос-Сантоса</h1>
                 <p>To Serve and Protect</p>
@@ -182,73 +156,60 @@
     <div class="wrapper">
         <div class="title-block">Программа «Возвращение домой»</div>
 
-        <div class="section-header">1. Информация о прошлых местах игры</div>
+        <div class="section-bar">1. Информация о прошлых местах игры</div>
         <div class="form-content">
             <label>1.1. Ник-нейм вашего персонажа:</label>
             <input type="text" id="nick" placeholder="Name_Surname">
 
             <label>1.2. Проекты и сообщества:</label>
-            <textarea id="factions" placeholder="Где играли, какие ранги занимали..."></textarea>
+            <textarea id="factions"></textarea>
 
             <div class="grid-half">
                 <div>
                     <label>1.3. Звание/Отдел:</label>
-                    <input type="text" id="rank" placeholder="Напр: Sergeant, SEB">
+                    <input type="text" id="rank">
                 </div>
                 <div>
                     <label>1.4. Причина ухода:</label>
-                    <input type="text" id="reason" placeholder="Напр: ПСЖ">
+                    <input type="text" id="reason">
                 </div>
             </div>
         </div>
 
-        <div class="section-header">Соглашение</div>
-        <div class="agreement-area">
-            <p class="agreement-text">
-                Я соглашаюсь со всеми условиями программы «Backhome» и подтверждаю правдивость введенных данных.
-                Я понимаю, что в случае обмана могу быть занесен в черный список департамента.
-            </p>
-            <div class="check-container">
-                <input type="checkbox" id="agree">
-                <span>Я принимаю условия данного заявления</span>
-            </div>
+        <div class="section-bar">Соглашение</div>
+        <div class="check-container">
+            <input type="checkbox" id="agree">
+            <span>Я принимаю условия данного заявления</span>
         </div>
 
         <div class="btn-row">
             <button class="btn" onclick="generate()">Сгенерировать</button>
-            <button class="btn btn-gray" onclick="location.reload()">Назад</button>
+            <button class="btn" style="color:#555" onclick="location.reload()">Назад</button>
         </div>
     </div>
 
-    <!-- ВСПЛЫВАЮЩЕЕ ОКНО -->
     <div id="modal" class="overlay">
         <div class="modal">
-            <div class="modal-h">BBCode для форума</div>
-            <textarea id="result-code" style="height: 200px; margin-bottom: 0;"></textarea>
-            <button class="btn-blue" onclick="sendToForum()">На форум</button>
-            <button class="btn" style="min-width: 80px; margin-top: 10px;" onclick="closeM()">Закрыть</button>
+            <div style="font-weight:bold; margin-bottom:10px;">BBCode готового заявления:</div>
+            <textarea id="res-code" style="width:100%; height:150px; background:#000; color:#0f0; border:1px solid #333;"></textarea>
+            <button class="btn" style="margin-top:10px; width:100%; background: #0060df;" onclick="copyAndGo()">На форум</button>
         </div>
     </div>
 
     <script>
         function generate() {
-            if(!document.getElementById('agree').checked) {
-                alert("Вы должны принять соглашение!");
-                return;
-            }
+            if(!document.getElementById('agree').checked) { alert("Примите соглашение!"); return; }
             const nick = document.getElementById('nick').value || "Name_Surname";
-            const factions = document.getElementById('factions').value;
             
-            const bb = `[box=#354920][img]https://www.upload.ee[/img][color=#FFFFFF] LSSD > Backhome[/color][/box]\n[b]Ник:[/b] ${nick}\n[b]Опыт:[/b] ${factions}`;
+            // Тут формируется сам текст заявления (BB-код)
+            const bb = `[box=${document.documentElement.style.getPropertyValue('--accent-color') || '#354920'}][img]https://www.upload.ee[/img][color=#FFFFFF] LSSD > Backhome[/color][/box]\n[b]Ник:[/b] ${nick}\n[b]Опыт:[/b] ${document.getElementById('factions').value}`;
             
-            document.getElementById('result-code').value = bb;
+            document.getElementById('res-code').value = bb;
             document.getElementById('modal').style.display = 'flex';
         }
 
-        function closeM() { document.getElementById('modal').style.display = 'none'; }
-
-        function sendToForum() {
-            const code = document.getElementById('result-code');
+        function copyAndGo() {
+            const code = document.getElementById('res-code');
             code.select();
             document.execCommand('copy');
             window.open('https://sd.ls-services.ru', '_blank');
