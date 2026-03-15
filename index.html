@@ -1,311 +1,124 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <link rel="stylesheet" href="/common/css/style.css">
-    <link rel="stylesheet" href="/common/css/micromodal.css">
-    <script src="/common/js/micromodal.min.js"></script>
-    <script src="/common/js/utils.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com">
+    <title>LSSD - Back Home Program</title>
+    <style>
+        :root { --lssd-main: #354920; }
+        body { background-color: #f4f4f4; font-family: 'Segoe UI', Tahoma, sans-serif; }
+        
+        .lssd-top { background: var(--lssd-main); color: white; padding: 6px 0; font-size: 13px; font-weight: bold; text-align: center; }
+        .lssd-header { background: white; border-bottom: 4px solid var(--lssd-main); padding: 15px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .dept-title { color: var(--lssd-main); font-weight: 800; text-transform: uppercase; line-height: 1.1; }
+        .dept-title span { display: block; font-size: 11px; color: #666; font-style: italic; }
 
-    <title>Программа возвращения домой | NYC-PD.RU</title>
+        .form-container { max-width: 850px; margin: 35px auto; background: white; border: 1px solid #ddd; padding: 30px; }
+        .main-title { color: var(--lssd-main); font-size: 26px; font-weight: bold; text-align: center; margin-bottom: 25px; border-bottom: 2px solid var(--lssd-main); padding-bottom: 15px; }
+
+        .section-bar { background: var(--lssd-main); color: white; padding: 8px 15px; font-weight: bold; font-size: 14px; text-transform: uppercase; margin: 25px 0 15px; }
+        
+        label { display: block; font-size: 12px; font-weight: bold; color: #333; text-transform: uppercase; margin-bottom: 5px; }
+        .input-wrap { border: 1px solid #ced4da; padding: 5px; margin-bottom: 20px; transition: 0.3s; }
+        .input-wrap:focus-within { border-color: var(--lssd-main); box-shadow: 0 0 0 0.2rem rgba(53, 73, 32, 0.1); }
+        
+        input, textarea { width: 100%; border: none; padding: 10px; font-size: 14px; outline: none; }
+        
+        .btn-generate { background: var(--lssd-main); color: white; border: none; padding: 16px; width: 100%; font-weight: bold; text-transform: uppercase; cursor: pointer; letter-spacing: 1px; transition: 0.3s; }
+        .btn-generate:hover { background: #2a3a19; }
+
+        #result-box { display: none; margin-top: 30px; padding: 20px; background: #1a1a1a; border: 2px dashed var(--lssd-main); color: #4af626; font-family: 'Consolas', monospace; font-size: 13px; white-space: pre-wrap; }
+    </style>
 </head>
 
 <body>
-<style>
+    <div class="lssd-top">LOS SANTOS COUNTY SHERIFF'S DEPARTMENT — BACK HOME PROGRAM</div>
 
-</style>
-    <body>
-        
-<header class="sfpd-header">
-    <nav class="topbar d-flex justify-content-between align-items-center px-3 px-md-4">
-        <div class="d-flex align-items-center text-white">
-            <img src="https://www.upload.ee/image/16078694/sfcitylogo2color.png" height="25" width="25" class="mr-2" alt="Герб">
-            <b>САН-ФИЕРРО</b>
-        </div>
-        <div class="d-flex align-items-center text-white" style="font-size: 0.9rem;">
-            <i class="fas fa-phone-alt mr-2"></i>
-            Для экстренных ситуаций: 
-            <span class="emergency__number">911</span>
-        </div>
-        </div>
-    </nav>
-
-    <nav class="navbar navbar-expand-lg navbar-main shadow-sm">
-        <div class="container position-relative">
-            <!-- Логотип, перекрывающий оба навбара -->
-            <div class="logo-container">
-                <img src="\htmlforms\lspd disabled\sfpd_logo.png" class="sfpd-logo" alt="Логотип SFPD">
-            </div>
-            
-            <a href="/" class="navbar-brand sfpd-brand">
-                <div class="department-name">
-                    Департамент полиции Сан-Фиерро
-                    <span><i>Oro en paz, fierro en guerra</i></span>
-                </div>
-            </a>
-            
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" 
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link sfpd-nav-link" href="/sfpd.html">
-                            <i class="fas fa-shield-alt mr-2"></i>
-                            Офицерам
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link sfpd-nav-link active" href="/sfpd/civil.html">
-                            <i class="fas fa-users mr-2"></i>
-                            Гражданам
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link sfpd-nav-link" href="/IAD_enter.html">
-                            <i class="fas fa-file-invoice"></i>
-                            Инспекторам ОВР
-                        </a>
-                    </li>
-                </ul>
+    <header class="lssd-header">
+        <div class="container d-flex align-items-center">
+            <img src="https://www.upload.ee" height="60" class="mr-4">
+            <div class="dept-title">
+                Департамент шерифа округа Лос-Сантос
+                <span>"A Tradition of Service"</span>
             </div>
         </div>
-    </nav>
-</header><br>
+    </header>
 
-<body>
-    <div class="form" style="border: 1px solid #0F283E; padding: 10px; background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);">
-        <table width="100%">
-            <tbody>
-                    <td style="vertical-align: centered_text; width:100%;  color: rgb(0, 0, 0); ">
-                        <div align="center"><span style="font-weight: bold; font-size: 25px;">Программа «Возвращение домой»</span> </span> </div>
-                    </td>
-                    <td style="vertical-align: top; width:26%; padding-left:10px;">
-                        <div align="right"><span style="font-size: 85%; line-height: 116%; color: #0F283E;">
-                            </span></div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <div style="border-bottom: 1px solid #0F283E; padding: 1px;"></div> <br>
-        <div style="padding: 2px; background-color: #0F283E;"><span><span style="color: #FFFFFF">
-                    <div align="center">1. ИНФОРМАЦИЯ О ПРОШЛЫХ МЕСТАХ ИГРЫ</div>
-                </span></span></div>
-        <div style="border: 1px solid #000; padding: 5px; background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);"><span style="color: #000000">
-                <table width="100%">
-                    <tbody>
-                        <tr>
-                            <td style="vertical-align: top; width:33%; padding-right:10px;"><span style="font-weight: bold; font-size: 90%; line-height: 116%;">1.1. НИК-НЕЙМ ВАШЕГО ДЕЙСТВУЮЩЕГО ПЕРСОНАЖА:</span><br>
-                                <div style="background-color:white; color: #555; border:1px solid #ccc; margin-right:10px"><input type="text" name="nickname" placeholder="Заполнить">
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table><br>
-                <table width="100%">
-                    <tbody>
-                        <tr>
-                            <td style="vertical-align: top; width:33%; padding-right:10px;"><span style="font-weight: bold; font-size: 90%; line-height: 116%;">1.2. ПРОЕКТЫ, СООБЩЕСТВА И СЕРВЕРА, ГДЕ ВЫ ИГРАЛИ:</span><br>
-                                <div style="background-color:white; border:1px solid #ccc; color: #555555; padding: 10px"><textarea name="projects" placeholder="Развернутый ответ на вопрос" cols="78"></textarea></div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table><br>
-                <table width="100%">
-                    <tbody>
-                        <tr>
-                            <td style="vertical-align: top; width:33%; padding-right:10px;"><span style="font-weight: bold; font-size: 90%; line-height: 116%;">1.3. ЗВАНИЕ, ДОЛЖНОСТЬ И ОТДЕЛ:</span><br>
-                                <div style="background-color:white; color: #555; border:1px solid #ccc; margin-right:10px"><input type="text" name="history" placeholder="Заполнить">
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table><br>
-                <table width="100%">
-                    <tbody>
-                        <tr>
-                            <td style="vertical-align: top; width:33%; padding-right:10px;"><span style="font-weight: bold; font-size: 90%; line-height: 116%;">1.4. ПРИЧИНА УХОДА:</span><br>
-                                <div style="background-color:white; color: #555; border:1px solid #ccc; margin-right:10px"><input type="text" name="leave_reason" placeholder="Заполнить">
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            
-        </div><br>
-        <div style="padding: 2px; background-color: #0F283E;"><span><span style="color: #FFFFFF">
-            <div align="center">2. ИНФОРМАЦИЯ О ПОДАЮЩЕМ ЗАЯВЛЕНИЕ</div>
-        </span></span></div>
-        <div style="border: 1px solid #000; padding: 5px; background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);"><span style="color: #000000">
-                <table width="100%">
-                    <tbody>
-                        <tr>
-                            <td style="vertical-align: top; width:33%; padding-right:10px;"><span style="font-weight: bold; font-size: 90%; line-height: 116%;">2.1. ВАШ ВОЗРАСТ:</span><br>
-                                <div style="background-color:white; color: #555; border:1px solid #ccc; margin-right:10px"><input type="text" name="age" placeholder="Заполнить">
-                                </div>
-                            </td>
-                            <td style="vertical-align: top; width:33%; padding-right:10px;"><span style="font-weight: bold; font-size: 90%; line-height: 116%;">2.2. ССЫЛКА НА ВКОНТАКТЕ:</span><br>
-                                <div style="background-color:white; color: #555; border:1px solid #ccc; margin-right:10px"><input type="text" name="vk" placeholder="Заполнить">
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table><br>
-                <table width="100%">
-                    <tbody>
-                        <tr>
-                            <td style="vertical-align: top; width:33%; padding-right:10px;"><span style="font-weight: bold; font-size: 90%; line-height: 116%;">2.3. КВЕНТА ВАШЕГО ПЕРСОНАЖА:</span><br>
-                                <div style="background-color:white; border:1px solid #ccc; color: #555555; padding: 10px"><textarea name="qventa" placeholder="Развернутый ответ на вопрос" cols="78"></textarea></div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table><br>
-                <table width="100%">
-                    <tbody>
-                        <tr>
-                            <td style="vertical-align: top; width:33%; padding-right:10px;"><span style="font-weight: bold; font-size: 90%; line-height: 116%;">2.4. ПЛАНЫ НА ПЕРСОНАЖА:</span><br>
-                                <div style="background-color:white; color: #555; border:1px solid #ccc; margin-right:10px"><input type="text" name="plans" placeholder="Заполнить">
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table><br>
-                <table width="100%">
-                    <tbody>
-                        <tr>
-                            <td style="vertical-align: top; width:33%; padding-right:10px;"><span style="font-weight: bold; font-size: 90%; line-height: 116%;">2.5. СПИСОК ПОЖЕЛАНИЙ:</span><br>
-                                <div style="background-color:white; color: #555; border:1px solid #ccc; margin-right:10px"><input type="text" name="zhelania" placeholder="Заполнить">
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table><br>
-                <table width="100%">
-                    <tbody>
-                        <tr>
-                            <td style="vertical-align: top; width:33%; padding-right:10px;"><span style="font-weight: bold; font-size: 90%; line-height: 116%;">2.6. ДОКАЗАТЕЛЬСТВА ВАШЕЙ ИГРЫ:</span><br>
-                                <div style="background-color:white; color: #555; border:1px solid #ccc; margin-right:10px"><input type="text" name="ss" placeholder="Ссылки на СС-ки, иные подтверждения">
-                                </div>
-                            </td>
-                            <td style="vertical-align: top; width:33%; padding-right:10px;"><span style="font-weight: bold; font-size: 90%; line-height: 116%;">2.7. СКРИНШОТ ЗАЩИТЫ НА ИГРОВОМ АККАУНТЕ (GOOGLE АУТЕНТИФИКАТОР, ПОЧТОВЫЙ ЯЩИК):</span><br>
-                                <div style="background-color:white; color: #555; border:1px solid #ccc; margin-right:10px"><input type="text" name="security" placeholder="Заполнить">
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            
-        </div><br>
-    
-        <div style="padding: 2px; background-color: #0F283E;"><span><span style="color: #FFFFFF">
-                <div align="center">СОГЛАШЕНИЕ</div>
-            </span></span></div>
-        </span></span>
-        <span style="font-size: 85%; line-height: 116%;"><span><div style="text-align: justify;">Я соглашаюсь, что если покину сообщество в течение испытательного срока без основательной причины, то буду занесен в черный список (ЧС) сообщества без права выхода. Я понимаю, что не все мои перечисленные пожелания могут быть удовлетворены и всё равно соглашаюсь играть. Я соглашаюсь, что мое заявление может быть отклонено без объяснения причин. Я понимаю, что в случае слива любой информации с форума и бесед, я буду занесен в черный список. Я уверяю, что все данные мною ответы в этой заявке являются правдивыми.</div><span style="font-weight: bold"><input type="checkbox" class="checkbox" name="checkbox" /> Я принимаю условия данного заявления</span>
+    <div class="form-container shadow-sm">
+        <div class="main-title">ГЕНЕРАТОР ЗАЯВЛЕНИЯ</div>
+
+        <div class="section-bar">I. Информация о прошлом опыте</div>
+        <label>1.1. Фракции, никнеймы, ранги, причины и даты ухода:</label>
+        <div class="input-wrap"><textarea id="exp" rows="3" placeholder="Nick, Project, Rank, Reason, Date"></textarea></div>
+
+        <label>1.2. Доказательства игры (ссылки на СС / скриншоты):</label>
+        <div class="input-wrap"><input type="text" id="proofs" placeholder="https://imgur.com..."></div>
+
+        <label>1.3. Планируемая роль во фракции (квента, 3-4 предложения):</label>
+        <div class="input-wrap"><textarea id="role" rows="4"></textarea></div>
+
+        <label>1.4. Список пожеланий, комментарий:</label>
+        <div class="input-wrap"><input type="text" id="comment"></div>
+
+        <div class="section-bar">II. Личные данные (OOC)</div>
+        <div class="row">
+            <div class="col-md-8"><label>Ваше Имя:</label><div class="input-wrap"><input type="text" id="name"></div></div>
+            <div class="col-md-4"><label>Возраст:</label><div class="input-wrap"><input type="text" id="age" placeholder="XX"></div></div>
         </div>
-       
 
-    <div class="btn-container">
-        <button class="modal__btn modal__btn-primary" onclick="showBB()">Сгенерировать</button>
-        <button class="modal__btn" onclick="window.location.assign('/sfpd/civil.html')">Назад</button>
+        <label>Ник в Telegram (для ссылки):</label>
+        <div class="input-wrap"><input type="text" id="tg" placeholder="username"></div>
+
+        <label>Скриншот Google Authenticator (ссылка):</label>
+        <div class="input-wrap"><input type="text" id="gauth"></div>
+
+        <button class="btn-generate" onclick="generate()">Сгенерировать BB-код</button>
+
+        <div id="result-box" id="bb-output"></div>
     </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="output_modal" tabindex="-1" role="dialog" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">BBCode для копирования</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div class="container-fluid">
-                <div class="row mb-3">
-                    <div class="col-12">
-                        <label for="output__header">Название темы</label>
-                    </div>
-                    <div class="col-9 col-lg-10">
-                        <input type="text" class="form-control" id="output__header">
-                    </div>
-                    <div class="col-3 col-lg-2">
-                        <button class="btn btn-outline-secondary" type="button" data-field="output__header" onclick="copyCode(this)">Copy</button>
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-12">
-                        <label for="output__body">Код</label>
-                    </div>
-                    <div class="col-9 col-lg-10">
-                        <textarea class="form-control" rows="10" id="output__body"></textarea>
-                    </div>
-                    <div class="col-3 col-lg-2 d-flex align-items-center">
-                        <button class="btn btn-outline-secondary" type="button" data-field="output__body" onclick="copyCode(this)">Copy</button>
-                    </div>
-                </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-            <button type="button" class="btn btn-primary" onclick="window.open('https://sfpd.nyc-pd.ru/posting.php?mode=post&f=15','_blank')">На форум</button>
-          </div>
-        </div>
-      </div>
-    
     <script>
-        function generatePostTitle() {
-            var nickname = document.getElementsByName("nickname")[0].value.toUpperCase();
-            var h_output = "[ВОССТАНОВЛЕНИЕ] " + document.getElementsByName("nickname")[0].innerText;
-            h_output = "[ВОССТАНОВЛЕНИЕ] " + nickname;
-            return h_output;
-        }
-        function form2dict(form) {
-            var values = form.querySelectorAll('[name]');
-            var data = {};
-            for (var i = 0; i < values.length; i++) {
-                if (values[i].classList.contains('datepicker')) {
-                    data[values[i].getAttribute('name')] = values[i].value.toUpperCase() || 'N/A';
-                } else if (values[i].classList.contains('checkbox')) {
-                    var checked = document.getElementsByName("checkbox")[0].checked ? ('X') : ' '
-                    data[values[i].getAttribute('name')] = checked;
-                } else {
-                    data[values[i].getAttribute('name')] = values[i].value || values[i].innerText || 'N/A';
-                }
-            }
-            return data;
-        }
+        function generate() {
+            const d = {
+                exp: document.getElementById('exp').value || "Заполнить",
+                proofs: document.getElementById('proofs').value || "Заполнить",
+                role: document.getElementById('role').value || "Описание вашего будущего персонажа...",
+                comment: document.getElementById('comment').value || "Заполнить",
+                name: document.getElementById('name').value || "Заполнить",
+                age: document.getElementById('age').value || "XX",
+                tg: document.getElementById('tg').value || "Nickname",
+                gauth: document.getElementById('gauth').value || "Ссылка на скриншот"
+            };
 
-        MicroModal.init();
-        window.__bbcodeurl = '/bbforms/lscsd disabled/back_home.txt';
-        document.querySelector('[name="name"]').focus();   
+            const bb = `[box=#354920][img]https://www.upload.ee[/img][color=#FFFFFF]  Департамент шерифа Лос Сантоса > Карьера > Программа «Возвращение домой»[/color][/box]
+[b][size=115][border=#354920]Заявление[/border][/size][/b]
+[list=1][*][b]Фракции в которых состояли ([i]Никнейм, проект, должность, причины и даты ухода[/i]):[/b] ${d.exp}
+[*][b]Доказательства игры [i](СС, не обязательно за копов)[/i]:[/b] ${d.proofs}
+[*][b]Планируемая роль во фракции:[/b]
+[spoiler="Роль"]${d.role}[/spoiler]
+[*][b]Список пожеланий, комментарий:[/b] ${d.comment}
+
+[*][b]Имя:[/b] ${d.name}
+[*][b]Возраст:[/b] ${d.age} лет
+[*][b]Ссылка на аккаунт в TG:[/b] [url=https://t.me{d.tg}]${d.tg}[/url]
+[*][b]Скриншот включенного Google Authenticator (без каких-либо обработок):[/b] [url=${d.gauth}]Ссылка на скриншот[/url][/list]
+
+[hr][/hr]
+[b][size=115][border=#354920]Соглашение[/border][/size][/b]
+[list][b]Отправляя это заявление, вы автоматически соглашаетесь с приведенным ниже соглашением:[/b]
+
+[list][i] [justify]Я соглашаюсь со всеми правилами и условиями полицейского департамента. Также уверяю, что все данные мною ответы в этой заявке являются правдивыми, и я не имею конфликтов с полицейским департаментом и не состою в черном списке сообщества. Я согласен быть активным с аккаунта полицейского больше, чем с каких-либо других имеющихся у меня аккаунтов.[/justify][/i][/list][/list]
+
+[box=#354920][color=#FFFFFF][size=85][center]© 2024. Департамент шерифа округа Лос-Сантос. Все права защищены.[/center][/size][/color][/box]`;
+
+            const res = document.getElementById('result-box');
+            res.innerText = bb;
+            res.style.display = 'block';
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        }
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-      <!-- Yandex.Metrika counter -->
-        <script type="text/javascript" >
-            (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-            m[i].l=1*new Date();
-            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-            (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-        
-            ym(101513650, "init", {
-                clickmap:true,
-                trackLinks:true,
-                accurateTrackBounce:true
-            });
-        </script>
-        <noscript><div><img src="https://mc.yandex.ru/watch/101513650" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-        <!-- /Yandex.Metrika counter -->
 </body>
 </html>
